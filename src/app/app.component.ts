@@ -14,6 +14,7 @@ export class AppComponent {
   items: Observable<any[]>;
   constructor(private firestore: AngularFirestore,public auth: AngularFireAuth) {
     this.items = firestore.collection('items').valueChanges();
+  
   }
 
   addItem() {
