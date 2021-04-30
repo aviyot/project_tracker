@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'StartTemplate-Angular-AngularFire-AngularMaterial';
+  title = 'Start Template : Angular,AngularFire,AngularMaterial';
 }
