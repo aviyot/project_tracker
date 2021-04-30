@@ -11,6 +11,7 @@ import firebase from 'firebase/app';
 })
 export class AppComponent {
   title = 'Start Template : Angular,AngularFire,AngularMaterial';
+  appName = "my app"
   items: Observable<any[]>;
   constructor(private firestore: AngularFirestore,public auth: AngularFireAuth) {
     this.items = firestore.collection('items').valueChanges();

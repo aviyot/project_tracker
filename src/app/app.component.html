@@ -1,7 +1,11 @@
 
-   <div *ngIf="auth.user | async as user; else showLogin" >
+<mat-toolbar style="justify-content: space-between;">
+  <span>{{appName}}</span>
+  <div *ngIf="auth.user | async as user; else showLogin" >
     <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
   </div>
+</mat-toolbar>
+ 
   <ng-template #showLogin>
     <ngx-auth-firebaseui-login></ngx-auth-firebaseui-login>
   </ng-template>

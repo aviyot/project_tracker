@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
       enableEmailVerification: true, // default: true
       useRawUserCredential: true, // If set to true outputs the UserCredential object instead of firebase.User after login and signup - Default: false
     }),
-    MatPasswordStrengthModule
+    MatPasswordStrengthModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
