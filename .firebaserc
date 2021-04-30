@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "test-proj-760a7": {
+      "hosting": {
+        "StartTemplate-Angular-AngularFire-AngularMaterial": [
+          "test-proj-760a7"
+        ]
+      }
+    }
+  }
+}
