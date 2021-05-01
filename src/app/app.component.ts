@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  appName = 'my app';
+  appName = 'Project tracker';
   isUserSignIn = false;
   collectionName: string = 'items';
   items: Observable<any[]>;
