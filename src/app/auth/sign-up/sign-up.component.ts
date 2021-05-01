@@ -1,4 +1,5 @@
-import { Component, OnInit, Output,EventEmitter} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -6,16 +7,15 @@ import { Component, OnInit, Output,EventEmitter} from '@angular/core';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
-  @Output() onLoginRequested  = new EventEmitter();
-
-  constructor() { }
+  
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
   }
 
   loginReq(){
-this.onLoginRequested.emit();
+this.router.navigate(['/','sign-in'])
+
   }
 
 }

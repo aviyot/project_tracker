@@ -1,12 +1,8 @@
 
 <mat-toolbar style="justify-content: space-between;">
   <span>{{appName}}</span>
-  <div *ngIf="isUserSignIn">
   <app-login></app-login>
-  </div>
 </mat-toolbar>
- 
-<div *ngIf="!isUserSignIn">
-  <app-sign-in (onCreateAccountRequested)="register()" *ngIf="!isReg"></app-sign-in>
-  <app-sign-up *ngIf="isReg" (onLoginRequested)="loginReq()"></app-sign-up>
+<div>
+  <router-outlet></router-outlet>
 </div>
