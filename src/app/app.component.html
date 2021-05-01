@@ -2,11 +2,11 @@
 <mat-toolbar style="justify-content: space-between;">
   <span>{{appName}}</span>
   <div *ngIf="isUserSignIn">
-    <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
+  <app-login></app-login>
   </div>
 </mat-toolbar>
  
 <div *ngIf="!isUserSignIn">
-  <ngx-auth-firebaseui-login *ngIf="!isReg" (onCreateAccountRequested)="register()"></ngx-auth-firebaseui-login>
-  <ngx-auth-firebaseui-register *ngIf="isReg" (onLoginRequested)="loginReq()"></ngx-auth-firebaseui-register>
+  <app-sign-in (onCreateAccountRequested)="register()" *ngIf="!isReg"></app-sign-in>
+  <app-sign-up *ngIf="isReg" (onLoginRequested)="loginReq()"></app-sign-up>
 </div>

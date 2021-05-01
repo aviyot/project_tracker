@@ -10,13 +10,13 @@ import firebase from 'firebase/app';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'Start Template : Angular,AngularFire,AngularMaterial';
   appName = "my app";
   isUserSignIn = false;
+  collectionName :string = "";
   items: Observable<any[]>;
   isReg = false;
   constructor(private firestore: AngularFirestore,public auth: AngularFireAuth) {
-    this.items = firestore.collection('items').valueChanges();
+    this.items = firestore.collection(this.collectionName).valueChanges();
   
   }
    ngOnInit(){
@@ -31,14 +31,14 @@ export class AppComponent implements OnInit{
      })
    }
   addItem() {
-      this.firestore.collection("items").add({
+      this.firestore.collection(this.collectionName).add({
       name: "new york",
       country: "Japan"
   }) 
   }
 
   delItem(){
-    this.firestore.collection("items").doc("xBnv53opoIPsLK2Y7q85").delete();
+    this.firestore.collection(this.collectionName).doc("xBnv53opoIPsLK2Y7q85").delete();
   }
 
   login() {
