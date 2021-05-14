@@ -1,8 +1,55 @@
-
 <mat-toolbar style="justify-content: space-between;">
-  <span>{{appName}}</span>
-  <app-login></app-login>
+
+  <button mat-button (click)="sideNav.toggle()"> 
+    <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{appName}}</span>
+    <app-login></app-login>
+
 </mat-toolbar>
-<div>
-  <router-outlet></router-outlet>
+<!-- <div class="main">
+  <div class="header">
+    <span>nav</span>
+    <span style="font-size:2rem" class="menu-open" (click)="openSide()">|||</span>
+  </div>
+  <div class="main-content">
+    <div class="side" [ngClass]="{'side-open':isSideOpen}">1
+      <span style="font-size:2rem" class="menu-open" (click)="openSide()">|||</span>
+    </div>
+    <div class="content">2</div>
+  </div>
+  <div class="footer">footer</div>
+</div> -->
+
+<!-- <mat-drawer-container>
+  <mat-drawer >1111</mat-drawer>
+  <mat-drawer-content>2222222</mat-drawer-content>
+</mat-drawer-container>
+ -->
+<div  class="main">
+<!--   <mat-toolbar class="side-nav-header">
+    <span>my app</span>
+   <button mat-button (click)="sideNav.toggle()"> 
+    <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar> -->
+  <mat-sidenav-container>
+    <mat-sidenav autoFocus="false" mode="push" #sideNav opened>
+      <mat-list>
+        <mat-list-item *ngFor="let project of projects | async" (click)="onSelectProject(project)"> {{project.name}}</mat-list-item>
+       </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <!-- <button (click)="addItem()">add</button> -->
+  <div *ngIf="selectedProject">
+      <div>{{selectedProject.name }}</div>
+      <div *ngFor="let tool of selectedProject.tools" style="display: flex;flex-direction:column;animation:fade 2s">
+        <span>{{tool.name}}</span>
+        <span>{{tool.ver}}</span>
+        <span>{{tool.desc}}</span>
+      </div>
+    </div>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

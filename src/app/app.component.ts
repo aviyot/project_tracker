@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
-import firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import { Project } from 'src/models/project.model';
 
 @Component({
   selector: 'app-root',
@@ -11,32 +11,47 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  appName = 'Project tracker';
+  appName = 'מנהל הפרוקטים';
   isUserSignIn = false;
-  collectionName: string = 'items';
-  items: Observable<any[]>;
+  userId:string="";
+  collectionName: string = 'projects';
+  projects: Observable<Project[]> = new Observable<Project[]>();
+  selectedProject?:Project;
+  isSideOpen = false;
   isReg = false;
   constructor(
     private firestore: AngularFirestore,
     public auth: AngularFireAuth,
-    private router:Router
+    private router: Router
   ) {
-    this.items = firestore.collection(this.collectionName).valueChanges();
+    this.projects = firestore
+      .collection('users').doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2').collection(this.collectionName)
+      .valueChanges() as Observable<Project[]>;
   }
   ngOnInit() {
+    this.projects.subscribe((p)=>{
+      console.log(p);
+    })
     this.auth.user.subscribe((user) => {
       if (user) {
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
+        this.userId = user.uid;
+        this.isUserSignIn = true;
       } else {
-        this.router.navigate(['/','sign-in'])
+        this.isUserSignIn = false;
+        this.router.navigate(['/', 'sign-in']);
       }
     });
   }
   addItem() {
-    this.firestore.collection(this.collectionName).add({
-      name: 'new york',
-      country: 'Japan',
-    });
+    let newProj: Project = {
+      name: 'myName',
+      desc: 'my descripthion',
+      lifecycleStage: 'planning',
+      startTime: '07/05/2021',
+      tools: [{ name: 'angular', desc: 'hhhh',ver:"1.1.1" }],
+    };
+    this.firestore.collection("users").doc(this.userId).collection(this.collectionName).add(newProj);
   }
 
   delItem() {
@@ -46,4 +61,11 @@ export class AppComponent implements OnInit {
       .delete();
   }
 
+  openSide(){
+    this.isSideOpen = !this.isSideOpen;
+  }
+
+  onSelectProject(selectedProject:Project){
+    this.selectedProject = selectedProject;
+  }
 }
