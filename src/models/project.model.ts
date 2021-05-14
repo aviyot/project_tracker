@@ -1,6 +1,6 @@
 import { tool } from './tool.model';
 import { Feature } from './feature.model';
-import {Question} from "./question.model"
+import {QuestionAnswer} from "./question-answer.model"
 import { LIFECYCLE_STAGE } from '../types/lifecycleStage.type';
 
 export interface Project {
@@ -8,10 +8,9 @@ export interface Project {
   desc: string;
   startTime: string;
   endTime?: string;
-  lifecycleStage: LIFECYCLE_STAGE
-  tools?: tool[];
+  lifecycleStage: LIFECYCLE_STAGE;
   gitHub?:string;
+  tools?: tool[];
   features?: Feature[];
-  questions?: Question[];
-  todo?: [{name:string;desc?:string;done:boolean}];
+  questions?: QuestionAnswer[];
 }
