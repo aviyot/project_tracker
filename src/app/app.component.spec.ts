@@ -20,11 +20,11 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'StartTemplate-Angular-AngularFire-AngularMaterial'`, () => {
+/*   it(`should have as title 'StartTemplate-Angular-AngularFire-AngularMaterial'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('StartTemplate-Angular-AngularFire-AngularMaterial');
-  });
+  }); */
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
