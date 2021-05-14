@@ -1,10 +1,10 @@
 <mat-toolbar style="justify-content: space-between;">
 
-  <button mat-button (click)="sideNav.toggle()"> 
+  <button mat-button (click)="sideNav.toggle()">
     <mat-icon>menu</mat-icon>
-    </button>
-    <span>{{appName}}</span>
-    <app-login></app-login>
+  </button>
+  <span>{{appName}}</span>
+  <app-login></app-login>
 
 </mat-toolbar>
 <!-- <div class="main">
@@ -26,29 +26,31 @@
   <mat-drawer-content>2222222</mat-drawer-content>
 </mat-drawer-container>
  -->
-<div  class="main">
-<!--   <mat-toolbar class="side-nav-header">
+<div class="main">
+  <!--   <mat-toolbar class="side-nav-header">
     <span>my app</span>
    <button mat-button (click)="sideNav.toggle()"> 
     <mat-icon>menu</mat-icon>
     </button>
   </mat-toolbar> -->
   <mat-sidenav-container>
-    <mat-sidenav autoFocus="false" mode="push" #sideNav opened>
+    <mat-sidenav autoFocus="false" mode="push" #sideNav>
       <mat-list>
-        <mat-list-item *ngFor="let project of projects | async" (click)="onSelectProject(project)"> {{project.name}}</mat-list-item>
-       </mat-list>
+        <mat-list-item *ngFor="let project of projects | async" (click)="onSelectProject(project)"> {{project.name}}
+        </mat-list-item>
+      </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>
       <!-- <button (click)="addItem()">add</button> -->
-  <div *ngIf="selectedProject">
-      <div>{{selectedProject.name }}</div>
-      <div *ngFor="let tool of selectedProject.tools" style="display: flex;flex-direction:column;animation:fade 2s">
-        <span>{{tool.name}}</span>
-        <span>{{tool.ver}}</span>
-        <span>{{tool.desc}}</span>
+      <div *ngIf="selectedProject">
+        <div>{{selectedProject.name }}</div>
+        <div *ngFor="let tool of selectedProject.tools" style="display: flex;flex-direction:column;animation:fade 2s">
+          <span>{{tool.name}}</span>
+          <span>{{tool.ver}}</span>
+          <span>{{tool.desc}}</span>
+        </div>
       </div>
-    </div>
+      <app-new-project></app-new-project>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
