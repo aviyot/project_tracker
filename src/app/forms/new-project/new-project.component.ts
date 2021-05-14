@@ -9,16 +9,17 @@ import { Project } from 'src/models/project.model';
 })
 export class NewProjectComponent implements OnInit {
   projects: Project[] = [];
+  currentProject?:Project
 
   projectForm = this.fb.group({
-    name: ['avi'],
+    name: [''],
     desc: [''],
     startTime: [''],
     endTime: [''],
     lifecycleStage: [''],
     gitHub: [''],
     tool: this.fb.group({
-      name: ['angular'],
+      name: [''],
       desc: [''],
       purpose: [''],
       ver: [''],
@@ -50,7 +51,7 @@ export class NewProjectComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
-    console.log(this.projectForm.value);
+    console.log(typeof this.projectForm.value);
   }
 
   getFormData() {
@@ -58,6 +59,7 @@ export class NewProjectComponent implements OnInit {
   }
 
   saveFormData() {
-    console.log('save clicked');
+    this.currentProject = {...this.projectForm.value};
+    console.log(this.currentProject);
   }
 }
