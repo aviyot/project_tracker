@@ -13,4 +13,5 @@ export interface Project {
   gitHub?:string;
   features?: Feature[];
   questions?: Question[];
+  todo?: [{name:string;desc?:string;done:boolean}];
 }
