@@ -50,15 +50,14 @@ export class NewProjectComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
-
     console.log(this.projectForm.value);
   }
 
-  getFormData(){
+  getFormData() {
     console.log(this.projectForm.get('tool.name')?.value);
   }
 
-  saveFormData(){
-    console.log("save clicked");
+  saveFormData() {
+    console.log('save clicked');
   }
 }
