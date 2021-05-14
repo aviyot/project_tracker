@@ -1,1 +1,129 @@
-<p>new-project works!</p>
+<form [formGroup]="projectForm">
+
+    <h2>הפרויקט</h2>
+    <div>
+        <label>שם הפרויקט</label>
+        <input type="text" formControlName="name" />
+    </div>
+    <div>
+        <label>תיאור הפרויקט</label>
+        <input type="textarea" formControlName="desc" />
+    </div>
+    <div>
+        <label>זמן התחלה</label>
+        <input type="date" formControlName="startTime" />
+    </div>
+    <div>
+        <label>סיום הפרויקט</label>
+        <input type="date" formControlName="endTime" />
+    </div>
+    <div>
+        <label>מצב הפרויקט</label>
+        <input type="text" formControlName="lifecycleStage" />
+    </div>
+    <hr />
+    <h2>כלים</h2>
+    <div formGroupName="tool">
+        <div>
+            <label>שם כלי</label>
+            <input type="text" formControlName="name" />
+        </div>
+
+        <div>
+            <label>תיאור</label>
+            <input type="textarea" formControlName="desc" />
+        </div>
+        <div>
+            <label>מטרה</label>
+            <input type="text" formControlName="purpose" />
+        </div>
+        <div>
+            <label>גירסה</label>
+            <input type="text" formControlName="ver" />
+        </div>
+        <div>
+            <label>github</label>
+            <input type="text" formControlName="githubLink" />
+        </div>
+        <div>
+            <label>npm</label>
+            <input type="text" formControlName="npmLink" />
+        </div>
+    </div>
+    <hr />
+    <h2>פיצרים</h2>
+    <div formGroupName="feature">
+        <div>
+            <label>שם</label>
+            <input type="text" formControlName="name" />
+        </div>
+        <div>
+            <label>תיאור</label>
+            <input type="text" formControlName="desc" />
+        </div>
+        <div>
+            <label>תאריך התחלה</label>
+            <input type="date" formControlName="startDate" />
+        </div>
+        <div>
+            <label>תאריך סיום</label>
+            <input type="date" formControlName="endDate" />
+        </div>
+        <div>
+            <label>התקדמות</label>
+            <input type="text" formControlName="progress" />
+        </div>
+    </div>
+    <hr />
+    <h2>שאלות</h2>
+    <div formGroupName="question">
+        <div>
+            <label>שאלה</label>
+            <input type="text" formControlName="question" />
+        </div>
+        <div>
+            <label>תאריך</label>
+            <input type="date" formControlName="questionTime" />
+        </div>
+        <div>
+            <label> שלב הפרויקט</label>
+            <input type="text" formControlName="lifecycleStageId" />
+        </div>
+        <div>
+            <label> שם פיצר</label>
+            <input type="text" formControlName="featureId" />
+        </div>
+
+        <div>
+            <label> נענה?</label>
+            <input type="checkbox" formControlName="answered" />
+        </div>
+        <div>
+            <label> תשובה</label>
+            <input type="textarea" formControlName="answer" />
+        </div>
+        <div>
+            <label>תאריך תשובה</label>
+            <input type="date" formControlName="answerTime" />
+        </div>
+        <div formGroupName="answerLinks">
+            <div>
+                <label>מקור</label>
+                <input type="text" formControlName="from" />
+            </div>
+            <div>
+                <label>קישור</label>
+                <input type="text" formControlName="links" />
+            </div>
+            <div>
+                <label>פתרון מועדף</label>
+                <input type="text" formControlName="prefer" />
+            </div>
+        </div>
+    </div>
+
+    <div class="action-btn">
+        <button (click)="getFormData()">GET DATA</button>
+        <button (click)="saveFormData()"> SAVE DATA</button>
+    </div>
+</form>
