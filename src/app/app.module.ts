@@ -14,10 +14,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import { NewProjectComponent } from './forms/new-project/new-project.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NewProjectComponent
   ],
   imports: [
     BrowserModule,
