@@ -11,9 +11,9 @@ import { Project } from 'src/models/project.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  appName = 'מנהל הפרוקטים';
+  appName = 'מנהל הפרויקטים';
   isUserSignIn = false;
-  userId:string="";
+  user:any="";
   collectionName: string = 'projects';
   projects: Observable<Project[]> = new Observable<Project[]>();
   selectedProject?:Project;
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   isReg = false;
   constructor(
     private firestore: AngularFirestore,
-    public auth: AngularFireAuth,
+    private auth: AngularFireAuth,
     private router: Router
   ) {
     this.projects = firestore
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     this.auth.user.subscribe((user) => {
       if (user) {
         this.router.navigate(['/']);
-        this.userId = user.uid;
+        this.user = user;
         this.isUserSignIn = true;
       } else {
         this.isUserSignIn = false;
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
       startTime: '07/05/2021',
       tools: [{ name: 'angular', desc: 'hhhh',ver:"1.1.1" }],
     };
-    this.firestore.collection("users").doc(this.userId).collection(this.collectionName).add(newProj);
+    this.firestore.collection("users").doc(this.user.userId).collection(this.collectionName).add(newProj);
   }
 
   delItem() {
@@ -67,5 +67,9 @@ export class AppComponent implements OnInit {
 
   onSelectProject(selectedProject:Project){
     this.selectedProject = selectedProject;
+  }
+
+  addNewProject() {
+    this.router.navigate(['/', 'new-project']);
   }
 }
