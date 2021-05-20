@@ -35,22 +35,9 @@
   </mat-toolbar> -->
   <mat-sidenav-container>
     <mat-sidenav autoFocus="false" mode="push" #sideNav>
-      <button mt-button (click)="addNewProject()"> הוסף פרויקט חדש</button>
-      <mat-list>
-        <mat-list-item *ngFor="let project of projects | async" (click)="onSelectProject(project)"> {{project.name}}
-        </mat-list-item>
-      </mat-list>
+      <app-project-list></app-project-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <!-- <button (click)="addItem()">add</button> -->
-      <div *ngIf="selectedProject">
-        <div>{{selectedProject.name }}</div>
-        <div *ngFor="let tool of selectedProject.tools" style="display: flex;flex-direction:column;animation:fade 2s">
-          <span>{{tool.name}}</span>
-          <span>{{tool.ver}}</span>
-          <span>{{tool.desc}}</span>
-        </div>
-      </div>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
