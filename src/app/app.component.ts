@@ -24,9 +24,7 @@ export class AppComponent implements OnInit {
     private auth: AngularFireAuth,
     private router: Router
   ) {
-    this.projects = firestore
-      .collection('users').doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2').collection(this.collectionName)
-      .valueChanges() as Observable<Project[]>;
+
   }
   ngOnInit() {
     this.projects.subscribe((p)=>{
@@ -43,16 +41,6 @@ export class AppComponent implements OnInit {
       }
     });
   }
-  addItem() {
-    let newProj: Project = {
-      name: 'myName',
-      desc: 'my descripthion',
-      lifecycleStage: 'planning',
-      startTime: '07/05/2021',
-      tools: [{ name: 'angular', desc: 'hhhh',ver:"1.1.1" }],
-    };
-    this.firestore.collection("users").doc(this.user.userId).collection(this.collectionName).add(newProj);
-  }
 
   delItem() {
     this.firestore
@@ -64,12 +52,5 @@ export class AppComponent implements OnInit {
   openSide(){
     this.isSideOpen = !this.isSideOpen;
   }
-
-  onSelectProject(selectedProject:Project){
-    this.selectedProject = selectedProject;
-  }
-
-  addNewProject() {
-    this.router.navigate(['/', 'new-project']);
-  }
+ 
 }
