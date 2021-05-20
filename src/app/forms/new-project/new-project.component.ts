@@ -41,8 +41,9 @@ export class NewProjectComponent implements OnInit {
       this.user = user;
     });
     this.activatedRoute.paramMap.subscribe((p) => {
-    this.new = false;
       this.doc_id = p.get('project_id');
+      if(this.doc_id){
+        this.new = false;
          this.firestore
          .collection('users')
          .doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2')
@@ -50,6 +51,7 @@ export class NewProjectComponent implements OnInit {
       
            this.projectForm.patchValue(p.data());
          });
+      }
        });
   }
 
