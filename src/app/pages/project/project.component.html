@@ -1,0 +1,49 @@
+<div style="font-size: 1.5rem;">
+  <div style="display: flex;flex-direction: column;padding-bottom: 2rem;">
+    <span>{{selectedProject.name}}</span>
+    <span>{{selectedProject.desc}}</span>
+    <span>{{selectedProject.startTime}}</span>
+    <span>{{selectedProject.endTime}}</span>
+    <span>{{selectedProject.lifecycleStage}}</span>
+    <span>{{selectedProject.gitHub}}</span>
+  </div>
+
+  <div style="padding-bottom: 2rem;">
+    <div *ngFor="let tool of selectedProject.tools"  style="display: flex;flex-direction: column;">
+      <span>{{tool.name}}</span>
+      <span>{{tool.desc}}</span>
+      <span>{{tool.purpose}}</span>
+      <span>{{tool.ver}}</span>
+      <a [href]="tool.githubLink">{{tool.githubLink}}</a>
+      <a [href]="tool.webSite">{{tool.webSite}}</a>
+      <a [href]="tool.npmLink">{{tool.npmLink}}</a>
+    </div>
+  </div>
+  <div style="padding-bottom: 2rem;">
+    <div *ngFor="let feature of selectedProject.features"  style="display: flex;flex-direction: column;">
+      <span>{{feature.name}}</span>
+      <span>{{feature.desc}}</span>
+      <span>{{feature.startDate}}</span>
+      <span>{{feature.endDate}}</span>
+      <span>{{feature.progress}}</span>
+    </div>
+  </div>
+  <div>
+    <div *ngFor="let question of selectedProject.questions"  style="display: flex;flex-direction: column;">
+      <span> {{question.question}}</span>
+      <span> {{question.featureId}}</span>
+      <span> {{question.lifecycleStageId}}</span>
+      <span> {{question.questionTime}}</span>
+      <span> {{question.answered}}</span>
+      <span> {{question.answer}}</span>
+      <span> {{question.answerTime}}</span>
+      <div *ngFor="let answerLink of question.answerLinks"  style="display: flex;flex-direction: column;">
+        <span>{{answerLink.from}}</span>
+        <span>{{answerLink.link}}</span>
+        <span>{{answerLink.prefer}}</span>
+      </div>
+    </div>
+  </div>
+  <button mat-button (click)="deleteProject()">Delete Project</button>
+  <button mat-button (click)="editProject()">Edit Project</button>
+</div>

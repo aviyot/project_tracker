@@ -14,13 +14,18 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 import { NewProjectComponent } from './forms/new-project/new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProjectComponent } from './pages/project/project.component';
+import { ProjectListComponent } from './pages/project-list/project-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    ProjectComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     MatListModule,
+    MatInputModule,
     AuthModule
   ],
   providers: [],
