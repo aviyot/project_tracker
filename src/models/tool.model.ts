@@ -4,5 +4,6 @@ export interface tool {
     purpose?:string;
     ver:string;
     githubLink?:string;
+    webSite?:string;
     npmLink?:string;
 }
