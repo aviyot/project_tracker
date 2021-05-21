@@ -61,6 +61,30 @@
         <button mat-button (click)="addTool()">Add Tool</button>
     </div>
     <hr />
+    <h2>משימות</h2>
+      <div formArrayName="todos" >
+          <div *ngFor="let todo of projectForm.get('todos')['controls'] ;let todoIndex = index">
+              <div [formGroupName] = "todoIndex" style="margin-bottom: 2rem;">
+                <div>
+                    <label>כותרת</label>
+                    <input type="text" formControlName="title" />
+                </div>
+                <div>
+                    <label>תיאור משימה</label>
+                    <textarea  formControlName="detail"></textarea>
+                </div>
+                <div>
+                    <label>תאריך יצירה</label>
+                    <input type="date" formControlName="date" />
+                </div>
+                <div>
+                    <label>בוצע?</label>
+                    <input type="checkbox" formControlName="done" />
+                </div>
+              </div>
+          </div>
+          <button mat-button (click)="addTodo()">Add Todo</button>
+      </div>
     <h2>פיצרים</h2>
     <div formArrayName="features">
         <div *ngFor="let feature of projectForm.get('features')['controls'];let i=index">
