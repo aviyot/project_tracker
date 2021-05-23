@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectData } from 'src/models/project-data.model';
 
 @Component({
@@ -22,7 +22,8 @@ export class NewProjectComponent implements OnInit {
     private fb: FormBuilder,
     private firestore: AngularFirestore,
     private auth: AngularFireAuth,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router:Router
   ) {
     this.createform();
   }
@@ -104,6 +105,7 @@ export class NewProjectComponent implements OnInit {
             .then(() => {
               console.log('data updated');
               this.projectForm.reset();
+              this.router.navigate(['/','app-project',this.doc_id])
             });
         } else {
           console.log('form not vaild');
@@ -112,6 +114,8 @@ export class NewProjectComponent implements OnInit {
         console.log('invaild user data');
       }
     }
+
+
   }
 
   addTodo(data?: any[]) {
