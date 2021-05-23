@@ -69,10 +69,11 @@
                     <label>כותרת</label>
                     <input type="text" formControlName="title" />
                 </div>
-                <div>
-                    <label>תיאור משימה</label>
-                    <textarea  formControlName="detail"></textarea>
-                </div>
+              
+                <mat-form-field appearance="outline">
+                    <mat-label>תיאור משימה</mat-label>
+                    <textarea matInput placeholder="" formControlName="detail"></textarea>
+                </mat-form-field>
                 <div>
                     <label>תאריך יצירה</label>
                     <input type="date" formControlName="date" />
@@ -93,10 +94,11 @@
                     <label>שם</label>
                     <input type="text" formControlName="name" />
                 </div>
-                <div>
-                    <label>תיאור</label>
-                    <input type="text" formControlName="desc" />
-                </div>
+               
+                <mat-form-field appearance="outline">
+                    <mat-label>תיאור</mat-label>
+                    <textarea matInput placeholder="" formControlName="desc"></textarea>
+                </mat-form-field>
                 <div>
                     <label>תאריך התחלה</label>
                     <input type="date" formControlName="startDate" />
@@ -118,10 +120,10 @@
     <div formArrayName="questions">
         <div *ngFor="let question of projectForm.get('questions')['controls']; let questionIndex = index">
             <div [formGroupName]="questionIndex" style="margin-bottom: 2rem;">
-                <div>
-                    <label>שאלה</label>
-                    <input type="text" formControlName="question" />
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>שאלה</mat-label>
+                    <textarea matInput placeholder="" formControlName="question"></textarea>
+                </mat-form-field>
                 <div>
                     <label>תאריך</label>
                     <input type="date" formControlName="questionTime" />
@@ -139,10 +141,10 @@
                     <label> נענה?</label>
                     <input type="checkbox" formControlName="answered" />
                 </div>
-                <div>
-                    <label> תשובה</label>
-                    <input type="textarea" formControlName="answer" />
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>תשובה</mat-label>
+                    <textarea matInput placeholder="" formControlName="answer"></textarea>
+                </mat-form-field>
                 <div>
                     <label>תאריך תשובה</label>
                     <input type="date" formControlName="answerTime" />
