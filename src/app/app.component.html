@@ -34,8 +34,8 @@
     </button>
   </mat-toolbar> -->
   <mat-sidenav-container hasBackdrop="false">
-    <mat-sidenav autoFocus="true" mode="push" #sideNav opened="true" >
-      <app-project-list></app-project-list>
+    <mat-sidenav autoFocus="true" mode="over" #sideNav opened>
+      <app-project-list (itemSelected) = "onItemSelected()"></app-project-list>
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet></router-outlet>

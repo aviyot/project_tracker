@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Project } from 'src/models/project.model';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +15,13 @@ export class AppComponent implements OnInit {
   appName = 'מנהל הפרויקטים';
   isUserSignIn = false;
   user:any="";
+  itemSelected = false;
   collectionName: string = 'projects';
   projects: Observable<Project[]> = new Observable<Project[]>();
   selectedProject?:Project;
   isSideOpen = false;
   isReg = false;
+  @ViewChild('sideNav') sideNav:MatDrawer;
   constructor(
     private firestore: AngularFirestore,
     private auth: AngularFireAuth,
@@ -52,5 +55,9 @@ export class AppComponent implements OnInit {
   openSide(){
     this.isSideOpen = !this.isSideOpen;
   }
+
+  onItemSelected(){
+    this.sideNav.close();
+    }
  
 }

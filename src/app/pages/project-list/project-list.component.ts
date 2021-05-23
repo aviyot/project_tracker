@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { Project } from 'src/models/project.model';
 
 @Component({
@@ -11,6 +12,7 @@ import { Project } from 'src/models/project.model';
 })
 export class ProjectListComponent implements OnInit {
   projects: Observable<Project[]> = new Observable<Project[]>();
+  @Output() itemSelected  = new EventEmitter();
   constructor(private firestore: AngularFirestore,private router: Router) { }
 
   ngOnInit(): void {
@@ -19,12 +21,13 @@ export class ProjectListComponent implements OnInit {
   }
 
   onSelectProject(selectedProject:Project){
- 
+    this.itemSelected.emit();
    this.router.navigate(['/','app-project',selectedProject.id]);
-    
+
   }
 
   addNewProject() {
+ 
     this.router.navigate(['/', 'new-project']);
   }
 }
