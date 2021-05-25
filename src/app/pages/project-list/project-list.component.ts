@@ -27,7 +27,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   addNewProject() {
- 
+    this.itemSelected.emit();
     this.router.navigate(['/', 'new-project']);
   }
 }
