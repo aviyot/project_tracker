@@ -61,6 +61,20 @@
       </div>
     </div>
   </div>
+  <div>
+    <h2>איך לעשות</h2>
+    <div *ngFor="let howTodo of selectedProject.howTodos" style="display: flex;flex-direction: column;">
+      <span>{{howTodo.title}}</span>
+      <span>{{howTodo.desc}}</span>
+      <div *ngFor="let step of howTodo.steps"  style="display: flex;flex-direction: column;margin-right: 1rem;">
+         <span>{{step}}</span>
+      </div>
+
+    </div>
+  </div>
   <hr>
+  <div style="position: fixed; left:1.5rem;bottom: 1rem;display: flex;gap:1rem">
   <button  mat-raised-button  color="warn" (click)="deleteProject()">Delete Project</button>
+  <button  mat-raised-button  color="primary" (click)="editProject()">Edit Project</button>
+</div>
 </div>

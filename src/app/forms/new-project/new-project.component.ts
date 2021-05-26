@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectData } from 'src/models/project-data.model';
+import { HowTodo } from '../../../../src/models/howtodo.model';
 
 @Component({
   selector: 'app-new-project',
@@ -23,7 +24,7 @@ export class NewProjectComponent implements OnInit {
     private firestore: AngularFirestore,
     private auth: AngularFireAuth,
     private activatedRoute: ActivatedRoute,
-    private router:Router
+    private router: Router
   ) {
     this.createform();
   }
@@ -43,15 +44,23 @@ export class NewProjectComponent implements OnInit {
               .doc(p.get('project_id'))
               .get()
               .subscribe((p) => {
-                const { features, questions, todos, tools } = p.data();
+                const { features, questions, todos, tools, howTodos } =
+                  p.data();
                 this.projectForm.patchValue(p.data());
                 this.addFeature(features);
+
                 this.addQuestion(questions);
                 questions.forEach((el, index) => {
                   this.addAnswerLink(index, el.answerLinks);
                 });
-                this.addTodo(todos);
+
                 this.addTool(tools);
+
+                this.addTodo(todos);
+                this.addHowTodo(howTodos);
+                howTodos.forEach((el, index) => {
+                  this.addHowtodoSteps(index, el.steps);
+                });
               });
           }
         });
@@ -71,6 +80,7 @@ export class NewProjectComponent implements OnInit {
       todos: this.fb.array([]),
       features: this.fb.array([]),
       questions: this.fb.array([]),
+      howTodos: this.fb.array([]),
     });
   }
 
@@ -105,7 +115,7 @@ export class NewProjectComponent implements OnInit {
             .then(() => {
               console.log('data updated');
               this.projectForm.reset();
-              this.router.navigate(['/','app-project',this.doc_id])
+              this.router.navigate(['/', 'app-project', this.doc_id]);
             });
         } else {
           console.log('form not vaild');
@@ -114,8 +124,6 @@ export class NewProjectComponent implements OnInit {
         console.log('invaild user data');
       }
     }
-
-
   }
 
   addTodo(data?: any[]) {
@@ -251,6 +259,49 @@ export class NewProjectComponent implements OnInit {
     } else {
       answerLinkRef.push(answerLink);
     }
+  }
+
+  addHowTodo(data?: HowTodo[]) {
+    const formArray = this.projectForm.get('howTodos') as FormArray;
+    const howTodo = this.fb.group({
+      title: [''],
+      desc: [''],
+      ordered: [false],
+      steps: this.fb.array([]),
+    });
+
+    if (data) {
+      data.forEach((dataItem) => {
+        formArray.push(
+          this.fb.group({
+            title: [dataItem.title],
+            desc: [dataItem.desc],
+            ordered: [dataItem.ordered],
+            steps: this.fb.array([]),
+          })
+        );
+      });
+    } else {
+      formArray.push(howTodo);
+    }
+  }
+
+  addHowtodoSteps(index: number, data?: string[]) {
+    const todoStepsRef = this.getHowtodoSteps(index);
+    const todoStep = this.fb.control('');
+    if (data) {
+      data.forEach((dataItem) => {
+        todoStepsRef.push(this.fb.control(dataItem));
+      });
+    } else {
+      todoStepsRef.push(todoStep);
+    }
+  }
+  getHowtodoSteps(index): FormArray {
+   console.log((this.projectForm.get('howTodos') as FormArray).at(index));
+    return (this.projectForm.get('howTodos') as FormArray)
+      .at(index)
+      .get('steps') as FormArray;
   }
 
   getAnswerLinks(index): FormArray {

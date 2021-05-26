@@ -62,14 +62,14 @@
     </div>
     <hr />
     <h2>משימות</h2>
-      <div formArrayName="todos" >
-          <div *ngFor="let todo of projectForm.get('todos')['controls'] ;let todoIndex = index">
-              <div [formGroupName] = "todoIndex" style="margin-bottom: 2rem;">
+    <div formArrayName="todos">
+        <div *ngFor="let todo of projectForm.get('todos')['controls'] ;let todoIndex = index">
+            <div [formGroupName]="todoIndex" style="margin-bottom: 2rem;">
                 <div>
                     <label>כותרת</label>
                     <input type="text" formControlName="title" />
                 </div>
-              
+
                 <mat-form-field appearance="outline">
                     <mat-label>תיאור משימה</mat-label>
                     <textarea matInput placeholder="" formControlName="detail"></textarea>
@@ -82,10 +82,10 @@
                     <label>בוצע?</label>
                     <input type="checkbox" formControlName="done" />
                 </div>
-              </div>
-          </div>
-          <button mat-button (click)="addTodo()">Add Todo</button>
-      </div>
+            </div>
+        </div>
+        <button mat-button (click)="addTodo()">Add Todo</button>
+    </div>
     <h2>פיצרים</h2>
     <div formArrayName="features">
         <div *ngFor="let feature of projectForm.get('features')['controls'];let i=index">
@@ -94,7 +94,7 @@
                     <label>שם</label>
                     <input type="text" formControlName="name" />
                 </div>
-               
+
                 <mat-form-field appearance="outline">
                     <mat-label>תיאור</mat-label>
                     <textarea matInput placeholder="" formControlName="desc"></textarea>
@@ -150,8 +150,7 @@
                     <input type="date" formControlName="answerTime" />
                 </div>
                 <div formArrayName="answerLinks">
-                    <div
-                        *ngFor="let answerLink of getAnswerLinks(questionIndex).controls;let answerLinkIndex = index">
+                    <div *ngFor="let answerLink of getAnswerLinks(questionIndex).controls;let answerLinkIndex = index">
                         <div [formGroupName]="answerLinkIndex">
                             <div>
                                 <label>מקור</label>
@@ -166,15 +165,46 @@
                                 <input type="text" formControlName="prefer" />
                             </div>
                         </div>
-                        <button mat-button (click)="removeAnswerLink(questionIndex,answerLinkIndex)"> Remove Answer</button>
+                        <button mat-button (click)="removeAnswerLink(questionIndex,answerLinkIndex)"> Remove
+                            Answer</button>
 
                     </div>
                     <button mat-button (click)="addAnswerLink(questionIndex)"> Add Answer</button>
 
-                </div> 
+                </div>
             </div>
         </div>
         <button mat-button (click)="addQuestion()">Add Question</button>
+    </div>
+    <h2>איך עושים</h2>
+    <div formArrayName="howTodos">
+        <div *ngFor = "let howtodo of projectForm.get('howTodos')['controls'];let howtodoIndex = index">
+            <div [formGroupName] = "howtodoIndex">
+                <mat-form-field appearance="outline">
+                    <mat-label>title</mat-label>
+                    <input matInput placeholder="" formControlName="title">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>תיאור</mat-label>
+                    <textarea matInput placeholder="" formControlName="desc"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>לפי הסדר</mat-label>
+                    <input  matInput placeholder="" formControlName="ordered">
+                </mat-form-field>
+                <div formArrayName="steps">
+                    <div *ngFor="let step of getHowtodoSteps(howtodoIndex).controls;let stepIndex = index" style="margin-block-start: 2rem;">
+                            <mat-form-field appearance="outline">
+                                <mat-label>שלב</mat-label>
+                                <textarea matInput placeholder="" [formControlName] = "stepIndex"></textarea>
+                            </mat-form-field>
+                        
+                    </div>
+                    <button mat-button (click)="addHowtodoSteps(howtodoIndex)">הוסף שלב</button>
+                </div>
+            </div>
+        </div>
+        <button mat-button (click)="addHowTodo()">הוסף איך לעשות</button>
     </div>
     <div class="action-btn">
         <button (click)="saveFormData()"> SAVE DATA</button>
