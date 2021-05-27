@@ -10,7 +10,7 @@
   <hr>
   <h2>כלי פיתוח</h2>
   <div style="padding-bottom: 2rem;">
-    <div *ngFor="let tool of selectedProject.tools"  style="display: flex;flex-direction: column;">
+    <div *ngFor="let tool of selectedProject.tools" style="display: flex;flex-direction: column;">
       <span>{{tool.name}}</span>
       <span>{{tool.desc}}</span>
       <span>{{tool.purpose}}</span>
@@ -23,7 +23,7 @@
   <hr>
   <h2>משימות לעשות</h2>
   <div style="padding-bottom: 2rem;">
-    <div *ngFor="let todo of selectedProject.todos"  style="display: flex;flex-direction: column;margin-bottom: 10px;">
+    <div *ngFor="let todo of selectedProject.todos" style="display: flex;flex-direction: column;margin-bottom: 10px;">
       <span>{{todo.title}}</span>
       <span>{{todo.detail}}</span>
       <span>{{todo.date}}</span>
@@ -32,9 +32,18 @@
     </div>
   </div>
   <hr>
+  <h2>זמני עבודה</h2>
+  <div style="padding-bottom: 2rem;">
+    <div *ngFor="let workTime of selectedProject.workTimes" style="display: flex;flex-direction: column;">
+      <span>{{workTime.startTime}}</span>
+      <span>{{workTime.endTime}}</span>
+      <span>{{workTime.task}}</span>
+    </div>
+  </div>
+  <hr>
   <h2>פיצרים</h2>
   <div style="padding-bottom: 2rem;">
-    <div *ngFor="let feature of selectedProject.features"  style="display: flex;flex-direction: column;">
+    <div *ngFor="let feature of selectedProject.features" style="display: flex;flex-direction: column;">
       <span>{{feature.name}}</span>
       <span>{{feature.desc}}</span>
       <span>{{feature.startDate}}</span>
@@ -45,7 +54,7 @@
   <hr>
   <div>
     <h2>שאלות</h2>
-    <div *ngFor="let question of selectedProject.questions"  style="display: flex;flex-direction: column;">
+    <div *ngFor="let question of selectedProject.questions" style="display: flex;flex-direction: column;">
       <span> {{question.question}}</span>
       <span> {{question.featureId}}</span>
       <span> {{question.lifecycleStageId}}</span>
@@ -54,7 +63,8 @@
       <span *ngIf="question.answered"> נענה</span>
       <span *ngIf="!question.answered">לא נענה</span>
       <span> {{question.answerTime}}</span>
-      <div *ngFor="let answerLink of question.answerLinks"  style="display: flex;flex-direction: column;margin-right: 1rem;">
+      <div *ngFor="let answerLink of question.answerLinks"
+        style="display: flex;flex-direction: column;margin-right: 1rem;">
         <span>{{answerLink.from}}</span>
         <span>{{answerLink.link}}</span>
         <span>{{answerLink.prefer}}</span>
@@ -66,15 +76,15 @@
     <div *ngFor="let howTodo of selectedProject.howTodos" style="display: flex;flex-direction: column;">
       <span>{{howTodo.title}}</span>
       <span>{{howTodo.desc}}</span>
-      <div *ngFor="let step of howTodo.steps"  style="display: flex;flex-direction: column;margin-right: 1rem;">
-         <span>{{step}}</span>
+      <div *ngFor="let step of howTodo.steps" style="display: flex;flex-direction: column;margin-right: 1rem;">
+        <span>{{step}}</span>
       </div>
 
     </div>
   </div>
   <hr>
   <div style="position: fixed; left:1.5rem;bottom: 1rem;display: flex;gap:1rem">
-  <button  mat-raised-button  color="warn" (click)="deleteProject()">Delete Project</button>
-  <button  mat-raised-button  color="primary" (click)="editProject()">Edit Project</button>
-</div>
+    <button mat-raised-button color="warn" (click)="deleteProject()">Delete Project</button>
+    <button mat-raised-button color="primary" (click)="editProject()">Edit Project</button>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectData } from 'src/models/project-data.model';
+import { WorkTime } from 'src/models/work-time.model';
 import { HowTodo } from '../../../../src/models/howtodo.model';
 
 @Component({
@@ -44,7 +45,7 @@ export class NewProjectComponent implements OnInit {
               .doc(p.get('project_id'))
               .get()
               .subscribe((p) => {
-                const { features, questions, todos, tools, howTodos } =
+                const { features, questions, todos, tools, howTodos,workTimes} =
                   p.data();
                 this.projectForm.patchValue(p.data());
                 this.addFeature(features);
@@ -61,6 +62,7 @@ export class NewProjectComponent implements OnInit {
                 howTodos.forEach((el, index) => {
                   this.addHowtodoSteps(index, el.steps);
                 });
+                this.addWorkTime(workTimes);
               });
           }
         });
@@ -81,6 +83,7 @@ export class NewProjectComponent implements OnInit {
       features: this.fb.array([]),
       questions: this.fb.array([]),
       howTodos: this.fb.array([]),
+      workTimes:this.fb.array([])
     });
   }
 
@@ -312,5 +315,28 @@ export class NewProjectComponent implements OnInit {
 
   removeAnswerLink(questionIndex, answerLinkIndex) {
     this.getAnswerLinks(questionIndex).removeAt(answerLinkIndex);
+  }
+
+  addWorkTime(data?:WorkTime[]){
+    const formArray = this.projectForm.get('workTimes') as FormArray;
+    const workTime = this.fb.group({
+      startTime:[''],
+      endTime:[''],
+      task:['']
+    })
+
+    if(data) {
+      data.forEach((dataItem)=>{
+        formArray.push(this.fb.group({
+          startTime:[dataItem.startTime],
+          endTime:[dataItem.endTime],
+          task:[dataItem.task]
+        }))
+
+      })
+    }
+    else {
+      formArray.push(workTime);
+    }
   }
 }
