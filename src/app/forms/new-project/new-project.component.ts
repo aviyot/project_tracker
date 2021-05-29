@@ -78,6 +78,7 @@ export class NewProjectComponent implements OnInit {
       endTime: [''],
       lifecycleStage: [''],
       gitHub: [''],
+      site:[''],
       tools: this.fb.array([]),
       todos: this.fb.array([]),
       features: this.fb.array([]),

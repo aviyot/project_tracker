@@ -5,7 +5,12 @@
     <span>{{selectedProject.startTime}}</span>
     <span>{{selectedProject.endTime}}</span>
     <span>{{selectedProject.lifecycleStage}}</span>
-    <span>{{selectedProject.gitHub}}</span>
+    <div style="display: flex;gap: 1rem;margin: 1rem;">
+      <span> <a target="_blank" [href]="selectedProject.gitHub"> גיטהב</a>
+      </span>
+      <span> <a target="_blank" href="selectedProject.site">אתר</a>
+      </span>
+    </div>
   </div>
   <hr>
   <h2>כלי פיתוח</h2>

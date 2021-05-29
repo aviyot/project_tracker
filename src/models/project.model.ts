@@ -12,6 +12,7 @@ export interface Project extends ProjectData {
   endTime?: string;
   lifecycleStage: LIFECYCLE_STAGE;
   gitHub?:string;
+  site?:string;
   tools?: tool[];
   features?: Feature[];
   questions?: QuestionAnswer[];
