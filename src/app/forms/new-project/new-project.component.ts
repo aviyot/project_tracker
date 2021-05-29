@@ -88,7 +88,7 @@ export class NewProjectComponent implements OnInit {
     });
   }
 
-  saveFormData() {
+  saveFormData(exit?:boolean) {
     this.currentProject = { ...this.projectForm.value };
     if (this.new) {
       if (this.user.uid) {
@@ -119,6 +119,7 @@ export class NewProjectComponent implements OnInit {
             .then(() => {
               console.log('data updated');
               this.projectForm.reset();
+              if(exit)
               this.router.navigate(['/', 'app-project', this.doc_id]);
             });
         } else {
