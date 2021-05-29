@@ -12,9 +12,9 @@
     <p>
       {{selectedProject.desc}}
     </p>
-    <mat-nav-list>
-      <a target="_blank" mat-list-item [href]="selectedProject.gitHub"> גיטהב</a>
-      <a target="_blank" mat-list-item [href]="selectedProject.site">אתר</a>
+    <mat-nav-list >
+      <a *ngIf="selectedProject.gitHub" target="_blank" mat-list-item [href]="selectedProject.gitHub"> גיטהב</a>
+      <a *ngIf="selectedProject.site" target="_blank" mat-list-item [href]="selectedProject.site">אתר</a>
     </mat-nav-list>
   </mat-card-content>
   <mat-card-actions>
