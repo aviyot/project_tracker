@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule,
+    
   ],
   exports:[
     CommonModule,
@@ -33,7 +36,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
   ]
 })
 export class AngularMaterialModule { }
