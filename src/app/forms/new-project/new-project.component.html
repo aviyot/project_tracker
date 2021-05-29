@@ -3,60 +3,57 @@
     <mat-form-field appearance="outline">
         <mat-label>שם הפרויקט</mat-label>
         <input matInput placeholder="" formControlName="name">
-    </mat-form-field>
+    </mat-form-field >
     <mat-form-field appearance="outline">
         <mat-label>תיאור הפרויקט</mat-label>
         <textarea matInput placeholder="" formControlName="desc"></textarea>
     </mat-form-field>
-    <div>
-        <label>זמן התחלה</label>
-        <input type="date" formControlName="startTime" />
-    </div>
-    <div>
-        <label>סיום הפרויקט</label>
-        <input type="date" formControlName="endTime" />
-    </div>
-    <div>
-        <label>מצב הפרויקט</label>
-        <input type="text" formControlName="lifecycleStage" />
-    </div>
+    <mat-form-field appearance="outline">
+        <mat-label>זמן התחלה</mat-label>
+        <input type="date" matInput formControlName="startTime" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>סיום הפרויקט</mat-label>
+        <input type="date" matInput formControlName="endTime" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>מצב הפרויקט</mat-label>
+        <input type="text" matInput formControlName="lifecycleStage" />
+    </mat-form-field>
     <hr />
     <h2>כלים</h2>
     <div formArrayName="tools">
         <div *ngFor="let tool of projectForm.get('tools')['controls'];let i=index">
             <div [formGroupName]="i" style="margin-bottom: 2rem;">
-                <div>
-                    <label>שם כלי</label>
-                    <input type="text" formControlName="name" />
-                </div>
-
-                <div>
-                    <label>תיאור</label>
-                    <input type="textarea" formControlName="desc" />
-                </div>
-                <div>
-                    <label>מטרה</label>
-                    <input type="text" formControlName="purpose" />
-                </div>
-                <div>
-                    <label>גירסה</label>
-                    <input type="text" formControlName="ver" />
-                </div>
-                <div>
-                    <label>Web site</label>
-                    <input type="text" formControlName="webSite" />
-                </div>
-                <div>
-                    <label>github</label>
-                    <input type="text" formControlName="githubLink" />
-                </div>
-                <div>
-                    <label>npm</label>
-                    <input type="text" formControlName="npmLink" />
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>שם כלי</mat-label>
+                    <input type="text" matInput formControlName="name" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>תיאור</mat-label>
+                    <input type="textarea" matInput formControlName="desc" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>מטרה</mat-label>
+                    <input type="textarea" matInput formControlName="purpose" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>גירסה</mat-label>
+                    <input type="text" matInput formControlName="ver" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>אתר</mat-label>
+                    <input type="text" matInput formControlName="webSite" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>גיטהב</mat-label>
+                    <input type="text" matInput formControlName="githubLink" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>NPM</mat-label>
+                    <input type="text" matInput formControlName="npmLink" />
+                </mat-form-field>
             </div>
-
-
         </div>
         <button mat-button (click)="addTool()">Add Tool</button>
     </div>
@@ -65,73 +62,67 @@
     <div formArrayName="todos">
         <div *ngFor="let todo of projectForm.get('todos')['controls'] ;let todoIndex = index">
             <div [formGroupName]="todoIndex" style="margin-bottom: 2rem;">
-                <div>
-                    <label>כותרת</label>
-                    <input type="text" formControlName="title" />
-                </div>
-
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" appearance="outline">
+                    <mat-label>כותרת</mat-label>
+                    <input type="text" matInput formControlName="title" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" appearance="outline">
                     <mat-label>תיאור משימה</mat-label>
                     <textarea matInput placeholder="" formControlName="detail"></textarea>
                 </mat-form-field>
-                <div>
-                    <label>תאריך יצירה</label>
-                    <input type="date" formControlName="date" />
-                </div>
-                <div>
-                    <label>בוצע?</label>
-                    <input type="checkbox" formControlName="done" />
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>תאריך יצירה</mat-label>
+                    <input type="date" matInput formControlName="date" />
+                </mat-form-field>
+                    <mat-checkbox type="text" matInput formControlName="done" >בוצע?</mat-checkbox>
             </div>
         </div>
         <button mat-button (click)="addTodo()">Add Todo</button>
     </div>
     <h2>זמני עבודה</h2>
     <div formArrayName="workTimes">
-       <div *ngFor="let workTime of projectForm.get('workTimes')['controls'];let workTimeIndex = index">
-           <div [formGroupName] = "workTimeIndex">
-            <div>
-                <label >זמן התחלה</label>
-                <input type="datetime-local" formControlName="startTime">
-            </div>
-                 <div>
-                    <label >זמן סיום</label>
-                    <input type="datetime-local" formControlName="endTime">
-                </div>
-
+        <div *ngFor="let workTime of projectForm.get('workTimes')['controls'];let workTimeIndex = index">
+            <div [formGroupName]="workTimeIndex">
+                <mat-form-field appearance="outline">
+                    <mat-label>זמן התחלה</mat-label>
+                    <input type="datetime-local" matInput formControlName="startTime">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>זמן סיום</mat-label>
+                    <input type="datetime-local" matInput formControlName="endTime">
+                </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>מה עשיתי</mat-label>
                     <textarea matInput placeholder="" formControlName="task"></textarea>
                 </mat-form-field>
-           </div>
-       </div>
-       <button mat-button (click)="addWorkTime()">Add Work Time</button>
+            </div>
+        </div>
+        <button mat-button (click)="addWorkTime()">Add Work Time</button>
     </div>
     <h2>פיצרים</h2>
     <div formArrayName="features">
         <div *ngFor="let feature of projectForm.get('features')['controls'];let i=index">
             <div [formGroupName]="i" style="margin-bottom: 2rem;">
-                <div>
-                    <label>שם</label>
-                    <input type="text" formControlName="name" />
-                </div>
-
+                <mat-form-field appearance="outline">
+                    <mat-label>שם</mat-label>
+                    <input matInput type="text" formControlName="name">
+                </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>תיאור</mat-label>
                     <textarea matInput placeholder="" formControlName="desc"></textarea>
                 </mat-form-field>
-                <div>
-                    <label>תאריך התחלה</label>
-                    <input type="date" formControlName="startDate" />
-                </div>
-                <div>
-                    <label>תאריך סיום</label>
-                    <input type="date" formControlName="endDate" />
-                </div>
-                <div>
-                    <label>התקדמות</label>
-                    <input type="text" formControlName="progress" />
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>תאריך התחלה</mat-label>
+                    <input matInput type="date" formControlName="startDate">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>תאריך סיום</mat-label>
+                    <input matInput type="date" formControlName="endDate">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>התקדמות</mat-label>
+                    <input matInput type="text" formControlName="progress">
+                </mat-form-field>
             </div>
         </div>
         <button mat-button (click)="addFeature()">Add Feature</button>
@@ -145,23 +136,23 @@
                     <mat-label>שאלה</mat-label>
                     <textarea matInput placeholder="" formControlName="question"></textarea>
                 </mat-form-field>
-                <div>
-                    <label>תאריך</label>
-                    <input type="date" formControlName="questionTime" />
-                </div>
-                <div>
-                    <label> שלב הפרויקט</label>
-                    <input type="text" formControlName="lifecycleStageId" />
-                </div>
-                <div>
-                    <label> שם פיצר</label>
-                    <input type="text" formControlName="featureId" />
-                </div>
-
-                <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>תאריך </mat-label>
+                    <input matInput type="date" formControlName="questionTime">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label> שלב הפרויקט</mat-label>
+                    <input matInput type="text" formControlName="lifecycleStageId">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>שם פיצר</mat-label>
+                    <input matInput type="text" formControlName="featureId">
+                </mat-form-field>
+                <mat-checkbox  color="accent" formControlName="answered">נענה?</mat-checkbox>
+            <!--     <div>
                     <label> נענה?</label>
                     <input type="checkbox" formControlName="answered" />
-                </div>
+                </div> -->
                 <mat-form-field appearance="outline">
                     <mat-label>תשובה</mat-label>
                     <textarea matInput placeholder="" formControlName="answer"></textarea>
@@ -173,18 +164,18 @@
                 <div formArrayName="answerLinks">
                     <div *ngFor="let answerLink of getAnswerLinks(questionIndex).controls;let answerLinkIndex = index">
                         <div [formGroupName]="answerLinkIndex">
-                            <div>
-                                <label>מקור</label>
-                                <input type="text" formControlName="from" />
-                            </div>
-                            <div>
-                                <label>קישור</label>
-                                <input type="text" formControlName="links" />
-                            </div>
-                            <div>
-                                <label>פתרון מועדף</label>
-                                <input type="text" formControlName="prefer" />
-                            </div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>מקור</mat-label>
+                                <input matInput type="text" formControlName="from">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>קישור</mat-label>
+                                <input matInput type="text" formControlName="links">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>פתרון מועדף</mat-label>
+                                <input matInput type="text" formControlName="prefer">
+                            </mat-form-field>
                         </div>
                         <button mat-button (click)="removeAnswerLink(questionIndex,answerLinkIndex)"> Remove
                             Answer</button>
@@ -199,8 +190,8 @@
     </div>
     <h2>איך עושים</h2>
     <div formArrayName="howTodos">
-        <div *ngFor = "let howtodo of projectForm.get('howTodos')['controls'];let howtodoIndex = index">
-            <div [formGroupName] = "howtodoIndex">
+        <div *ngFor="let howtodo of projectForm.get('howTodos')['controls'];let howtodoIndex = index">
+            <div [formGroupName]="howtodoIndex">
                 <mat-form-field appearance="outline">
                     <mat-label>title</mat-label>
                     <input matInput placeholder="" formControlName="title">
@@ -211,15 +202,16 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>לפי הסדר</mat-label>
-                    <input  matInput placeholder="" formControlName="ordered">
+                    <input matInput placeholder="" formControlName="ordered">
                 </mat-form-field>
                 <div formArrayName="steps">
-                    <div *ngFor="let step of getHowtodoSteps(howtodoIndex).controls;let stepIndex = index" style="margin-block-start: 2rem;">
-                            <mat-form-field appearance="outline">
-                                <mat-label>שלב</mat-label>
-                                <textarea matInput placeholder="" [formControlName] = "stepIndex"></textarea>
-                            </mat-form-field>
-                        
+                    <div *ngFor="let step of getHowtodoSteps(howtodoIndex).controls;let stepIndex = index"
+                        style="margin-block-start: 2rem;">
+                        <mat-form-field appearance="outline">
+                            <mat-label>שלב</mat-label>
+                            <textarea matInput placeholder="" [formControlName]="stepIndex"></textarea>
+                        </mat-form-field>
+
                     </div>
                     <button mat-button (click)="addHowtodoSteps(howtodoIndex)">הוסף שלב</button>
                 </div>

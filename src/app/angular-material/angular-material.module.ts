@@ -7,6 +7,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatListModule,
     MatIconModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSlideToggleModule,
+    MatCheckboxModule
   ],
   exports:[
     CommonModule,
@@ -27,7 +31,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatListModule,
     MatIconModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSlideToggleModule,
+    MatCheckboxModule
   ]
 })
 export class AngularMaterialModule { }
