@@ -117,10 +117,11 @@ export class NewProjectComponent implements OnInit {
             .doc(this.doc_id)
             .update(this.currentProject)
             .then(() => {
-              console.log('data updated');
+              alert("data saved");
+              if(exit){
               this.projectForm.reset();
-              if(exit)
               this.router.navigate(['/', 'app-project', this.doc_id]);
+              }
             });
         } else {
           console.log('form not vaild');
