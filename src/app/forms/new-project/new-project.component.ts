@@ -229,7 +229,7 @@ export class NewProjectComponent implements OnInit {
             questionTime: [dataItem.questionTime],
             lifecycleStageId: [dataItem.lifecycleStageId],
             featureId: [dataItem.featureId],
-            answered: [dataItem.featureId],
+            answered: [dataItem.answered],
             answer: [dataItem.answer],
             answerTime: [dataItem.answerTime],
             answerLinks: this.fb.array([]),
