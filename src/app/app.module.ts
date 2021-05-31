@@ -15,13 +15,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectComponent } from './pages/project/project.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { TodoFormComponent } from './forms/todo-form/todo-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewProjectComponent,
     ProjectComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    TodoFormComponent
   ],
   imports: [
     BrowserModule,
