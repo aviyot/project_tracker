@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Todo } from 'src/models/todo';
+import firebase from "firebase/app";
+import "firebase/firestore";
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-todo-form',
@@ -10,6 +13,7 @@ import { Todo } from 'src/models/todo';
 export class TodoFormComponent implements OnInit {
 
 @Input('todo') todoData : Todo | null;
+@Input('docRef') docRef:AngularFirestoreDocument<firebase.firestore.DocumentData>;
 todo:FormGroup;
   constructor(private fb: FormBuilder) { 
   }
@@ -27,6 +31,9 @@ todo:FormGroup;
   }
 
   addTodo(){
+    this.docRef.update({
+      todos:firebase.firestore.FieldValue.arrayUnion(this.todo.value)
+    })
   }
 
   saveTodo(){

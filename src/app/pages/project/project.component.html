@@ -52,7 +52,7 @@
   <hr>
   <h2>משימות לעשות <button mat-stroked-button color="primary" (click)="addTodo()"> הוסף משימה</button>
   </h2>
-  <app-todo-form *ngIf="add"></app-todo-form>
+  <app-todo-form *ngIf="add" [docRef] = "docRef"></app-todo-form>
   <div style="padding-bottom: 2rem;">
     <div *ngFor="let todo of selectedProject.todos;let todoIndex = index"
       style="display: flex;flex-direction: column;margin-bottom: 10px;">
@@ -63,9 +63,9 @@
       <span *ngIf="!todo.done" style="background-color: orangered;color: white;">לא הושלם</span>
       <mat-action-list>
         <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
-        <button mat-stroked-button color="warn" (click)="deleteTodo(todoIndex)">מחק</button>
+        <button mat-stroked-button color="warn" (click)="deleteTodo(todo)">מחק</button>
       </mat-action-list>
-      <app-todo-form *ngIf="edit" [todo]="todo"></app-todo-form>
+      <app-todo-form *ngIf="edit && (todoIndex === selectedIndex)" [todo]="todo"  [docRef] = "docRef" ></app-todo-form>
     </div>
   </div>
   <hr>
