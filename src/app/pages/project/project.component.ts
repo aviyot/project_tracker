@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from 'src/models/project.model';
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 @Component({
   selector: 'app-project',
@@ -14,6 +16,8 @@ export class ProjectComponent implements OnInit {
   selectedProject: any;
   edit = false;
   add = false;
+  docRef = null;
+  selectedIndex:number;
 
   constructor(
     private firestore: AngularFirestore,
@@ -25,15 +29,15 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((p) => {
-      console.log(p.get('project_id'));
-      this.selectedProject = this.firestore
-        .collection('users')
-        .doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2')
-        .collection('projects')
-        .doc(p.get('project_id'))
+      this.docRef = this.firestore
+      .collection('users')
+      .doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2')
+      .collection('projects')
+      .doc(p.get('project_id'));
+
+      this.selectedProject = this.docRef
         .valueChanges({ idField: 'id' })
         .subscribe((p) => {
-          console.log(p);
           this.selectedProject = p;
         });
     });
@@ -71,11 +75,19 @@ export class ProjectComponent implements OnInit {
   }
 
   editTodo(todoIndex) {
-    this.edit = !this.edit;
+    
+    if(this.selectedIndex !== todoIndex)
+      this.edit = true;
+    else
+       this.edit = !this.edit;
+
+    this.selectedIndex = todoIndex;
   }
 
-  deleteTodo(todoIndex) {
-    
+  deleteTodo(todo) {
+    this.docRef.update({
+      todos:firebase.firestore.FieldValue.arrayRemove(todo)
+    })
   }
 
 
