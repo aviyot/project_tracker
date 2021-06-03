@@ -2,6 +2,7 @@ import { tool } from './tool.model';
 import { Feature } from './feature.model';
 import {QuestionAnswer} from "./question-answer.model"
 import { LIFECYCLE_STAGE } from '../types/lifecycleStage.type';
+import { WorkTime } from './work-time.model';
 
 export interface ProjectData {
   name: string;
@@ -13,4 +14,5 @@ export interface ProjectData {
   tools?: tool[];
   features?: Feature[];
   questions?: QuestionAnswer[];
+  workTime?:WorkTime[];
 }
