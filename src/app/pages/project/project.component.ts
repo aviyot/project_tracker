@@ -3,8 +3,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Project } from 'src/models/project.model';
-import firebase from "firebase/app";
-import "firebase/firestore";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { WorkTime } from 'src/models/work-time.model';
+import { FormState } from 'src/models/ui/form-state';
+
+
 
 @Component({
   selector: 'app-project',
@@ -17,7 +21,8 @@ export class ProjectComponent implements OnInit {
   edit = false;
   add = false;
   docRef = null;
-  selectedIndex:number;
+  selectedIndex: number;
+  workTimeState: FormState;
 
   constructor(
     private firestore: AngularFirestore,
@@ -28,12 +33,13 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.workTimeState = { add: false, edit: true,selectedIndex:null };
     this.activatedRoute.paramMap.subscribe((p) => {
       this.docRef = this.firestore
-      .collection('users')
-      .doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2')
-      .collection('projects')
-      .doc(p.get('project_id'));
+        .collection('users')
+        .doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2')
+        .collection('projects')
+        .doc(p.get('project_id'));
 
       this.selectedProject = this.docRef
         .valueChanges({ idField: 'id' })
@@ -75,20 +81,31 @@ export class ProjectComponent implements OnInit {
   }
 
   editTodo(todoIndex) {
-    
-    if(this.selectedIndex !== todoIndex)
-      this.edit = true;
-    else
-       this.edit = !this.edit;
+    if (this.selectedIndex !== todoIndex) this.edit = true;
+    else this.edit = !this.edit;
 
     this.selectedIndex = todoIndex;
   }
 
   deleteTodo(todo) {
     this.docRef.update({
-      todos:firebase.firestore.FieldValue.arrayRemove(todo)
-    })
+      todos: firebase.firestore.FieldValue.arrayRemove(todo),
+    });
   }
 
+  addWorkTime(){
+    this.workTimeState.add = !this.workTimeState.add;
+  }
 
+  editWorkTime(index:number){
+    if (this.workTimeState.selectedIndex !== index) this.workTimeState.edit = true;
+    else this.workTimeState.edit = !this.workTimeState.edit;
+    this.workTimeState.selectedIndex = index;
+  }
+
+  deleteWorkTime(workTime:WorkTime){
+    this.docRef.update({
+      workTimes: firebase.firestore.FieldValue.arrayRemove(workTime),
+    });
+  }
 }
