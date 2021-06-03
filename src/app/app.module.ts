@@ -16,6 +16,7 @@ import { ProjectComponent } from './pages/project/project.component';
 import { ProjectListComponent } from './pages/project-list/project-list.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { TodoFormComponent } from './forms/todo-form/todo-form.component';
+import { WorkTimeFormComponent } from './forms/work-time-form/work-time-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TodoFormComponent } from './forms/todo-form/todo-form.component';
     NewProjectComponent,
     ProjectComponent,
     ProjectListComponent,
-    TodoFormComponent
+    TodoFormComponent,
+    WorkTimeFormComponent
   ],
   imports: [
     BrowserModule,
