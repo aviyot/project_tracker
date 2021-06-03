@@ -248,7 +248,7 @@ export class NewProjectComponent implements OnInit {
     const answerLinkRef = this.getAnswerLinks(index);
     const answerLink = this.fb.group({
       from: [''],
-      links: [''],
+      link: [''],
       prefer: [''],
     });
 
@@ -257,7 +257,7 @@ export class NewProjectComponent implements OnInit {
         answerLinkRef.push(
           this.fb.group({
             from: [dataItem.from],
-            links: [dataItem.links],
+            link: [dataItem.link],
             prefer: [dataItem.prefer],
           })
         );

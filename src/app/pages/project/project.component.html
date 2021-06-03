@@ -103,8 +103,9 @@
       <div *ngFor="let answerLink of question.answerLinks"
         style="display: flex;flex-direction: column;margin-right: 1rem;">
         <span>{{answerLink.from}}</span>
-        <span>{{answerLink.link}}</span>
-        <span>{{answerLink.prefer}}</span>
+        <a [href]="answerLink.links" target="_blank"><span>{{answerLink.link}}</span> </a>
+        <span *ngIf="answerLink.prefer">פתרון מעודף </span>
+        <span *ngIf="!answerLink.prefer">פתרון נוסף</span>
       </div>
     </div>
   </div>
