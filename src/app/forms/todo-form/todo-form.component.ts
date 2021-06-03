@@ -39,7 +39,11 @@ todo:FormGroup;
   }
 
   saveTodo(){
-
+    this.docRef.update({
+      todos:firebase.firestore.FieldValue.arrayRemove(this.todoData)
+    }).then(()=>{
+         this.addTodo();
+    })
   }
 
 }
