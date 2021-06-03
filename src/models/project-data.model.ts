@@ -14,5 +14,5 @@ export interface ProjectData {
   tools?: tool[];
   features?: Feature[];
   questions?: QuestionAnswer[];
-  workTime?:WorkTime[];
+  workTimes?:WorkTime[];
 }
