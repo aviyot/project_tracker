@@ -23,6 +23,7 @@ export class ProjectComponent implements OnInit {
   docRef = null;
   selectedIndex: number;
   workTimeState: FormState;
+  projectDescState:FormState;
 
   constructor(
     private firestore: AngularFirestore,
@@ -34,6 +35,7 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.workTimeState = { add: false, edit: true,selectedIndex:null };
+    this.projectDescState = { add: false, edit: false,selectedIndex:null };
     this.activatedRoute.paramMap.subscribe((p) => {
       this.docRef = this.firestore
         .collection('users')
@@ -107,5 +109,9 @@ export class ProjectComponent implements OnInit {
     this.docRef.update({
       workTimes: firebase.firestore.FieldValue.arrayRemove(workTime),
     });
+  }
+
+  editProjectDesc(){
+    this.projectDescState.edit = !this.projectDescState.edit;
   }
 }

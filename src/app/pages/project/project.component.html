@@ -1,7 +1,8 @@
 <div style="font-size: 1.5rem;">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{selectedProject.name}}</mat-card-title>
+      <mat-card-title>{{selectedProject.name}}
+      </mat-card-title>
       <mat-card-subtitle>
         <span>{{selectedProject.startTime}}</span>
         <span>{{selectedProject.endTime}}</span>
@@ -18,7 +19,8 @@
       </mat-nav-list>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Edit</button>
+      <button mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
+      <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject"  [docRef]="docRef"></app-project-desc-form>
     </mat-card-actions>
   </mat-card>
 

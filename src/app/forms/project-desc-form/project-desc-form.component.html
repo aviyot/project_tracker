@@ -1,0 +1,31 @@
+<form [formGroup]="projectDesc">
+    <mat-form-field appearance="outline">
+        <mat-label>שם הפרויקט</mat-label>
+        <input matInput placeholder="" formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>תיאור הפרויקט</mat-label>
+        <textarea matInput placeholder="" formControlName="desc"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>זמן התחלה</mat-label>
+        <input type="date" matInput formControlName="startTime" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>סיום הפרויקט</mat-label>
+        <input type="date" matInput formControlName="endTime" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>מצב הפרויקט</mat-label>
+        <input type="text" matInput formControlName="lifecycleStage" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>גיטהב</mat-label>
+        <input type="text" matInput formControlName="gitHub" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>אתר</mat-label>
+        <input type="text" matInput formControlName="site" />
+    </mat-form-field>
+    <button *ngIf="projectData" mat-stroked-button color="warn" (click)="saveProjectDesc()">שמור</button>
+</form>
