@@ -18,6 +18,7 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { TodoFormComponent } from './forms/todo-form/todo-form.component';
 import { WorkTimeFormComponent } from './forms/work-time-form/work-time-form.component';
 import { ProjectDescFormComponent } from './forms/project-desc-form/project-desc-form.component';
+import { ToolFormComponent } from './forms/tool-form/tool-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProjectDescFormComponent } from './forms/project-desc-form/project-desc
     ProjectListComponent,
     TodoFormComponent,
     WorkTimeFormComponent,
-    ProjectDescFormComponent
+    ProjectDescFormComponent,
+    ToolFormComponent
   ],
   imports: [
     BrowserModule,

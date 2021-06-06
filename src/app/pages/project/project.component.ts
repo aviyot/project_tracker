@@ -7,8 +7,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { WorkTime } from 'src/models/work-time.model';
 import { FormState } from 'src/models/ui/form-state';
-
-
+import { Tool } from 'src/models/tool.model';
 
 @Component({
   selector: 'app-project',
@@ -23,7 +22,8 @@ export class ProjectComponent implements OnInit {
   docRef = null;
   selectedIndex: number;
   workTimeState: FormState;
-  projectDescState:FormState;
+  projectDescState: FormState;
+  toolState: FormState;
 
   constructor(
     private firestore: AngularFirestore,
@@ -34,8 +34,9 @@ export class ProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.workTimeState = { add: false, edit: true,selectedIndex:null };
-    this.projectDescState = { add: false, edit: false,selectedIndex:null };
+    this.workTimeState = { add: false, edit: true, selectedIndex: null };
+    this.projectDescState = { add: false, edit: false, selectedIndex: null };
+    this.toolState = { add: false, edit: false, selectedIndex: null };
     this.activatedRoute.paramMap.subscribe((p) => {
       this.docRef = this.firestore
         .collection('users')
@@ -95,23 +96,40 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  addWorkTime(){
+  addWorkTime() {
     this.workTimeState.add = !this.workTimeState.add;
   }
 
-  editWorkTime(index:number){
-    if (this.workTimeState.selectedIndex !== index) this.workTimeState.edit = true;
+  editWorkTime(index: number) {
+    if (this.workTimeState.selectedIndex !== index)
+      this.workTimeState.edit = true;
     else this.workTimeState.edit = !this.workTimeState.edit;
     this.workTimeState.selectedIndex = index;
   }
 
-  deleteWorkTime(workTime:WorkTime){
+  deleteWorkTime(workTime: WorkTime) {
     this.docRef.update({
       workTimes: firebase.firestore.FieldValue.arrayRemove(workTime),
     });
   }
 
-  editProjectDesc(){
+  editProjectDesc() {
     this.projectDescState.edit = !this.projectDescState.edit;
+  }
+
+  addTool(){
+    this.toolState.add = !this.toolState.add;
+  }
+  editTool(index:number){
+    if (this.toolState.selectedIndex !== index)
+    this.toolState.edit = true;
+  else this.toolState.edit = !this.toolState.edit;
+  this.toolState.selectedIndex = index;
+  }
+
+  deleteTool(tool:Tool){
+    this.docRef.update({
+      tools: firebase.firestore.FieldValue.arrayRemove(tool),
+    });
   }
 }
