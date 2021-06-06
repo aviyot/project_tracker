@@ -1,4 +1,4 @@
-export interface tool {
+export interface Tool {
     name:string;
     desc?:string;
     purpose?:string;

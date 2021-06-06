@@ -1,4 +1,4 @@
-import { tool } from './tool.model';
+import { Tool } from './tool.model';
 import { Feature } from './feature.model';
 import {QuestionAnswer} from "./question-answer.model"
 import { LIFECYCLE_STAGE } from '../types/lifecycleStage.type';
@@ -12,7 +12,7 @@ export interface ProjectData {
   lifecycleStage: LIFECYCLE_STAGE;
   gitHub?:string;
   site?:string;
-  tools?: tool[];
+  tools?: Tool[];
   features?: Feature[];
   questions?: QuestionAnswer[];
   workTimes?:WorkTime[];
