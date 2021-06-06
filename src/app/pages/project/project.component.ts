@@ -8,6 +8,7 @@ import 'firebase/firestore';
 import { WorkTime } from 'src/models/work-time.model';
 import { FormState } from 'src/models/ui/form-state';
 import { Tool } from 'src/models/tool.model';
+import { Feature } from 'src/models/feature.model';
 
 @Component({
   selector: 'app-project',
@@ -23,6 +24,7 @@ export class ProjectComponent implements OnInit {
   selectedIndex: number;
   workTimeState: FormState;
   projectDescState: FormState;
+  featureState:FormState;
   toolState: FormState;
 
   constructor(
@@ -37,6 +39,7 @@ export class ProjectComponent implements OnInit {
     this.workTimeState = { add: false, edit: true, selectedIndex: null };
     this.projectDescState = { add: false, edit: false, selectedIndex: null };
     this.toolState = { add: false, edit: false, selectedIndex: null };
+    this.featureState = { add: false, edit: false, selectedIndex: null };
     this.activatedRoute.paramMap.subscribe((p) => {
       this.docRef = this.firestore
         .collection('users')
@@ -130,6 +133,22 @@ export class ProjectComponent implements OnInit {
   deleteTool(tool:Tool){
     this.docRef.update({
       tools: firebase.firestore.FieldValue.arrayRemove(tool),
+    });
+  }
+
+  addFeature(){
+    this.featureState.add = !this.featureState.add;
+  }
+  editFeature(index:number){
+    if (this.featureState.selectedIndex !== index)
+    this.featureState.edit = true;
+  else this.featureState.edit = !this.featureState.edit;
+  this.featureState.selectedIndex = index;
+  }
+
+  deleteFeature(feature:Feature){
+    this.docRef.update({
+      features: firebase.firestore.FieldValue.arrayRemove(feature),
     });
   }
 }

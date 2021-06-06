@@ -1,0 +1,24 @@
+<form [formGroup]="feature">
+    <mat-form-field appearance="outline">
+        <mat-label>שם</mat-label>
+        <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>תיאור</mat-label>
+        <textarea matInput placeholder="" formControlName="desc"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>תאריך התחלה</mat-label>
+        <input matInput type="date" formControlName="startDate">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>תאריך סיום</mat-label>
+        <input matInput type="date" formControlName="endDate">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>התקדמות</mat-label>
+        <input matInput type="text" formControlName="progress">
+    </mat-form-field>
+    <button *ngIf="!featureData" mat-stroked-button color="primary" (click)="addFeature()">הוסף</button>
+    <button *ngIf="featureData" mat-stroked-button color="warn" (click)="saveFeature()">שמור</button>
+</form>

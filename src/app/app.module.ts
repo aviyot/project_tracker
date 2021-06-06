@@ -19,6 +19,7 @@ import { TodoFormComponent } from './forms/todo-form/todo-form.component';
 import { WorkTimeFormComponent } from './forms/work-time-form/work-time-form.component';
 import { ProjectDescFormComponent } from './forms/project-desc-form/project-desc-form.component';
 import { ToolFormComponent } from './forms/tool-form/tool-form.component';
+import { FeatureFormComponent } from './forms/feature-form/feature-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ToolFormComponent } from './forms/tool-form/tool-form.component';
     TodoFormComponent,
     WorkTimeFormComponent,
     ProjectDescFormComponent,
-    ToolFormComponent
+    ToolFormComponent,
+    FeatureFormComponent
   ],
   imports: [
     BrowserModule,
