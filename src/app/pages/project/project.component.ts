@@ -9,6 +9,7 @@ import { WorkTime } from 'src/models/work-time.model';
 import { FormState } from 'src/models/ui/form-state';
 import { Tool } from 'src/models/tool.model';
 import { Feature } from 'src/models/feature.model';
+import { QuestionAnswer } from 'src/models/question-answer.model';
 
 @Component({
   selector: 'app-project',
@@ -26,6 +27,7 @@ export class ProjectComponent implements OnInit {
   projectDescState: FormState;
   featureState:FormState;
   toolState: FormState;
+  qaState:FormState;
 
   constructor(
     private firestore: AngularFirestore,
@@ -40,6 +42,7 @@ export class ProjectComponent implements OnInit {
     this.projectDescState = { add: false, edit: false, selectedIndex: null };
     this.toolState = { add: false, edit: false, selectedIndex: null };
     this.featureState = { add: false, edit: false, selectedIndex: null };
+    this.qaState  = { add: false, edit: false, selectedIndex: null };
     this.activatedRoute.paramMap.subscribe((p) => {
       this.docRef = this.firestore
         .collection('users')
@@ -149,6 +152,22 @@ export class ProjectComponent implements OnInit {
   deleteFeature(feature:Feature){
     this.docRef.update({
       features: firebase.firestore.FieldValue.arrayRemove(feature),
+    });
+  }
+
+  addQA(){
+    this.qaState.add = !this.qaState.add;
+  }
+  editQA(index:number){
+    if (this.qaState.selectedIndex !== index)
+    this.qaState.edit = true;
+  else this.qaState.edit = !this.qaState.edit;
+  this.qaState.selectedIndex = index;
+  }
+
+  deleteQA(qa:QuestionAnswer){
+    this.docRef.update({
+      questions: firebase.firestore.FieldValue.arrayRemove(qa),
     });
   }
 }
