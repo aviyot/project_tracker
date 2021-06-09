@@ -58,10 +58,10 @@ export class NewProjectComponent implements OnInit {
                 this.addTool(tools);
 
                 this.addTodo(todos);
-                this.addHowTodo(howTodos);
+               /*  this.addHowTodo(howTodos);
                 howTodos.forEach((el, index) => {
                   this.addHowtodoSteps(index, el.steps);
-                });
+                }); */
                 this.addWorkTime(workTimes);
               });
           }
@@ -83,7 +83,7 @@ export class NewProjectComponent implements OnInit {
       todos: this.fb.array([]),
       features: this.fb.array([]),
       questions: this.fb.array([]),
-      howTodos: this.fb.array([]),
+      // howTodos: this.fb.array([]),
       workTimes:this.fb.array([])
     });
   }
@@ -266,7 +266,7 @@ export class NewProjectComponent implements OnInit {
       answerLinkRef.push(answerLink);
     }
   }
-
+/* 
   addHowTodo(data?: HowTodo[]) {
     const formArray = this.projectForm.get('howTodos') as FormArray;
     const howTodo = this.fb.group({
@@ -309,7 +309,7 @@ export class NewProjectComponent implements OnInit {
       .at(index)
       .get('steps') as FormArray;
   }
-
+ */
   getAnswerLinks(index): FormArray {
     return (this.projectForm.get('questions') as FormArray)
       .at(index)
