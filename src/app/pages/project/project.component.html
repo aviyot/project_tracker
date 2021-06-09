@@ -50,21 +50,24 @@
   <hr>
 
   <div style="padding-bottom: 2rem;">
-    <h2 id="todos">משימות לעשות <button mat-stroked-button color="primary" (click)="addTodo()"> הוסף משימה</button>
+    <h2 id="todos">משימות לעשות
+      <button mat-stroked-button color="primary" (click)="addTodo()"> הוסף משימה</button>
+      <button mat-stroked-button color="primary" (click)="hideDone()"> הסתר הושלמו</button>
     </h2>
     <app-todo-form *ngIf="add" [docRef]="docRef"></app-todo-form>
-    <div *ngFor="let todo of selectedProject.todos;let todoIndex = index"
-      style="display: flex;flex-direction: column;margin-bottom: 10px;">
-      <span>{{todo.title}}</span>
-      <span>{{todo.detail}}</span>
-      <span>{{todo.date}}</span>
-      <span *ngIf="todo.done" style="background-color: green;color: white;">הושלם</span>
-      <span *ngIf="!todo.done" style="background-color: orangered;color: white;">לא הושלם</span>
-      <mat-action-list>
-        <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
-        <button mat-stroked-button color="warn" (click)="deleteTodo(todo)">מחק</button>
-      </mat-action-list>
-      <app-todo-form *ngIf="edit && (todoIndex === selectedIndex)" [todo]="todo" [docRef]="docRef"></app-todo-form>
+    <div *ngFor="let todo of selectedProject.todos;let todoIndex = index">
+      <div *ngIf="!doneHided || !todo.done" style="display: flex;flex-direction: column;margin-bottom: 10px;">
+        <span>{{todo.title}}</span>
+        <span>{{todo.detail}}</span>
+        <span>{{todo.date}}</span>
+        <span *ngIf="todo.done" style="background-color: green;color: white;">הושלם</span>
+        <span *ngIf="!todo.done" style="background-color: orangered;color: white;">לא הושלם</span>
+        <mat-action-list>
+          <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
+          <button mat-stroked-button color="warn" (click)="deleteTodo(todo)">מחק</button>
+        </mat-action-list>
+        <app-todo-form *ngIf="edit && (todoIndex === selectedIndex)" [todo]="todo" [docRef]="docRef"></app-todo-form>
+      </div>
     </div>
   </div>
   <hr>
@@ -133,7 +136,7 @@
     </div>
   </div>
   <hr />
-<!-- 
+  <!-- 
   <div>
     <h2 id="howtodos">איך לעשות</h2>
     <div *ngFor="let howTodo of selectedProject.howTodos" style="display: flex;flex-direction: column;">

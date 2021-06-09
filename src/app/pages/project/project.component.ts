@@ -30,6 +30,7 @@ export class ProjectComponent implements OnInit,AfterViewInit{
   qaState:FormState;
   anchors = ['desc','tools','todos','worktimea','features','questions','howtodos']
   private fragment: string;
+  doneHided = false;
 
   constructor(
     private firestore: AngularFirestore,
@@ -185,5 +186,9 @@ export class ProjectComponent implements OnInit,AfterViewInit{
     this.docRef.update({
       questions: firebase.firestore.FieldValue.arrayRemove(qa),
     });
+  }
+
+  hideDone(){
+    this.doneHided = !this.doneHided;
   }
 }
