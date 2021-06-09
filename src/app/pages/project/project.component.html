@@ -1,4 +1,5 @@
 <div style="font-size: 1.5rem;">
+  <h2 id="desc">Project Description</h2>
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{selectedProject.name}}
@@ -24,27 +25,12 @@
       </app-project-desc-form>
     </mat-card-actions>
   </mat-card>
-
-
-  <!-- <div style="display: flex;flex-direction: column;padding-bottom: 2rem;">
-    <span>{{selectedProject.name}}</span>
-    <span>{{selectedProject.desc}}</span>
-    <span>{{selectedProject.startTime}}</span>
-    <span>{{selectedProject.endTime}}</span>
-    <span>{{selectedProject.lifecycleStage}}</span>
-    <div style="display: flex;gap: 1rem;margin: 1rem;">
-      <span> <a target="_blank" [href]="selectedProject.gitHub"> גיטהב</a>
-      </span>
-      <span> <a target="_blank" href="selectedProject.site">אתר</a>
-      </span>
-    </div>
-  </div> -->
   <hr>
-  <h2>כלי פיתוח
-    <button mat-stroked-button color="primary" (click)="addTool()"> הוסף </button>
-  </h2>
-  <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
   <div style="padding-bottom: 2rem;">
+    <h2 id="tools">כלי פיתוח
+      <button mat-stroked-button color="primary" (click)="addTool()"> הוסף </button>
+    </h2>
+    <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
     <div *ngFor="let tool of selectedProject.tools;let toolIndex = index" style="display: flex;flex-direction: column;">
       <span>{{tool.name}}</span>
       <span>{{tool.desc}}</span>
@@ -62,10 +48,11 @@
     </div>
   </div>
   <hr>
-  <h2>משימות לעשות <button mat-stroked-button color="primary" (click)="addTodo()"> הוסף משימה</button>
-  </h2>
-  <app-todo-form *ngIf="add" [docRef]="docRef"></app-todo-form>
+
   <div style="padding-bottom: 2rem;">
+    <h2 id="todos">משימות לעשות <button mat-stroked-button color="primary" (click)="addTodo()"> הוסף משימה</button>
+    </h2>
+    <app-todo-form *ngIf="add" [docRef]="docRef"></app-todo-form>
     <div *ngFor="let todo of selectedProject.todos;let todoIndex = index"
       style="display: flex;flex-direction: column;margin-bottom: 10px;">
       <span>{{todo.title}}</span>
@@ -81,9 +68,9 @@
     </div>
   </div>
   <hr>
-  <h2>זמני עבודה <button mat-stroked-button color="primary" (click)="addWorkTime()"> הוסף</button></h2>
-  <app-work-time-form *ngIf="workTimeState.add" [docRef]="docRef"></app-work-time-form>
   <div style="padding-bottom: 2rem;">
+    <h2 id="worktimes">זמני עבודה <button mat-stroked-button color="primary" (click)="addWorkTime()"> הוסף</button></h2>
+    <app-work-time-form *ngIf="workTimeState.add" [docRef]="docRef"></app-work-time-form>
     <div *ngFor="let workTime of selectedProject.workTimes;let workTimeIndex = index"
       style="display: flex;flex-direction: column;">
       <span>{{workTime.startTime}}</span>
@@ -98,9 +85,9 @@
     </div>
   </div>
   <hr>
-  <h2>פיצרים <button mat-stroked-button color="primary" (click)="addFeature()"> הוסף</button></h2>
-  <app-feature-form *ngIf="featureState.add" [docRef]="docRef"></app-feature-form>
   <div style="padding-bottom: 2rem;">
+    <h2 id="features">פיצרים <button mat-stroked-button color="primary" (click)="addFeature()"> הוסף</button></h2>
+    <app-feature-form *ngIf="featureState.add" [docRef]="docRef"></app-feature-form>
     <div *ngFor="let feature of selectedProject.features;let featureIndex = index"
       style="display: flex;flex-direction: column;">
       <span>{{feature.name}}</span>
@@ -118,7 +105,7 @@
   </div>
   <hr>
   <div>
-    <h2> שאלות <button mat-stroked-button color="primary" (click)="addQA()"> הוסף</button></h2>
+    <h2 id="questions"> שאלות <button mat-stroked-button color="primary" (click)="addQA()"> הוסף</button></h2>
     <app-question-answer-form *ngIf="qaState.add" [docRef]="docRef"></app-question-answer-form>
     <div *ngFor="let question of selectedProject.questions let questionIndex = index"
       style="display: flex;flex-direction: column;">
@@ -147,7 +134,7 @@
   </div>
   <hr />
   <div>
-    <h2>איך לעשות</h2>
+    <h2 id="howtodos">איך לעשות</h2>
     <div *ngFor="let howTodo of selectedProject.howTodos" style="display: flex;flex-direction: column;">
       <span>{{howTodo.title}}</span>
       <span>{{howTodo.desc}}</span>
@@ -156,9 +143,9 @@
       </div>
     </div>
   </div>
-  <hr/>
+  <hr />
   <mat-action-list>
-    <button  mat-stroked-button color="warn" (click)="deleteProject()">Delete Project</button>
-    <button mat-stroked-button  color="primary" (click)="editProject()">Edit Project</button>
+    <button mat-stroked-button color="warn" (click)="deleteProject()">Delete Project</button>
+    <button mat-stroked-button color="primary" (click)="editProject()">Edit Project</button>
   </mat-action-list>
 </div>

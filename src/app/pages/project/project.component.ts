@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,7 +16,7 @@ import { QuestionAnswer } from 'src/models/question-answer.model';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css'],
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit,AfterViewInit{
   projects: Observable<Project[]> = new Observable<Project[]>();
   selectedProject: any;
   edit = false;
@@ -28,11 +28,14 @@ export class ProjectComponent implements OnInit {
   featureState:FormState;
   toolState: FormState;
   qaState:FormState;
+  anchors = ['desc','tools','todos','worktimea','features','questions','howtodos']
+  private fragment: string;
 
   constructor(
     private firestore: AngularFirestore,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     // console.log(this.router.getCurrentNavigation().extras.state);
   }
@@ -56,6 +59,19 @@ export class ProjectComponent implements OnInit {
           this.selectedProject = p;
         });
     });
+
+    this.route.fragment.subscribe(fragment => { this.fragment = fragment;
+    //this.router.navigate(['./'],{fragment:this.fragment})
+  });
+  }
+
+  
+  ngAfterViewInit(): void {
+
+ 
+    try {
+      document.querySelector('#' + this.fragment).scrollIntoView();
+    } catch (e) { }
   }
 
   deleteProject() {
