@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   {path:'new-project/edit/:project_id',component:NewProjectComponent},
+  {path:'new-project',component:NewProjectComponent},
   {path:'app-project/:project_id',component:ProjectComponent},
 
 ];
