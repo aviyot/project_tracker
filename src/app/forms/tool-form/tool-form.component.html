@@ -27,6 +27,14 @@
         <mat-label>NPM</mat-label>
         <input type="text" matInput formControlName="npmLink" />
     </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>סוג</mat-label>
+        <mat-select formControlName="type">
+            <mat-option *ngFor="let toolType  of toolTypes" [value] = "toolType" >
+               {{toolType}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
     <button *ngIf="!toolData" mat-stroked-button color="primary" (click)="addTool()">הוסף</button>
     <button *ngIf="toolData" mat-stroked-button color="warn" (click)="saveTool()">שמור</button>
 </form>

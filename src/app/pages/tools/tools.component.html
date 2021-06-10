@@ -5,9 +5,10 @@
     <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
     <div *ngFor="let tool of selectedProject.tools;let toolIndex = index" style="display: flex;flex-direction: column;">
       <span>{{tool.name}}</span>
-      <span>{{tool.desc}}</span>
-      <span>{{tool.purpose}}</span>
       <span>{{tool.ver}}</span>
+      <span> {{tool.type}}</span>
+      <span>{{tool.purpose}}</span>
+      <span>{{tool.desc}}</span>
       <a [href]="tool.githubLink" target="_blank">github</a>
       <a [href]="tool.webSite" target="_blank">site</a>
       <a [href]="tool.npmLink" target="_blank">npm</a>

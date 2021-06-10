@@ -5,6 +5,7 @@ import { Tool } from 'src/models/tool.model';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { ToolType } from 'src/types/toolType.type';
 
 @Component({
   selector: 'app-tool-form',
@@ -16,10 +17,12 @@ export class ToolFormComponent implements OnInit {
   @Input('docRef')
   docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
   tool: FormGroup;
+  toolTypes:ToolType[];
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.toolTypes = ["frontend","backend"]
     this.tool = this.fb.group({
       name: [''],
       desc: [''],
@@ -28,10 +31,11 @@ export class ToolFormComponent implements OnInit {
       webSite: [''],
       githubLink: [''],
       npmLink: [''],
+      type:['']
     });
 
     if(this.toolData) {
-      this.tool.setValue(this.toolData);
+      this.tool.patchValue(this.toolData);
     }
   }
 
