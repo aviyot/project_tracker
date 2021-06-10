@@ -1,7 +1,9 @@
 <div style="padding-bottom: 2rem;">
     <h2 id="todos">משימות לעשות
       <button mat-stroked-button color="primary" (click)="addTodo()"> הוסף משימה</button>
-      <button mat-stroked-button color="primary" (click)="hideDone()"> הסתר הושלמו</button>
+      <button *ngIf="!doneHided" mat-stroked-button color="primary" (click)="hideDone()"> הסתר הושלמו</button>
+      <button *ngIf="doneHided" mat-stroked-button color="primary" (click)="hideDone()"> הראה הושלמו</button>
+
     </h2>
     <app-todo-form *ngIf="todoState.add" [docRef]="docRef"></app-todo-form>
     <div *ngFor="let todo of selectedProject.todos;let todoIndex = index">

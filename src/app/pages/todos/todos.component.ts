@@ -15,7 +15,7 @@ export class TodosComponent implements OnInit {
   @Input() docRef;
   todoState:FormState;
 
-  doneHided = false;
+  doneHided = true;
 
   constructor() { }
 
