@@ -42,6 +42,8 @@ export class ToolFormComponent implements OnInit {
   addTool(){
     this.docRef.update({
       tools:firebase.firestore.FieldValue.arrayUnion(this.tool.value)
+    }).then(()=>{
+      this.tool.reset();
     })
 
   }
