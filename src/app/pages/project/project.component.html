@@ -1,153 +1,16 @@
 <div style="font-size: 1.5rem;">
-  <h2 id="desc">תיאור הפרויקט</h2>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{selectedProject.name}}
-      </mat-card-title>
-      <mat-card-subtitle>
-        <span>{{selectedProject.startTime}}</span>
-        <span>{{selectedProject.endTime}}</span>
-        <span>{{selectedProject.lifecycleStage}}</span>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>
-        {{selectedProject.desc}}
-      </p>
-      <mat-nav-list>
-        <a *ngIf="selectedProject.gitHub" target="_blank" mat-list-item [href]="selectedProject.gitHub"> גיטהב</a>
-        <a *ngIf="selectedProject.site" target="_blank" mat-list-item [href]="selectedProject.site">אתר</a>
-      </mat-nav-list>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
-      <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
-      </app-project-desc-form>
-    </mat-card-actions>
-  </mat-card>
+  <app-description [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
   <hr>
-  <div style="padding-bottom: 2rem;">
-    <h2 id="tools">כלי פיתוח
-      <button mat-stroked-button color="primary" (click)="addTool()"> הוסף </button>
-    </h2>
-    <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
-    <div *ngFor="let tool of selectedProject.tools;let toolIndex = index" style="display: flex;flex-direction: column;">
-      <span>{{tool.name}}</span>
-      <span>{{tool.desc}}</span>
-      <span>{{tool.purpose}}</span>
-      <span>{{tool.ver}}</span>
-      <a [href]="tool.githubLink" target="_blank">github</a>
-      <a [href]="tool.webSite" target="_blank">site</a>
-      <a [href]="tool.npmLink" target="_blank">npm</a>
-      <mat-action-list>
-        <button mat-stroked-button color="accent" (click)="editTool(toolIndex)">ערוך</button>
-        <button mat-stroked-button color="warn" (click)="deleteTool(tool)">מחק</button>
-      </mat-action-list>
-      <app-tool-form *ngIf="toolState.edit && (toolIndex === toolState.selectedIndex)" [tool]="tool" [docRef]="docRef">
-      </app-tool-form>
-    </div>
-  </div>
+  <app-tools [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
   <hr>
-
-  <div style="padding-bottom: 2rem;">
-    <h2 id="todos">משימות לעשות
-      <button mat-stroked-button color="primary" (click)="addTodo()"> הוסף משימה</button>
-      <button mat-stroked-button color="primary" (click)="hideDone()"> הסתר הושלמו</button>
-    </h2>
-    <app-todo-form *ngIf="add" [docRef]="docRef"></app-todo-form>
-    <div *ngFor="let todo of selectedProject.todos;let todoIndex = index">
-      <div *ngIf="!doneHided || !todo.done" style="display: flex;flex-direction: column;margin-bottom: 10px;">
-        <span>{{todo.title}}</span>
-        <span>{{todo.detail}}</span>
-        <span>{{todo.date}}</span>
-        <span *ngIf="todo.done" style="background-color: green;color: white;">הושלם</span>
-        <span *ngIf="!todo.done" style="background-color: orangered;color: white;">לא הושלם</span>
-        <mat-action-list>
-          <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
-          <button mat-stroked-button color="warn" (click)="deleteTodo(todo)">מחק</button>
-        </mat-action-list>
-        <app-todo-form *ngIf="edit && (todoIndex === selectedIndex)" [todo]="todo" [docRef]="docRef"></app-todo-form>
-      </div>
-    </div>
-  </div>
+   <app-todos [selectedProject]="selectedProject" [docRef]="docRef"></app-todos>
   <hr>
-  <div style="padding-bottom: 2rem;">
-    <h2 id="worktimes">זמני עבודה <button mat-stroked-button color="primary" (click)="addWorkTime()"> הוסף</button></h2>
-    <app-work-time-form *ngIf="workTimeState.add" [docRef]="docRef"></app-work-time-form>
-    <div *ngFor="let workTime of selectedProject.workTimes;let workTimeIndex = index"
-      style="display: flex;flex-direction: column;">
-      <span>{{workTime.startTime}}</span>
-      <span>{{workTime.endTime}}</span>
-      <span>{{workTime.task}}</span>
-      <mat-action-list>
-        <button mat-stroked-button color="accent" (click)="editWorkTime(workTimeIndex)">ערוך</button>
-        <button mat-stroked-button color="warn" (click)="deleteWorkTime(workTime)">מחק</button>
-      </mat-action-list>
-      <app-work-time-form *ngIf="workTimeState.edit && (workTimeIndex === workTimeState.selectedIndex)"
-        [workTime]="workTime" [docRef]="docRef"></app-work-time-form>
-    </div>
-  </div>
+  <app-work-times [selectedProject]="selectedProject" [docRef]="docRef" ></app-work-times>
   <hr>
-  <div style="padding-bottom: 2rem;">
-    <h2 id="features">פיצרים <button mat-stroked-button color="primary" (click)="addFeature()"> הוסף</button></h2>
-    <app-feature-form *ngIf="featureState.add" [docRef]="docRef"></app-feature-form>
-    <div *ngFor="let feature of selectedProject.features;let featureIndex = index"
-      style="display: flex;flex-direction: column;">
-      <span>{{feature.name}}</span>
-      <span>{{feature.desc}}</span>
-      <span>{{feature.startDate}}</span>
-      <span>{{feature.endDate}}</span>
-      <span>{{feature.progress}}</span>
-      <mat-action-list>
-        <button mat-stroked-button color="accent" (click)="editFeature(featureIndex)">ערוך</button>
-        <button mat-stroked-button color="warn" (click)="deleteFeature(feature)">מחק</button>
-      </mat-action-list>
-      <app-feature-form *ngIf="featureState.edit && (featureIndex === featureState.selectedIndex)" [feature]="feature"
-        [docRef]="docRef"></app-feature-form>
-    </div>
-  </div>
+  <app-features [selectedProject]="selectedProject" [docRef]="docRef"></app-features>
   <hr>
-  <div>
-    <h2 id="questions"> שאלות <button mat-stroked-button color="primary" (click)="addQA()"> הוסף</button></h2>
-    <app-question-answer-form *ngIf="qaState.add" [docRef]="docRef"></app-question-answer-form>
-    <div *ngFor="let question of selectedProject.questions let questionIndex = index"
-      style="display: flex;flex-direction: column;">
-      <span> {{question.question}}</span>
-      <span> {{question.featureId}}</span>
-      <span> {{question.lifecycleStageId}}</span>
-      <span> {{question.questionTime}}</span>
-      <span> {{question.answered}}</span>
-      <span *ngIf="question.answered"> נענה</span>
-      <span *ngIf="!question.answered">לא נענה</span>
-      <span> {{question.answerTime}}</span>
-      <div *ngFor="let answerLink of question.answerLinks"
-        style="display: flex;flex-direction: column;margin-right: 1rem;">
-        <span>{{answerLink.from}}</span>
-        <a [href]="answerLink.links" target="_blank"><span>{{answerLink.link}}</span> </a>
-        <span *ngIf="answerLink.prefer">פתרון מעודף </span>
-        <span *ngIf="!answerLink.prefer">פתרון נוסף</span>
-      </div>
-      <mat-action-list>
-        <button mat-stroked-button color="accent" (click)="editQA(questionIndex)">ערוך</button>
-        <button mat-stroked-button color="warn" (click)="deleteQA(question)">מחק</button>
-      </mat-action-list>
-      <app-question-answer-form *ngIf="qaState.edit && (questionIndex === qaState.selectedIndex)" [question]="question"
-        [docRef]="docRef"></app-question-answer-form>
-    </div>
-  </div>
+<app-questions [selectedProject]="selectedProject" [docRef]="docRef"></app-questions>
   <hr />
-  <!-- 
-  <div>
-    <h2 id="howtodos">איך לעשות</h2>
-    <div *ngFor="let howTodo of selectedProject.howTodos" style="display: flex;flex-direction: column;">
-      <span>{{howTodo.title}}</span>
-      <span>{{howTodo.desc}}</span>
-      <div *ngFor="let step of howTodo.steps" style="display: flex;flex-direction: column;margin-right: 1rem;">
-        <span>{{step}}</span>
-      </div>
-    </div>
-  </div>
-  <hr /> -->
   <mat-action-list>
     <button mat-stroked-button color="warn" (click)="deleteProject()">Delete Project</button>
     <button mat-stroked-button color="primary" (click)="editProject()">Edit Project</button>

@@ -1,0 +1,26 @@
+<h2 id="desc">תיאור הפרויקט</h2>
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>{{selectedProject.name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        <span>{{selectedProject.startTime}}</span>
+        <span>{{selectedProject.endTime}}</span>
+        <span>{{selectedProject.lifecycleStage}}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{selectedProject.desc}}
+      </p>
+      <mat-nav-list>
+        <a *ngIf="selectedProject.gitHub" target="_blank" mat-list-item [href]="selectedProject.gitHub"> גיטהב</a>
+        <a *ngIf="selectedProject.site" target="_blank" mat-list-item [href]="selectedProject.site">אתר</a>
+      </mat-nav-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
+      <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
+      </app-project-desc-form>
+    </mat-card-actions>
+  </mat-card>

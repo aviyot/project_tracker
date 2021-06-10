@@ -1,0 +1,28 @@
+<div>
+    <h2 id="questions"> שאלות <button mat-stroked-button color="primary" (click)="addQA()"> הוסף</button></h2>
+    <app-question-answer-form *ngIf="qaState.add" [docRef]="docRef"></app-question-answer-form>
+    <div *ngFor="let question of selectedProject.questions let questionIndex = index"
+      style="display: flex;flex-direction: column;">
+      <span> {{question.question}}</span>
+      <span> {{question.featureId}}</span>
+      <span> {{question.lifecycleStageId}}</span>
+      <span> {{question.questionTime}}</span>
+      <span> {{question.answered}}</span>
+      <span *ngIf="question.answered"> נענה</span>
+      <span *ngIf="!question.answered">לא נענה</span>
+      <span> {{question.answerTime}}</span>
+      <div *ngFor="let answerLink of question.answerLinks"
+        style="display: flex;flex-direction: column;margin-right: 1rem;">
+        <span>{{answerLink.from}}</span>
+        <a [href]="answerLink.link" target="_blank"><span>{{answerLink.link}}</span> </a>
+        <span *ngIf="answerLink.prefer">פתרון מעודף </span>
+        <span *ngIf="!answerLink.prefer">פתרון נוסף</span>
+      </div>
+      <mat-action-list>
+        <button mat-stroked-button color="accent" (click)="editQA(questionIndex)">ערוך</button>
+        <button mat-stroked-button color="warn" (click)="deleteQA(question)">מחק</button>
+      </mat-action-list>
+      <app-question-answer-form *ngIf="qaState.edit && (questionIndex === qaState.selectedIndex)" [question]="question"
+        [docRef]="docRef"></app-question-answer-form>
+    </div>
+  </div>

@@ -21,6 +21,13 @@ import { ProjectDescFormComponent } from './forms/project-desc-form/project-desc
 import { ToolFormComponent } from './forms/tool-form/tool-form.component';
 import { FeatureFormComponent } from './forms/feature-form/feature-form.component';
 import { QuestionAnswerFormComponent } from './forms/question-answer-form/question-answer-form.component';
+import { DescriptionComponent } from './pages/description/description.component';
+import { ViewDataComponent } from './pages/view-data/view-data.component';
+import { ToolsComponent } from './pages/tools/tools.component';
+import { TodosComponent } from './pages/todos/todos.component';
+import { WorkTimesComponent } from './pages/work-times/work-times.component';
+import { FeaturesComponent } from './pages/features/features.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +40,14 @@ import { QuestionAnswerFormComponent } from './forms/question-answer-form/questi
     ProjectDescFormComponent,
     ToolFormComponent,
     FeatureFormComponent,
-    QuestionAnswerFormComponent
+    QuestionAnswerFormComponent,
+    DescriptionComponent,
+    ViewDataComponent,
+    ToolsComponent,
+    TodosComponent,
+    WorkTimesComponent,
+    FeaturesComponent,
+    QuestionsComponent,
   ],
   imports: [
     BrowserModule,

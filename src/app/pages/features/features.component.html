@@ -1,0 +1,18 @@
+<div style="padding-bottom: 2rem;">
+    <h2 id="features">פיצרים <button mat-stroked-button color="primary" (click)="addFeature()"> הוסף</button></h2>
+    <app-feature-form *ngIf="featureState.add" [docRef]="docRef"></app-feature-form>
+    <div *ngFor="let feature of selectedProject.features;let featureIndex = index"
+      style="display: flex;flex-direction: column;">
+      <span>{{feature.name}}</span>
+      <span>{{feature.desc}}</span>
+      <span>{{feature.startDate}}</span>
+      <span>{{feature.endDate}}</span>
+      <span>{{feature.progress}}</span>
+      <mat-action-list>
+        <button mat-stroked-button color="accent" (click)="editFeature(featureIndex)">ערוך</button>
+        <button mat-stroked-button color="warn" (click)="deleteFeature(feature)">מחק</button>
+      </mat-action-list>
+      <app-feature-form *ngIf="featureState.edit && (featureIndex === featureState.selectedIndex)" [feature]="feature"
+        [docRef]="docRef"></app-feature-form>
+    </div>
+  </div>

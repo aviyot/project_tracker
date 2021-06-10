@@ -1,0 +1,21 @@
+<div style="padding-bottom: 2rem;">
+    <h2 id="tools">כלי פיתוח
+      <button mat-stroked-button color="primary" (click)="addTool()"> הוסף </button>
+    </h2>
+    <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
+    <div *ngFor="let tool of selectedProject.tools;let toolIndex = index" style="display: flex;flex-direction: column;">
+      <span>{{tool.name}}</span>
+      <span>{{tool.desc}}</span>
+      <span>{{tool.purpose}}</span>
+      <span>{{tool.ver}}</span>
+      <a [href]="tool.githubLink" target="_blank">github</a>
+      <a [href]="tool.webSite" target="_blank">site</a>
+      <a [href]="tool.npmLink" target="_blank">npm</a>
+      <mat-action-list>
+        <button mat-stroked-button color="accent" (click)="editTool(toolIndex)">ערוך</button>
+        <button mat-stroked-button color="warn" (click)="deleteTool(tool)">מחק</button>
+      </mat-action-list>
+      <app-tool-form *ngIf="toolState.edit && (toolIndex === toolState.selectedIndex)" [tool]="tool" [docRef]="docRef">
+      </app-tool-form>
+    </div>
+  </div>

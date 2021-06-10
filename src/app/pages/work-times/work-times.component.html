@@ -1,0 +1,16 @@
+<div style="padding-bottom: 2rem;">
+    <h2 id="worktimes">זמני עבודה <button mat-stroked-button color="primary" (click)="addWorkTime()"> הוסף</button></h2>
+    <app-work-time-form *ngIf="workTimeState.add" [docRef]="docRef"></app-work-time-form>
+    <div *ngFor="let workTime of selectedProject.workTimes;let workTimeIndex = index"
+      style="display: flex;flex-direction: column;">
+      <span>{{workTime.startTime}}</span>
+      <span>{{workTime.endTime}}</span>
+      <span>{{workTime.task}}</span>
+      <mat-action-list>
+        <button mat-stroked-button color="accent" (click)="editWorkTime(workTimeIndex)">ערוך</button>
+        <button mat-stroked-button color="warn" (click)="deleteWorkTime(workTime)">מחק</button>
+      </mat-action-list>
+      <app-work-time-form *ngIf="workTimeState.edit && (workTimeIndex === workTimeState.selectedIndex)"
+        [workTime]="workTime" [docRef]="docRef"></app-work-time-form>
+    </div>
+  </div>
