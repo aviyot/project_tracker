@@ -55,13 +55,13 @@ export class ProjectComponent implements OnInit, AfterViewInit {
 
     this.route.fragment.subscribe((fragment) => {
       this.fragment = fragment;
-      //this.router.navigate(['./'],{fragment:this.fragment})
+      //this.router.navigate(['./','app-project',this.selectedProject.id],{fragment:this.fragment})
     });
   }
 
   ngAfterViewInit(): void {
     try {
-      document.querySelector('#' + this.fragment).scrollIntoView();
+      //document.querySelector('#' + this.fragment).scrollIntoView();
     } catch (e) {}
   }
 

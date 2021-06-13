@@ -1,15 +1,23 @@
 <div style="font-size: 1.5rem;">
-  <app-description [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
+<!--   <div class="anchors">
+    <a [routerLink]="['./']" fragment="desc">desc</a>
+    <a [routerLink]="['./']" fragment="tools">tools</a>
+    <a [routerLink]="['./']" fragment="todos">todos</a>
+    <a [routerLink]="['./']" fragment="worktimes" >worktimes</a>
+    <a [routerLink]="['./']" fragment="features">features</a>
+    <a [routerLink]="['./']" fragment="questions" >questions</a>
+  </div> -->
+  <app-description id="desc" [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
   <hr>
-  <app-tools [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
+  <app-tools id="tools" [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
   <hr>
-   <app-todos [selectedProject]="selectedProject" [docRef]="docRef"></app-todos>
+   <app-todos id="todos" [selectedProject]="selectedProject" [docRef]="docRef"></app-todos>
   <hr>
-  <app-work-times [selectedProject]="selectedProject" [docRef]="docRef" ></app-work-times>
+  <app-work-times id="worktimes" [selectedProject]="selectedProject" [docRef]="docRef" ></app-work-times>
   <hr>
-  <app-features [selectedProject]="selectedProject" [docRef]="docRef"></app-features>
+  <app-features id="features" [selectedProject]="selectedProject" [docRef]="docRef"></app-features>
   <hr>
-<app-questions [selectedProject]="selectedProject" [docRef]="docRef"></app-questions>
+<app-questions id="questions" [selectedProject]="selectedProject" [docRef]="docRef"></app-questions>
   <hr />
   <mat-action-list>
     <button mat-stroked-button color="warn" (click)="deleteProject()">Delete Project</button>
