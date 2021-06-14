@@ -11,6 +11,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatCheckboxModule,
     MatCardModule,
     MatSelectModule,
+    MatButtonToggleModule
   ],
   exports:[
     CommonModule,
@@ -40,6 +42,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatCheckboxModule,
     MatCardModule,
     MatSelectModule,
+    MatButtonToggleModule
   ]
 })
 export class AngularMaterialModule { }

@@ -1,18 +1,26 @@
 <form [formGroup]="todo">
-            <mat-form-field appearance="outline" appearance="outline">
-                <mat-label>כותרת</mat-label>
-                <input type="text" matInput formControlName="title" />
-            </mat-form-field>
-            <mat-form-field appearance="outline" appearance="outline">
-                <mat-label>תיאור משימה</mat-label>
-                <textarea matInput placeholder="" formControlName="detail"></textarea>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>תאריך יצירה</mat-label>
-                <input type="date" matInput formControlName="date" />
-            </mat-form-field>
-                <mat-checkbox type="text" matInput formControlName="done" >בוצע?</mat-checkbox>
+    <mat-form-field appearance="outline" appearance="outline">
+        <mat-label>כותרת</mat-label>
+        <input type="text" matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" appearance="outline">
+        <mat-label>תיאור משימה</mat-label>
+        <textarea matInput placeholder="" formControlName="detail"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>תאריך יצירה</mat-label>
+        <input type="date" matInput formControlName="date" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>סטטוס</mat-label>
+        <mat-select formControlName="status">
+            <mat-option *ngFor="let selectedStatus  of status" [value] = "selectedStatus" >
+               {{selectedStatus}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <button *ngIf="!todoData" mat-stroked-button color="primary" (click)="addTodo()">Add Todo</button>
-    <button  *ngIf="todoData" mat-stroked-button color="warn" (click)="saveTodo()">Save Todo</button>
-    
+    <button *ngIf="todoData" mat-stroked-button color="warn" (click)="saveTodo()">Save Todo</button>
+
 </form>

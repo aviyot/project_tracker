@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Project } from 'src/models/project.model';
 import { FormState } from 'src/models/ui/form-state';
+import { TODO_STATUS } from 'src/types/todo_status.type';
 
 
 @Component({
@@ -16,11 +17,12 @@ export class TodosComponent implements OnInit {
   todoState:FormState;
 
   doneHided = true;
+  selectedStatus:TODO_STATUS | 'ALL' = "IN_PROGRESS";
 
   constructor() { }
 
   ngOnInit(): void {
-    this.todoState = { add: false, edit: false, selectedIndex: null }
+    this.todoState = { add: false, edit: false, selectedIndex: null };
   }
 
   addTodo() {

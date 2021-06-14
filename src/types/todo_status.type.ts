@@ -1,0 +1,1 @@
+export type TODO_STATUS = 'PLANNED' | 'IN_PROGRESS' | 'COMPLETED' | 'NOT_NEEDED' | 'STUCK'
