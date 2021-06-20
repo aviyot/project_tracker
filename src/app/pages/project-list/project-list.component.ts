@@ -8,8 +8,11 @@ import {
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AppComponent } from 'src/app/app.component';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Project } from 'src/models/project.model';
+
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 @Component({
   selector: 'app-project-list',
@@ -19,14 +22,21 @@ import { Project } from 'src/models/project.model';
 export class ProjectListComponent implements OnInit {
   projects: Observable<Project[]> = new Observable<Project[]>();
   @Output() itemSelected = new EventEmitter();
-  constructor(private firestore: AngularFirestore, private router: Router) {}
+  @Input() detial:boolean;
+  constructor(private firestore: AngularFirestore, private router: Router,private authService:AuthService) {}
 
   ngOnInit(): void {
-    this.projects = this.firestore
+    this.authService.user.subscribe((user)=>{
+      if(user) {
+      this.projects = this.firestore
       .collection('users')
-      .doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2')
+      .doc(user.uid)
       .collection('projects')
       .valueChanges({ idField: 'id' }) as Observable<Project[]>;
+    }
+  }
+    )
+   
   }
 
   onSelectProject(selectedProject: Project) {
