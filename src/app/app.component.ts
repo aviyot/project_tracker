@@ -44,18 +44,6 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
-  delItem() {
-    this.firestore
-      .collection(this.collectionName)
-      .doc('xBnv53opoIPsLK2Y7q85')
-      .delete();
-  }
-
-  openSide(){
-    this.isSideOpen = !this.isSideOpen;
-  }
-
   onItemSelected(){
     this.sideNav.close();
     }

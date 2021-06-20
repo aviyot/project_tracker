@@ -1,40 +1,13 @@
 <mat-toolbar style="justify-content: space-between;">
-
   <button mat-button (click)="sideNav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{appName}}</span>
   <app-login></app-login>
-
 </mat-toolbar>
-<!-- <div class="main">
-  <div class="header">
-    <span>nav</span>
-    <span style="font-size:2rem" class="menu-open" (click)="openSide()">|||</span>
-  </div>
-  <div class="main-content">
-    <div class="side" [ngClass]="{'side-open':isSideOpen}">1
-      <span style="font-size:2rem" class="menu-open" (click)="openSide()">|||</span>
-    </div>
-    <div class="content">2</div>
-  </div>
-  <div class="footer">footer</div>
-</div> -->
-
-<!-- <mat-drawer-container>
-  <mat-drawer >1111</mat-drawer>
-  <mat-drawer-content>2222222</mat-drawer-content>
-</mat-drawer-container>
- -->
 <div class="main">
-  <!--   <mat-toolbar class="side-nav-header">
-    <span>my app</span>
-   <button mat-button (click)="sideNav.toggle()"> 
-    <mat-icon>menu</mat-icon>
-    </button>
-  </mat-toolbar> -->
   <mat-sidenav-container hasBackdrop="false">
-    <mat-sidenav autoFocus="true" mode="over" #sideNav opened>
+    <mat-sidenav autoFocus="true" mode="over" #sideNav>
       <app-project-list (itemSelected) = "onItemSelected()"></app-project-list>
     </mat-sidenav>
     <mat-sidenav-content>
