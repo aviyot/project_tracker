@@ -1,5 +1,14 @@
-<button mt-button (click)="addNewProject()"> הוסף פרויקט חדש</button>
-<mat-list>
+<mat-list *ngIf="!detial">
+  <button mt-button (click)="addNewProject()"> הוסף פרויקט חדש</button>
   <mat-list-item *ngFor="let project of projects | async" (click)="onSelectProject(project)"> {{project.name}}
   </mat-list-item>
 </mat-list>
+<div *ngIf="detial ">
+  <button mt-button (click)="addNewProject()"> הוסף פרויקט חדש</button>
+  <div *ngFor="let project of projects | async">
+    <app-description [selectedProject]="project">
+      <button mat-button (click)="onSelectProject(project)">פרטים</button>
+    </app-description>
+    <mat-divider></mat-divider>
+  </div>
+  </div>
