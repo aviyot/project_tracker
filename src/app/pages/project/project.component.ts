@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Project } from 'src/models/project.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-project',
@@ -13,6 +14,7 @@ import 'firebase/firestore';
 })
 export class ProjectComponent implements OnInit, AfterViewInit {
   projects: Observable<Project[]> = new Observable<Project[]>();
+  user:any
   selectedProject: any;
   edit = false;
   add = false;
@@ -33,25 +35,33 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     private firestore: AngularFirestore,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AngularFireAuth,
   ) {
     // console.log(this.router.getCurrentNavigation().extras.state);
   }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((p) => {
-      this.docRef = this.firestore
-        .collection('users')
-        .doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2')
-        .collection('projects')
-        .doc(p.get('project_id'));
 
-      this.selectedProject = this.docRef
-        .valueChanges({ idField: 'id' })
-        .subscribe((p) => {
-          this.selectedProject = p;
-        });
-    });
+    this.auth.user.subscribe((currentUser)=>{
+       this.user = currentUser;
+       this.activatedRoute.paramMap.subscribe((p) => {
+        if(p.get('project_id')){
+        this.docRef = this.firestore
+          .collection('users')
+          .doc(this.user.uid)
+          .collection('projects')
+          .doc(p.get('project_id'));
+  
+        this.selectedProject = this.docRef
+          .valueChanges({ idField: 'id' })
+          .subscribe((p) => {
+            this.selectedProject = p;
+          });
+        }
+      });
+    })
+
 
     this.route.fragment.subscribe((fragment) => {
       this.fragment = fragment;
@@ -71,7 +81,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     if (answer) {
       this.firestore
         .collection('users')
-        .doc('5cj0ysyGqdPdmEXjkWRGtEBA4ig2')
+        .doc(this.user.uid)
         .collection('projects')
         .doc(this.selectedProject.id)
         .delete()
