@@ -10,7 +10,9 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   {path:'new-project/edit/:project_id',component:NewProjectComponent},
   {path:'new-project',component:NewProjectComponent},
+  {path:'app-projects', component:ProjectComponent},
   {path:'app-project/:project_id',component:ProjectComponent},
+  {path:'',pathMatch:"full",redirectTo:'app-projects'}
 
 ];
 
