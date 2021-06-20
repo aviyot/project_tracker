@@ -87,6 +87,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       endTime: this.projectDesc.value.endTime,
       lifecycleStage: this.projectDesc.value.lifecycleStage,
       gitHub: this.projectDesc.value.gitHub,
+      site:this.projectDesc.value.site
     });
   }
 }
