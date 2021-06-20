@@ -1,4 +1,3 @@
-<h2 id="desc">תיאור הפרויקט</h2>
 <mat-card>
     <mat-card-header>
       <mat-card-title>{{selectedProject.name}}
@@ -19,7 +18,8 @@
       </mat-nav-list>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
+      <button *ngIf="docRef"  mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
+      <ng-content></ng-content>
       <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
       </app-project-desc-form>
     </mat-card-actions>
