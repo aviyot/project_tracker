@@ -42,7 +42,6 @@ export class NewProjectComponent implements OnInit {
         .collection('projects')
         .add(this.currentProject)
         .then((doc) => {
-          console.log(doc.id);
           this.added = true;
           if (exit) {
             this.router.navigate(['./', 'app-project', doc.id]);
