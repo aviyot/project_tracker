@@ -13,6 +13,7 @@ export interface ProjectData {
   lifecycleStage: LIFECYCLE_STAGE;
   gitHub?:string;
   site?:string;
+  filePath:string;
   tools?: Tool[];
   features?: Feature[];
   questions?: QuestionAnswer[];

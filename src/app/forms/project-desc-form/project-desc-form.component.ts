@@ -37,10 +37,11 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       lifecycleStage: [''],
       gitHub: [''],
       site: [''],
+      filePath:['']
     });
 
     if (this.projectData) {
-      this.projectDesc.setValue({
+      this.projectDesc.patchValue({
         name: this.projectData.name,
         desc: this.projectData.desc,
         startTime: this.projectData.startTime,
@@ -48,6 +49,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
         lifecycleStage: this.projectData.lifecycleStage,
         gitHub: this.projectData.gitHub,
         site: this.projectData.startTime,
+        filePath:this.projectData.filePath
       });
     } else {
       this.createNewProject();
@@ -72,6 +74,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       lifecycleStage: [''],
       gitHub: [''],
       site: [''],
+      filePath:[''],
       tools: this.fb.array([]),
       todos: this.fb.array([]),
       features: this.fb.array([]),
@@ -87,7 +90,8 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       endTime: this.projectDesc.value.endTime,
       lifecycleStage: this.projectDesc.value.lifecycleStage,
       gitHub: this.projectDesc.value.gitHub,
-      site:this.projectDesc.value.site
+      site:this.projectDesc.value.site,
+      filePath:this.projectDesc.value.filePath
     });
   }
 }

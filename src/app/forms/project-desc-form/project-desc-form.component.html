@@ -27,5 +27,9 @@
         <mat-label>אתר</mat-label>
         <input type="text" matInput formControlName="site" />
     </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>מיקום קובץ</mat-label>
+        <input type="text" matInput formControlName="filePath" />
+    </mat-form-field>
     <button *ngIf="projectData" mat-stroked-button color="warn" (click)="saveProjectDesc()">שמור</button>
 </form>
