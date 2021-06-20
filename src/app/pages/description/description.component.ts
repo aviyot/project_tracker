@@ -6,22 +6,20 @@ import { FormState } from 'src/models/ui/form-state';
 @Component({
   selector: 'app-description',
   templateUrl: './description.component.html',
-  styleUrls: ['./description.component.css']
+  styleUrls: ['./description.component.css'],
 })
 export class DescriptionComponent implements OnInit {
-@Input() selectedProject:Project;
-@Input() docRef;
-projectDescState:FormState;
+  @Input() selectedProject: Project;
+  @Input() docRef;
+  projectDescState: FormState;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.projectDescState = { add: false, edit: false, selectedIndex: null };
-
   }
 
   editProjectDesc() {
     this.projectDescState.edit = !this.projectDescState.edit;
   }
-
 }
