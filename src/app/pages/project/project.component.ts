@@ -86,7 +86,10 @@ export class ProjectComponent implements OnInit, AfterViewInit {
         .doc(this.selectedProject.id)
         .delete()
         .then(() => {
-          console.log('deleted');
+          this.router.navigate([
+            '/',
+            'app-projects'
+          ]);
         });
     }
   }
