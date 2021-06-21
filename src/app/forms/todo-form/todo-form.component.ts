@@ -16,7 +16,7 @@ export class TodoFormComponent implements OnInit {
 @Input('todo') todoData : Todo | null;
 @Input('docRef') docRef:AngularFirestoreDocument<firebase.firestore.DocumentData>;
 todo:FormGroup;
-status:TODO_STATUS[] = ['PLANNED','IN_PROGRESS','NOT_NEEDED','STUCK','COMPLETED'];
+status:TODO_STATUS[] = ['PLANNED','IN_PROGRESS','NOT_NEEDED','STUCK','COMPLETED','STOPED'];
   constructor(private fb: FormBuilder) { 
   }
 
