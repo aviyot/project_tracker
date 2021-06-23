@@ -1,22 +1,22 @@
 <mat-card>
     <mat-card-header>
-      <mat-card-title>{{selectedProject.name}}
+      <mat-card-title>{{selectedProject.projectDesc.name}}
       </mat-card-title>
       <mat-card-subtitle>
-        <span>{{selectedProject.startTime}}</span>
-        <span>{{selectedProject.endTime}}</span>
-        <span>{{selectedProject.lifecycleStage}}</span>
+        <span>{{selectedProject.projectDesc.startTime}}</span>
+        <span>{{selectedProject.projectDesc.endTime}}</span>
+        <span>{{selectedProject.projectDesc.lifecycleStage}}</span>
         <br/>
-        <span>{{selectedProject.filePath}}</span>
+        <span>{{selectedProject.projectDesc.filePath}}</span>
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>
-        {{selectedProject.desc}}
+        {{selectedProject.projectDesc.desc}}
       </p>
       <mat-nav-list>
-        <a *ngIf="selectedProject.gitHub" target="_blank" mat-list-item [href]="selectedProject.gitHub"> גיטהב</a>
-        <a *ngIf="selectedProject.site" target="_blank" mat-list-item [href]="selectedProject.site">אתר</a>
+        <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
+        <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item [href]="selectedProject.projectDesc.site">אתר</a>
       </mat-nav-list>
     </mat-card-content>
     <mat-card-actions>
@@ -25,4 +25,4 @@
       <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
       </app-project-desc-form>
     </mat-card-actions>
-  </mat-card>
+  </mat-card> 

@@ -33,6 +33,7 @@ export class ProjectListComponent implements OnInit {
       .doc(user.uid)
       .collection('projects')
       .valueChanges({ idField: 'id' }) as Observable<Project[]>;
+      
     }
   }
     )

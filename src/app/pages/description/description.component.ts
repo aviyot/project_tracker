@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Description } from 'src/models/description';
 import { Project } from 'src/models/project.model';
 import { FormState } from 'src/models/ui/form-state';
 

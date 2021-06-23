@@ -6,6 +6,7 @@ import { Project } from 'src/models/project.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { DataStructureService } from 'src/app/services/firebase/data-structure.service';
 
 @Component({
   selector: 'app-project',
@@ -15,7 +16,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class ProjectComponent implements OnInit, AfterViewInit {
   projects: Observable<Project[]> = new Observable<Project[]>();
   user:any
-  selectedProject: any;
+  selectedProject: Project;
   edit = false;
   add = false;
   docRef = null;
@@ -37,11 +38,14 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private auth: AngularFireAuth,
+    private dataStructureService : DataStructureService
   ) {
     // console.log(this.router.getCurrentNavigation().extras.state);
   }
 
   ngOnInit(): void {
+
+//this.dataStructureService.deleteFields();
 
     this.auth.user.subscribe((currentUser)=>{
        this.user = currentUser;
@@ -53,9 +57,9 @@ export class ProjectComponent implements OnInit, AfterViewInit {
           .collection('projects')
           .doc(p.get('project_id'));
   
-        this.selectedProject = this.docRef
+        this.docRef
           .valueChanges({ idField: 'id' })
-          .subscribe((p) => {
+          .subscribe((p:Project) => {
             this.selectedProject = p;
           });
         }

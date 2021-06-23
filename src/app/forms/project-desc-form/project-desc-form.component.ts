@@ -42,14 +42,14 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
 
     if (this.projectData) {
       this.projectDesc.patchValue({
-        name: this.projectData.name,
-        desc: this.projectData.desc,
-        startTime: this.projectData.startTime,
-        endTime: this.projectData.endTime,
-        lifecycleStage: this.projectData.lifecycleStage,
-        gitHub: this.projectData.gitHub,
-        site: this.projectData.startTime,
-        filePath:this.projectData.filePath
+        name: this.projectData.projectDesc.name,
+        desc: this.projectData.projectDesc.desc,
+        startTime: this.projectData.projectDesc.startTime,
+        endTime: this.projectData.projectDesc.endTime,
+        lifecycleStage: this.projectData.projectDesc.lifecycleStage,
+        gitHub: this.projectData.projectDesc.gitHub,
+        site: this.projectData.projectDesc.startTime,
+        filePath:this.projectData.projectDesc.filePath
       });
     } else {
       this.createNewProject();
@@ -67,14 +67,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
   }
   createNewProject() {
     this.projectForm = this.fb.group({
-      name: ['', [Validators.required]],
-      desc: [''],
-      startTime: [''],
-      endTime: [''],
-      lifecycleStage: [''],
-      gitHub: [''],
-      site: [''],
-      filePath:[''],
+      projectDesc:this.projectDesc,
       tools: this.fb.array([]),
       todos: this.fb.array([]),
       features: this.fb.array([]),
@@ -84,14 +77,14 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
   }
   saveProjectDesc() {
     this.docRef.update({
-      name: this.projectDesc.value.name,
-      desc: this.projectDesc.value.desc,
-      startTime: this.projectDesc.value.startTime,
-      endTime: this.projectDesc.value.endTime,
-      lifecycleStage: this.projectDesc.value.lifecycleStage,
-      gitHub: this.projectDesc.value.gitHub,
-      site:this.projectDesc.value.site,
-      filePath:this.projectDesc.value.filePath
+      'projectDesc.name': this.projectDesc.value.name,
+      'projectDesc.desc': this.projectDesc.value.desc,
+      'projectDesc.startTime': this.projectDesc.value.startTime,
+      'projectDesc.endTime': this.projectDesc.value.endTime,
+      'projectDesc.lifecycleStage': this.projectDesc.value.lifecycleStage,
+      'projectDesc.gitHub': this.projectDesc.value.gitHub,
+      'projectDesc.site':this.projectDesc.value.site,
+      'projectDesc.filePath':this.projectDesc.value.filePath
     });
   }
 }
