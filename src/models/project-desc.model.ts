@@ -8,4 +8,5 @@ export interface ProjectDesc {
     lifecycleStage: LIFECYCLE_STAGE;
     gitHub?:string;
     site:string;
+    filePath:string;
 }

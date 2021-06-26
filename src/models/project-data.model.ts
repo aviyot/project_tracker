@@ -4,10 +4,10 @@ import {QuestionAnswer} from "./question-answer.model"
 import { LIFECYCLE_STAGE } from '../types/lifecycleStage.type';
 import { Todo } from './todo';
 import { WorkTime } from './work-time.model';
-import { ProjectDescription } from './project-description';
+import { ProjectDesc } from './project-desc.model';
 
 export interface ProjectData {
-  projectDesc:ProjectDescription
+  projectDesc:ProjectDesc
   tools?: Tool[];
   features?: Feature[];
   questions?: QuestionAnswer[];
