@@ -5,4 +5,5 @@ export interface Todo {
   detail: string;
   date: Date;
   status: TODO_STATUS;
+  gitCommit: string;
 }

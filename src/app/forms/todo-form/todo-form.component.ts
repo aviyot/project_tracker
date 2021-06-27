@@ -36,6 +36,7 @@ export class TodoFormComponent implements OnInit {
       detail: ['', Validators.required],
       date: [new Date()],
       status: [this.status[0]],
+      gitCommit: [''],
     });
 
     if (this.todoData) {
