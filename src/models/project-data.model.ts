@@ -1,16 +1,16 @@
 import { Tool } from './tool.model';
 import { Feature } from './feature.model';
-import {QuestionAnswer} from "./question-answer.model"
+import { QuestionAnswer } from './question-answer.model';
 import { LIFECYCLE_STAGE } from '../types/lifecycleStage.type';
-import { Todo } from './todo';
+import { Todo } from './todo.model';
 import { WorkTime } from './work-time.model';
 import { ProjectDesc } from './project-desc.model';
 
 export interface ProjectData {
-  projectDesc:ProjectDesc
+  projectDesc: ProjectDesc;
   tools?: Tool[];
   features?: Feature[];
   questions?: QuestionAnswer[];
-  todos?:Todo[];
-  workTimes?:WorkTime[];
+  todos?: Todo[];
+  workTimes?: WorkTime[];
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Todo } from 'src/models/todo';
+import { Todo } from 'src/models/todo.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
