@@ -21,7 +21,7 @@
       <span>{{todo.date | format }}</span>
       <span *ngIf="selectedStatus ==='ALL'">{{todo.status}}</span>
       <span *ngIf="selectedStatus ==='COMPLETED'">{{todo.gitCommit}}</span>
-
+      <span>{{todo.makingDesc}}</span>
       <mat-action-list>
         <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
         <button mat-stroked-button color="warn" (click)="deleteTodo(todo)">מחק</button>

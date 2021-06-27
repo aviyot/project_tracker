@@ -37,6 +37,7 @@ export class TodoFormComponent implements OnInit {
       date: [new Date()],
       status: [this.status[0]],
       gitCommit: [''],
+      makingDesc: [''],
     });
 
     if (this.todoData) {

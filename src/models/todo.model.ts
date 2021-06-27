@@ -6,4 +6,5 @@ export interface Todo {
   date: Date;
   status: TODO_STATUS;
   gitCommit: string;
+  makingDesc: string;
 }
