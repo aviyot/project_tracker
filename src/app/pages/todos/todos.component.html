@@ -12,13 +12,13 @@
     <mat-button-toggle value="COMPLETED">הושלם</mat-button-toggle>
   </mat-button-toggle-group>
   <app-todo-form *ngIf="todoState.add" [docRef]="docRef"></app-todo-form>
- 
+
   <div *ngFor="let todo of selectedProject.todos;let todoIndex = index">
-    <div *ngIf="selectedStatus === todo.status || selectedStatus ==='ALL' "
+    <div *ngIf="selectedStatus === todo.status || selectedStatus ==='ALL'"
       style="display: flex;flex-direction: column;margin-bottom: 10px;">
       <span>{{todo.title}}</span>
       <span>{{todo.detail}}</span>
-      <span>{{todo.date}}</span>
+      <span>{{todo.date | format }}</span>
       <span *ngIf="selectedStatus ==='ALL'">{{todo.status}}</span>
       <mat-action-list>
         <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>

@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectData } from 'src/models/project-data.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { IsTimestampService } from 'src/app/services/is-timestamp.service';
 
 @Component({
   selector: 'app-project-desc-form',
@@ -19,37 +20,55 @@ import 'firebase/firestore';
 })
 export class ProjectDescFormComponent implements OnInit, OnChanges {
   projectDesc: FormGroup;
-  @Input('project') projectData: ProjectData;
+  @Input('project') projectData: ProjectData | any;
   @Input('docRef')
   docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
   @Input('added') added = false;
   @Output('newProject') newProject = new EventEmitter<ProjectData>();
 
   projectForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private timestampServ: IsTimestampService
+  ) {}
 
   ngOnInit(): void {
     this.projectDesc = this.fb.group({
       name: ['', Validators.required],
       desc: [''],
-      startTime: [''],
-      endTime: [''],
+      startTime: [new Date()],
+      endTime: [],
       lifecycleStage: [''],
       gitHub: [''],
       site: [''],
-      filePath:['']
+      filePath: [''],
     });
 
     if (this.projectData) {
+      let startTime: any = this.projectData.projectDesc.startTime;
+      let endTime: any = this.projectData.projectDesc.endTime;
+
+      if (
+        this.projectData.projectDesc.startTime &&
+        this.timestampServ.isTimestamp(this.projectData.projectDesc.startTime)
+      )
+        startTime = this.projectData.projectDesc.startTime.toDate();
+
+      if (
+        this.projectData.projectDesc.endTime &&
+        this.timestampServ.isTimestamp(this.projectData.projectDesc.endTime)
+      )
+        endTime = this.projectData.projectDesc.endTime.toDate();
+
       this.projectDesc.patchValue({
         name: this.projectData.projectDesc.name,
         desc: this.projectData.projectDesc.desc,
-        startTime: this.projectData.projectDesc.startTime,
-        endTime: this.projectData.projectDesc.endTime,
+        startTime: startTime,
+        endTime: endTime,
         lifecycleStage: this.projectData.projectDesc.lifecycleStage,
         gitHub: this.projectData.projectDesc.gitHub,
-        site: this.projectData.projectDesc.startTime,
-        filePath:this.projectData.projectDesc.filePath
+        site: this.projectData.projectDesc.site,
+        filePath: this.projectData.projectDesc.filePath,
       });
     } else {
       this.createNewProject();
@@ -67,7 +86,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
   }
   createNewProject() {
     this.projectForm = this.fb.group({
-      projectDesc:this.projectDesc,
+      projectDesc: this.projectDesc,
       tools: this.fb.array([]),
       todos: this.fb.array([]),
       features: this.fb.array([]),
@@ -83,8 +102,8 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       'projectDesc.endTime': this.projectDesc.value.endTime,
       'projectDesc.lifecycleStage': this.projectDesc.value.lifecycleStage,
       'projectDesc.gitHub': this.projectDesc.value.gitHub,
-      'projectDesc.site':this.projectDesc.value.site,
-      'projectDesc.filePath':this.projectDesc.value.filePath
+      'projectDesc.site': this.projectDesc.value.site,
+      'projectDesc.filePath': this.projectDesc.value.filePath,
     });
   }
 }

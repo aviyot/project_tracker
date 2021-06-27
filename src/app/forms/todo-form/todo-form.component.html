@@ -9,13 +9,15 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>תאריך יצירה</mat-label>
-        <input type="date" matInput formControlName="date" />
+        <input matInput [matDatepicker]="datepicker" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>סטטוס</mat-label>
         <mat-select formControlName="status">
-            <mat-option *ngFor="let selectedStatus  of status" [value] = "selectedStatus" >
-               {{selectedStatus}}
+            <mat-option *ngFor="let selectedStatus  of status" [value]="selectedStatus">
+                {{selectedStatus}}
             </mat-option>
         </mat-select>
     </mat-form-field>

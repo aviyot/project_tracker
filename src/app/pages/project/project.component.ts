@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DataStructureService } from 'src/app/services/firebase/data-structure.service';
+import { Timestamp } from '@firebase/firestore-types';
 
 @Component({
   selector: 'app-project',
@@ -15,7 +16,7 @@ import { DataStructureService } from 'src/app/services/firebase/data-structure.s
 })
 export class ProjectComponent implements OnInit, AfterViewInit {
   projects: Observable<Project[]> = new Observable<Project[]>();
-  user:any
+  user: any;
   selectedProject: Project;
   edit = false;
   add = false;
@@ -38,34 +39,36 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private auth: AngularFireAuth,
-    private dataStructureService : DataStructureService
+    private dataStructureService: DataStructureService
   ) {
     // console.log(this.router.getCurrentNavigation().extras.state);
   }
 
   ngOnInit(): void {
+    //this.dataStructureService.deleteFields();
 
-//this.dataStructureService.deleteFields();
+    this.auth.user.subscribe((currentUser) => {
+      this.user = currentUser;
+      this.activatedRoute.paramMap.subscribe((p) => {
+        if (p.get('project_id')) {
+          this.docRef = this.firestore
+            .collection('users')
+            .doc(this.user.uid)
+            .collection('projects')
+            .doc(p.get('project_id'));
 
-    this.auth.user.subscribe((currentUser)=>{
-       this.user = currentUser;
-       this.activatedRoute.paramMap.subscribe((p) => {
-        if(p.get('project_id')){
-        this.docRef = this.firestore
-          .collection('users')
-          .doc(this.user.uid)
-          .collection('projects')
-          .doc(p.get('project_id'));
-  
-        this.docRef
-          .valueChanges({ idField: 'id' })
-          .subscribe((p:Project) => {
+          this.docRef.valueChanges({ idField: 'id' }).subscribe((p) => {
+            /*     p.todos.forEach((todo) => {
+              if (todo.date instanceof Object) {
+                console.log(todo, todo.date.toDate());
+              }
+            }); */
+
             this.selectedProject = p;
           });
         }
       });
-    })
-
+    });
 
     this.route.fragment.subscribe((fragment) => {
       this.fragment = fragment;
@@ -90,10 +93,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
         .doc(this.selectedProject.id)
         .delete()
         .then(() => {
-          this.router.navigate([
-            '/',
-            'app-projects'
-          ]);
+          this.router.navigate(['/', 'app-projects']);
         });
     }
   }
@@ -108,6 +108,4 @@ export class ProjectComponent implements OnInit, AfterViewInit {
       ]);
     }
   }
-
-
 }

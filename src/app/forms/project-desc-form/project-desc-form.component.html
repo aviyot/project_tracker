@@ -9,11 +9,15 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>זמן התחלה</mat-label>
-        <input type="date" matInput formControlName="startTime" />
+        <input matInput [matDatepicker]="startpicker" formControlName="startTime">
+        <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+        <mat-datepicker #startpicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>סיום הפרויקט</mat-label>
-        <input type="date" matInput formControlName="endTime" />
+        <input matInput [matDatepicker]="endpicker" formControlName="endTime">
+        <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+        <mat-datepicker #endpicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>מצב הפרויקט</mat-label>

@@ -28,6 +28,8 @@ import { TodosComponent } from './pages/todos/todos.component';
 import { WorkTimesComponent } from './pages/work-times/work-times.component';
 import { FeaturesComponent } from './pages/features/features.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
+import { FormatPipe } from './pipes/format.pipe';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { QuestionsComponent } from './pages/questions/questions.component';
     WorkTimesComponent,
     FeaturesComponent,
     QuestionsComponent,
+    FormatPipe,
   ],
   imports: [
     BrowserModule,
@@ -58,9 +61,9 @@ import { QuestionsComponent } from './pages/questions/questions.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AuthModule,
-    AngularMaterialModule
+    AngularMaterialModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [DatePipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,28 +1,33 @@
 <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{selectedProject.projectDesc.name}}
-      </mat-card-title>
-      <mat-card-subtitle>
-        <span>{{selectedProject.projectDesc.startTime}}</span>
-        <span>{{selectedProject.projectDesc.endTime}}</span>
-        <span>{{selectedProject.projectDesc.lifecycleStage}}</span>
-        <br/>
-        <span>{{selectedProject.projectDesc.filePath}}</span>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>
-        {{selectedProject.projectDesc.desc}}
-      </p>
-      <mat-nav-list>
-        <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
-        <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item [href]="selectedProject.projectDesc.site">אתר</a>
-      </mat-nav-list>
-    </mat-card-content>
-    <mat-card-actions>
-      <button *ngIf="docRef"  mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
-      <ng-content></ng-content>
-      <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
-      </app-project-desc-form>
-    </mat-card-actions>
-  </mat-card> 
+  <mat-card-header>
+    <mat-card-title>{{selectedProject.projectDesc.name}}
+    </mat-card-title>
+    <mat-card-subtitle>
+
+      <span>{{selectedProject.projectDesc.startTime | format }}</span>
+      <br />
+      <span>{{selectedProject.projectDesc.endTime | format }}</span>
+      <br />
+      <span>{{selectedProject.projectDesc.lifecycleStage}}</span>
+      <br />
+      <span>{{selectedProject.projectDesc.filePath}}</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{selectedProject.projectDesc.desc}}
+    </p>
+    <mat-nav-list>
+      <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item
+        [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
+      <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item
+        [href]="selectedProject.projectDesc.site">אתר</a>
+    </mat-nav-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="docRef" mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
+    <ng-content></ng-content>
+    <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
+    </app-project-desc-form>
+  </mat-card-actions>
+</mat-card>
