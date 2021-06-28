@@ -7,4 +7,5 @@ export interface Todo {
   status: TODO_STATUS;
   gitCommit: string;
   makingDesc: string;
+  completeDate: Date;
 }

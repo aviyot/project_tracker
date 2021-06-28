@@ -18,7 +18,8 @@
       style="display: flex;flex-direction: column;margin-bottom: 10px;">
       <span>{{todo.title}}</span>
       <span>{{todo.detail}}</span>
-      <span>{{todo.date | format }}</span>
+      <span> נוצר : {{todo.date | format }} </span>
+      <span> הסתיים : {{todo.completeDate | format}} </span>
       <span *ngIf="selectedStatus ==='ALL'">{{todo.status}}</span>
       <span *ngIf="selectedStatus ==='COMPLETED'">{{todo.gitCommit}}</span>
       <span>{{todo.makingDesc}}</span>

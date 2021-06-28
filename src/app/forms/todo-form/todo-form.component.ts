@@ -38,12 +38,19 @@ export class TodoFormComponent implements OnInit {
       status: [this.status[0]],
       gitCommit: [''],
       makingDesc: [''],
+      completeDate: [null],
     });
 
     if (this.todoData) {
       this.todo.patchValue(this.todoData);
       if (this.timestampServ.isTimestamp(this.todoData.date)) {
         this.todo.patchValue({ date: this.todoData.date.toDate() });
+      }
+
+      if (this.timestampServ.isTimestamp(this.todoData.completeDate)) {
+        this.todo.patchValue({
+          completeDate: this.todoData.completeDate.toDate(),
+        });
       }
     }
   }
