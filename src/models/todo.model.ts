@@ -1,4 +1,5 @@
 import { TODO_STATUS } from 'src/types/todo_status.type';
+import { Link } from './link.model';
 
 export interface Todo {
   title: string;
@@ -8,4 +9,5 @@ export interface Todo {
   gitCommit: string;
   makingDesc: string;
   completeDate: Date;
+  links: Link[];
 }

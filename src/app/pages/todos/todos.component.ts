@@ -49,4 +49,17 @@ export class TodosComponent implements OnInit {
   hideDone() {
     this.doneHided = !this.doneHided;
   }
+
+  removeLink(todo, index) {
+    this.docRef
+      .update({
+        todos: firebase.firestore.FieldValue.arrayRemove(todo),
+      })
+      .then(() => {
+        todo.links.splice(index, 1);
+        this.docRef.update({
+          todos: firebase.firestore.FieldValue.arrayUnion(todo),
+        });
+      });
+  }
 }
