@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Todo } from 'src/models/todo.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -17,6 +17,8 @@ export class TodoFormComponent implements OnInit {
   @Input('docRef')
   docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
   todo: FormGroup;
+  linkForm: FormGroup;
+  openLinkform = false;
   status: TODO_STATUS[] = [
     'PLANNED',
     'IN_PROGRESS',
@@ -39,6 +41,7 @@ export class TodoFormComponent implements OnInit {
       gitCommit: [''],
       makingDesc: [''],
       completeDate: [null],
+      links: this.fb.array([]),
     });
 
     if (this.todoData) {
@@ -73,5 +76,38 @@ export class TodoFormComponent implements OnInit {
       .then(() => {
         this.addTodo();
       });
+  }
+
+  saveLink() {
+    this.docRef
+      .update({
+        todos: firebase.firestore.FieldValue.arrayRemove(this.todoData),
+      })
+      .then(() => {
+        this.todoData.links.push(this.linkForm.value);
+        this.docRef.update({
+          todos: firebase.firestore.FieldValue.arrayUnion(this.todoData),
+        });
+      });
+  }
+
+  addLink(type: string) {
+    if (type == 'open-form') {
+      this.linkForm = this.fb.group({
+        title: ['', Validators.required],
+        href: ['', Validators.required],
+        site: [''],
+        problemDesc: [''],
+      });
+      this.openLinkform = true;
+    } else if (type == 'add-link') {
+      /*       const linksArray = this.todo.get('links') as FormArray;
+      linksArray.push(this.linkForm); */
+      this.saveLink();
+    }
+  }
+
+  closeLinkForm() {
+    this.openLinkform = false;
   }
 }

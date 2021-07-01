@@ -23,6 +23,18 @@
       <span *ngIf="selectedStatus ==='ALL'">{{todo.status}}</span>
       <span *ngIf="selectedStatus ==='COMPLETED'">{{todo.gitCommit}}</span>
       <span>{{todo.makingDesc}}</span>
+      <div *ngIf="todo.links">
+        <div *ngFor="let link of todo.links;let i = index">
+          <ul>
+            <li>
+              <a [href]="link.href">{{link.title}}</a>
+            </li>
+            <li>{{link.site}}</li>
+          </ul>
+          <div>{{link.problemDesc}}</div>
+          <button mat-stroked-button color="warn" (click)="removeLink(todo,i)">מחק</button>
+        </div>
+      </div>
       <mat-action-list>
         <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
         <button mat-stroked-button color="warn" (click)="deleteTodo(todo)">מחק</button>

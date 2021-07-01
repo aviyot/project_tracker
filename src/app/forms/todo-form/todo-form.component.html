@@ -32,6 +32,30 @@
         <textarea matInput placeholder="" formControlName="makingDesc"></textarea>
     </mat-form-field>
 
+    <button mat-stroked-button color="primary" (click)="addLink('open-form')">הוסף לינק</button>
+
+    <form *ngIf="openLinkform" [formGroup]="linkForm">
+        <mat-form-field appearance="outline" appearance="outline">
+            <mat-label>כותרת</mat-label>
+            <input type="text" matInput formControlName="title" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" appearance="outline">
+            <mat-label>אתר</mat-label>
+            <input type="text" matInput formControlName="site" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" appearance="outline">
+            <mat-label>לינק</mat-label>
+            <input type="text" matInput formControlName="href" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" appearance="outline">
+            <mat-label>תיאור</mat-label>
+            <textarea matInput placeholder="" formControlName="problemDesc"></textarea>
+        </mat-form-field>
+        <button mat-stroked-button color="primary" (click)="addLink('add-link')">הוסף </button>
+        <button mat-stroked-button color="primary" (click)="closeLinkForm()">סגור </button>
+    </form>
+    </div>
+
     <mat-form-field appearance="outline" appearance="outline">
         <mat-label>גיט קומיט</mat-label>
         <textarea matInput placeholder="הכנס גיט קומיט" formControlName="gitCommit"></textarea>
