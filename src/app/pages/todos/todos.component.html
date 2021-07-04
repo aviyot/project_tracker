@@ -1,28 +1,37 @@
-<div style="padding-bottom: 2rem;">
-  <h2 id="todos">משימות לעשות
+<mat-card>
+  <mat-card-title>
+    <span> משימות לעשות </span>
     <button mat-stroked-button color="primary" (click)="addTodo()"> הוסף משימה</button>
-  </h2>
-  <mat-button-toggle-group style="flex-wrap: wrap;" [(value)]="selectedStatus">
-    <mat-button-toggle value="ALL">הכל</mat-button-toggle>
-    <mat-button-toggle value="PLANNED">בתיכנון</mat-button-toggle>
-    <mat-button-toggle color="warn" value="IN_PROGRESS">בעבודה</mat-button-toggle>
-    <mat-button-toggle value="NOT_NEEDED">אין צורך</mat-button-toggle>
-    <mat-button-toggle value="STOPED">נעצר</mat-button-toggle>
-    <mat-button-toggle value="STUCK">תקוע</mat-button-toggle>
-    <mat-button-toggle value="COMPLETED">הושלם</mat-button-toggle>
-  </mat-button-toggle-group>
+  </mat-card-title>
+  <mat-card-subtitle>
+    <mat-button-toggle-group style="flex-wrap: wrap;" [(value)]="selectedStatus">
+      <mat-button-toggle value="ALL">הכל</mat-button-toggle>
+      <mat-button-toggle value="PLANNED">בתיכנון</mat-button-toggle>
+      <mat-button-toggle color="warn" value="IN_PROGRESS">בעבודה</mat-button-toggle>
+      <mat-button-toggle value="NOT_NEEDED">אין צורך</mat-button-toggle>
+      <mat-button-toggle value="STOPED">נעצר</mat-button-toggle>
+      <mat-button-toggle value="STUCK">תקוע</mat-button-toggle>
+      <mat-button-toggle value="COMPLETED">הושלם</mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-card-subtitle>
   <app-todo-form *ngIf="todoState.add" [docRef]="docRef"></app-todo-form>
-
+  <mat-divider></mat-divider>
   <div *ngFor="let todo of selectedProject.todos;let todoIndex = index">
     <div *ngIf="selectedStatus === todo.status || selectedStatus ==='ALL'"
       style="display: flex;flex-direction: column;margin-bottom: 10px;">
-      <span>{{todo.title}}</span>
-      <span>{{todo.detail}}</span>
-      <span> נוצר : {{todo.date | format }} </span>
-      <span> הסתיים : {{todo.completeDate | format}} </span>
-      <span *ngIf="selectedStatus ==='ALL'">{{todo.status}}</span>
-      <span *ngIf="selectedStatus ==='COMPLETED'">{{todo.gitCommit}}</span>
-      <span>{{todo.makingDesc}}</span>
+      <p style="font-size: large"> {{todo.title}}</p>
+      <mat-card-subtitle>
+        <p *ngIf="selectedStatus ==='ALL'"> {{todo.status}} </p>
+        <span> זמן התחלה : {{todo.date | format }}</span>
+        <span> זמן סיום : {{todo.completeDate | format}}</span>
+        <p> <span>{{todo.gitCommit}}</span>
+        </p>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <span>{{todo.detail}}</span>
+        <span>{{todo.makingDesc}}</span>
+      </mat-card-content>
+
       <div *ngIf="todo.links">
         <div *ngFor="let link of todo.links;let i = index">
           <ul>
@@ -35,12 +44,13 @@
           <button mat-stroked-button color="warn" (click)="removeLink(todo,i)">מחק</button>
         </div>
       </div>
-      <mat-action-list>
+      <mat-card-actions>
         <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
         <button mat-stroked-button color="warn" (click)="deleteTodo(todo)">מחק</button>
-      </mat-action-list>
+      </mat-card-actions>
       <app-todo-form *ngIf="todoState.edit && (todoIndex === todoState.selectedIndex)" [todo]="todo" [docRef]="docRef">
       </app-todo-form>
     </div>
+    <mat-divider></mat-divider>
   </div>
-</div>
+</mat-card>

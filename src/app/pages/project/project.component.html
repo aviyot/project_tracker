@@ -1,6 +1,6 @@
-<app-project-list *ngIf="!selectedProject" [detial] = "true"></app-project-list>
+<app-project-list *ngIf="!selectedProject" [detial]="true"></app-project-list>
 <div style="font-size: 1.5rem;" *ngIf="selectedProject">
-<!--   <div class="anchors">
+  <!--   <div class="anchors">
     <a [routerLink]="['./']" fragment="desc">desc</a>
     <a [routerLink]="['./']" fragment="tools">tools</a>
     <a [routerLink]="['./']" fragment="todos">todos</a>
@@ -8,20 +8,18 @@
     <a [routerLink]="['./']" fragment="features">features</a>
     <a [routerLink]="['./']" fragment="questions" >questions</a>
   </div> -->
-  <h2 id="desc">תיאור הפרויקט</h2>
   <app-description id="desc" [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
   <mat-divider></mat-divider>
-
   <app-tools id="tools" [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
   <mat-divider></mat-divider>
-   <app-todos id="todos" [selectedProject]="selectedProject" [docRef]="docRef"></app-todos>
-   <mat-divider></mat-divider>
-  <app-work-times id="worktimes" [selectedProject]="selectedProject" [docRef]="docRef" ></app-work-times>
-  <mat-divider></mat-divider>
   <app-features id="features" [selectedProject]="selectedProject" [docRef]="docRef"></app-features>
-  <hr>
-<app-questions id="questions" [selectedProject]="selectedProject" [docRef]="docRef"></app-questions>
-<mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+  <app-todos id="todos" [selectedProject]="selectedProject" [docRef]="docRef"></app-todos>
+  <mat-divider></mat-divider>
+  <app-work-times id="worktimes" [selectedProject]="selectedProject" [docRef]="docRef"></app-work-times>
+  <mat-divider></mat-divider>
+  <app-questions id="questions" [selectedProject]="selectedProject" [docRef]="docRef"></app-questions>
+  <mat-divider></mat-divider>
   <mat-action-list>
     <button mat-stroked-button color="warn" (click)="deleteProject()">Delete Project</button>
     <button mat-stroked-button color="primary" (click)="editProject()">Edit Project</button>

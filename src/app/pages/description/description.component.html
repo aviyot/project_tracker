@@ -1,16 +1,13 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{selectedProject.projectDesc.name}}
+    <mat-card-title>
+      {{selectedProject.projectDesc.name}}
     </mat-card-title>
     <mat-card-subtitle>
-
-      <span>{{selectedProject.projectDesc.startTime | format }}</span>
-      <br />
-      <span>{{selectedProject.projectDesc.endTime | format }}</span>
-      <br />
-      <span>{{selectedProject.projectDesc.lifecycleStage}}</span>
-      <br />
-      <span>{{selectedProject.projectDesc.filePath}}</span>
+      <p>{{selectedProject.projectDesc.startTime | format }}</p>
+      <p>{{selectedProject.projectDesc.endTime | format }}</p>
+      <p>{{selectedProject.projectDesc.lifecycleStage}}</p>
+      <p>{{selectedProject.projectDesc.filePath}}</p>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>

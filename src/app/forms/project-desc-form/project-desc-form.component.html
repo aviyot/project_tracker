@@ -3,10 +3,7 @@
         <mat-label>שם הפרויקט</mat-label>
         <input matInput placeholder="" formControlName="name">
     </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>תיאור הפרויקט</mat-label>
-        <textarea matInput placeholder="" formControlName="desc"></textarea>
-    </mat-form-field>
+
     <mat-form-field appearance="outline">
         <mat-label>זמן התחלה</mat-label>
         <input matInput [matDatepicker]="startpicker" formControlName="startTime">
@@ -22,6 +19,10 @@
     <mat-form-field appearance="outline">
         <mat-label>מצב הפרויקט</mat-label>
         <input type="text" matInput formControlName="lifecycleStage" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="display: block;">
+        <mat-label>תיאור הפרויקט</mat-label>
+        <textarea matInput placeholder="" formControlName="desc"></textarea>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>גיטהב</mat-label>

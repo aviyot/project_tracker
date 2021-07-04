@@ -15,6 +15,8 @@ export class ToolsComponent implements OnInit {
   @Input() selectedProject: Project;
   @Input() docRef;
   toolState: FormState;
+  showDetial = false;
+  selectedIndex = null;
   constructor() {}
 
   ngOnInit(): void {
@@ -34,5 +36,10 @@ export class ToolsComponent implements OnInit {
     this.docRef.update({
       tools: firebase.firestore.FieldValue.arrayRemove(tool),
     });
+  }
+
+  toogleDetail(index) {
+    this.showDetial = !this.showDetial;
+    this.selectedIndex = index;
   }
 }

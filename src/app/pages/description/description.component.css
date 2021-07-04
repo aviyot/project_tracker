@@ -1,0 +1,10 @@
+mat-nav-list {
+  display: flex;
+  justify-content: flex-start;
+}
+
+mat-nav-list mat-list-item,
+mat-nav-list a {
+  width: fit-content;
+  text-transform: capitalize;
+}
