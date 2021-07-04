@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Todo } from 'src/models/todo.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -44,12 +50,22 @@ export class TodoFormComponent implements OnInit {
       links: this.fb.array([]),
     });
 
+    this.linkForm = this.fb.group({
+      title: ['', Validators.required],
+      href: ['', Validators.required],
+      site: [''],
+      problemDesc: [''],
+    });
     if (this.todoData) {
       this.todo.patchValue(this.todoData);
+      const linksArray = this.todo.get('links') as FormArray;
+      this.todoData.links.forEach((link) => {
+        this.linkForm.patchValue(link);
+        linksArray.push(this.linkForm);
+      });
       if (this.timestampServ.isTimestamp(this.todoData.date)) {
         this.todo.patchValue({ date: this.todoData.date.toDate() });
       }
-
       if (this.timestampServ.isTimestamp(this.todoData.completeDate)) {
         this.todo.patchValue({
           completeDate: this.todoData.completeDate.toDate(),
@@ -59,51 +75,56 @@ export class TodoFormComponent implements OnInit {
   }
 
   addTodo() {
-    this.docRef
-      .update({
-        todos: firebase.firestore.FieldValue.arrayUnion(this.todo.value),
-      })
-      .then(() => {
-        this.todo.reset();
-      });
+    if (this.todo.valid) {
+      if (this.linkForm.valid) {
+        const linksArray = this.todo.get('links') as FormArray;
+        linksArray.push(this.linkForm);
+        this.linkForm.reset();
+      }
+      this.docRef
+        .update({
+          todos: firebase.firestore.FieldValue.arrayUnion(this.todo.value),
+        })
+        .then(() => {
+          this.todo.reset({ date: new Date(), status: this.status[0] });
+        });
+    }
   }
 
   saveTodo() {
-    this.docRef
-      .update({
-        todos: firebase.firestore.FieldValue.arrayRemove(this.todoData),
-      })
-      .then(() => {
-        this.addTodo();
-      });
-  }
-
-  saveLink() {
-    this.docRef
-      .update({
-        todos: firebase.firestore.FieldValue.arrayRemove(this.todoData),
-      })
-      .then(() => {
-        this.todoData.links.push(this.linkForm.value);
-        this.docRef.update({
-          todos: firebase.firestore.FieldValue.arrayUnion(this.todoData),
+    if (this.todo.valid) {
+      if (this.linkForm.valid) {
+        const linksArray = this.todo.get('links') as FormArray;
+        linksArray.push(this.linkForm);
+        this.linkForm.reset();
+      }
+      this.docRef
+        .update({
+          todos: firebase.firestore.FieldValue.arrayRemove(this.todoData),
+        })
+        .then(() => {
+          this.addTodo();
         });
-      });
+    }
   }
-
   addLink(type: string) {
     if (type == 'open-form') {
-      this.linkForm = this.fb.group({
-        title: ['', Validators.required],
-        href: ['', Validators.required],
-        site: [''],
-        problemDesc: [''],
-      });
       this.openLinkform = true;
     } else if (type == 'add-link') {
-      /*       const linksArray = this.todo.get('links') as FormArray;
-      linksArray.push(this.linkForm); */
-      this.saveLink();
+      if (this.linkForm.valid) {
+        const linksArray = this.todo.get('links') as FormArray;
+        linksArray.push(this.linkForm);
+        this.docRef
+          .update({
+            todos: firebase.firestore.FieldValue.arrayRemove(this.todoData),
+          })
+          .then(() => {
+            this.docRef.update({
+              todos: firebase.firestore.FieldValue.arrayUnion(this.todo.value),
+            });
+            this.linkForm.reset();
+          });
+      }
     }
   }
 
