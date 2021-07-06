@@ -6,6 +6,12 @@ import { Project } from 'src/models/project.model';
 import { FormState } from 'src/models/ui/form-state';
 import { TODO_STATUS } from 'src/types/todo_status.type';
 import { IsTimestampService } from 'src/app/services/is-timestamp.service';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-todos',
@@ -14,16 +20,25 @@ import { IsTimestampService } from 'src/app/services/is-timestamp.service';
 })
 export class TodosComponent implements OnInit {
   @Input() selectedProject: any;
-  @Input() docRef;
+  @Input() docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
   todoState: FormState;
+  todos = new Observable<any[]>();
 
   doneHided = true;
   selectedStatus: TODO_STATUS | 'ALL' = 'IN_PROGRESS';
 
-  constructor(private timestampServ: IsTimestampService) {}
+  constructor(
+    private timestampServ: IsTimestampService,
+    private firestore: AngularFirestore,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.todoState = { add: false, edit: false, selectedIndex: null };
+    this.todos = this.docRef
+      .collection('todos')
+      .valueChanges({ idField: 'id' }) as Observable<Project[]>;
+    this.todos.subscribe((d) => {});
   }
 
   addTodo() {
@@ -40,26 +55,17 @@ export class TodosComponent implements OnInit {
     this.todoState.selectedIndex = todoIndex;
   }
 
-  deleteTodo(todo) {
-    this.docRef.update({
-      todos: firebase.firestore.FieldValue.arrayRemove(todo),
-    });
+  deleteTodo(todoId) {
+    this.docRef
+      .collection('todos')
+      .doc(todoId)
+      .delete()
+      .then(() => {
+        console.log('data deleted');
+      });
   }
 
   hideDone() {
     this.doneHided = !this.doneHided;
-  }
-
-  removeLink(todo, index) {
-    this.docRef
-      .update({
-        todos: firebase.firestore.FieldValue.arrayRemove(todo),
-      })
-      .then(() => {
-        todo.links.splice(index, 1);
-        this.docRef.update({
-          todos: firebase.firestore.FieldValue.arrayUnion(todo),
-        });
-      });
   }
 }

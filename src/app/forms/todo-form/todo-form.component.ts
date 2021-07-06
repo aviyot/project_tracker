@@ -12,6 +12,7 @@ import 'firebase/firestore';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { TODO_STATUS } from 'src/types/todo_status.type';
 import { IsTimestampService } from 'src/app/services/is-timestamp.service';
+import { Link } from 'src/models/link.model';
 
 @Component({
   selector: 'app-todo-form',
@@ -24,7 +25,9 @@ export class TodoFormComponent implements OnInit {
   docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
   todo: FormGroup;
   linkForm: FormGroup;
+  linksArray: FormArray;
   openLinkform = false;
+  todoLinks: Link[] = [];
   status: TODO_STATUS[] = [
     'PLANNED',
     'IN_PROGRESS',
@@ -47,22 +50,10 @@ export class TodoFormComponent implements OnInit {
       gitCommit: [''],
       makingDesc: [''],
       completeDate: [null],
-      links: this.fb.array([]),
     });
 
-    this.linkForm = this.fb.group({
-      title: ['', Validators.required],
-      href: ['', Validators.required],
-      site: [''],
-      problemDesc: [''],
-    });
     if (this.todoData) {
       this.todo.patchValue(this.todoData);
-      const linksArray = this.todo.get('links') as FormArray;
-      this.todoData.links.forEach((link) => {
-        this.linkForm.patchValue(link);
-        linksArray.push(this.linkForm);
-      });
       if (this.timestampServ.isTimestamp(this.todoData.date)) {
         this.todo.patchValue({ date: this.todoData.date.toDate() });
       }
@@ -76,59 +67,16 @@ export class TodoFormComponent implements OnInit {
 
   addTodo() {
     if (this.todo.valid) {
-      if (this.linkForm.valid) {
-        const linksArray = this.todo.get('links') as FormArray;
-        linksArray.push(this.linkForm);
-        this.linkForm.reset();
-      }
-      this.docRef
-        .update({
-          todos: firebase.firestore.FieldValue.arrayUnion(this.todo.value),
-        })
-        .then(() => {
-          this.todo.reset({ date: new Date(), status: this.status[0] });
-        });
+      this.docRef.collection('todos').add(this.todo.value);
     }
   }
 
   saveTodo() {
     if (this.todo.valid) {
-      if (this.linkForm.valid) {
-        const linksArray = this.todo.get('links') as FormArray;
-        linksArray.push(this.linkForm);
-        this.linkForm.reset();
-      }
       this.docRef
-        .update({
-          todos: firebase.firestore.FieldValue.arrayRemove(this.todoData),
-        })
-        .then(() => {
-          this.addTodo();
-        });
+        .collection('todos')
+        .doc(this.todoData.id)
+        .update(this.todo.value);
     }
-  }
-  addLink(type: string) {
-    if (type == 'open-form') {
-      this.openLinkform = true;
-    } else if (type == 'add-link') {
-      if (this.linkForm.valid) {
-        const linksArray = this.todo.get('links') as FormArray;
-        linksArray.push(this.linkForm);
-        this.docRef
-          .update({
-            todos: firebase.firestore.FieldValue.arrayRemove(this.todoData),
-          })
-          .then(() => {
-            this.docRef.update({
-              todos: firebase.firestore.FieldValue.arrayUnion(this.todo.value),
-            });
-            this.linkForm.reset();
-          });
-      }
-    }
-  }
-
-  closeLinkForm() {
-    this.openLinkform = false;
   }
 }

@@ -5,16 +5,13 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  _user: Observable<any> = new Observable();
+  constructor(private auth: AngularFireAuth) {}
 
-_user:Observable<any> = new Observable();
-  constructor(private auth: AngularFireAuth) {
-   }
-
-   get user():Observable<firebase.User>{
+  get user(): Observable<firebase.User> {
     return this.auth.user;
   }
 }
-

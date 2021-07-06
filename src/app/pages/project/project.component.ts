@@ -83,18 +83,10 @@ export class ProjectComponent implements OnInit, AfterViewInit {
   }
 
   deleteProject() {
-    let answer = confirm('delete?');
-
-    if (answer) {
-      this.firestore
-        .collection('users')
-        .doc(this.user.uid)
-        .collection('projects')
-        .doc(this.selectedProject.id)
-        .delete()
-        .then(() => {
-          this.router.navigate(['/', 'app-projects']);
-        });
+    if (confirm('delete?')) {
+      this.docRef.delete().then(() => {
+        this.router.navigate(['/', 'app-projects']);
+      });
     }
   }
 

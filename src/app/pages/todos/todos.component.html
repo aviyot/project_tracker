@@ -16,7 +16,7 @@
   </mat-card-subtitle>
   <app-todo-form *ngIf="todoState.add" [docRef]="docRef"></app-todo-form>
   <mat-divider></mat-divider>
-  <div *ngFor="let todo of selectedProject.todos;let todoIndex = index">
+  <div *ngFor="let todo of todos | async; let todoIndex = index">
     <div *ngIf="selectedStatus === todo.status || selectedStatus ==='ALL'"
       style="display: flex;flex-direction: column;margin-bottom: 10px;">
       <p style="font-size: large"> {{todo.title}}</p>
@@ -32,21 +32,9 @@
         <span>{{todo.makingDesc}}</span>
       </mat-card-content>
 
-      <div *ngIf="todo.links">
-        <div *ngFor="let link of todo.links;let i = index">
-          <ul>
-            <li>
-              <a [href]="link.href">{{link.title}}</a>
-            </li>
-            <li>{{link.site}}</li>
-          </ul>
-          <div>{{link.problemDesc}}</div>
-          <button mat-stroked-button color="warn" (click)="removeLink(todo,i)">מחק</button>
-        </div>
-      </div>
       <mat-card-actions>
         <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
-        <button mat-stroked-button color="warn" (click)="deleteTodo(todo)">מחק</button>
+        <button mat-stroked-button color="warn" (click)="deleteTodo(todo.id)">מחק</button>
       </mat-card-actions>
       <app-todo-form *ngIf="todoState.edit && (todoIndex === todoState.selectedIndex)" [todo]="todo" [docRef]="docRef">
       </app-todo-form>
