@@ -8,3 +8,8 @@ mat-nav-list a {
   width: fit-content;
   text-transform: capitalize;
 }
+
+.mat-card {
+  height: 100%;
+  box-sizing: border-box;
+}

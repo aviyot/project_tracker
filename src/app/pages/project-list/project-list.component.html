@@ -4,11 +4,8 @@
     {{project.projectDesc.name}}
   </mat-list-item>
 </mat-list>
-<div *ngIf="detial ">
-  <div *ngFor="let project of projects | async">
-    <app-description [selectedProject]="project">
-      <button mat-button (click)="onSelectProject(project)">פרטים</button>
-    </app-description>
-    <mat-divider></mat-divider>
-  </div>
+<div class="project-list" *ngIf="detial">
+  <app-description *ngFor="let project of projects | async" [selectedProject]="project">
+    <button mat-button (click)="onSelectProject(project)">פרטים</button>
+  </app-description>
 </div>
