@@ -67,7 +67,12 @@ export class TodoFormComponent implements OnInit {
 
   addTodo() {
     if (this.todo.valid) {
-      this.docRef.collection('todos').add(this.todo.value);
+      this.docRef
+        .collection('todos')
+        .add(this.todo.value)
+        .then(() => {
+          this.todo.reset({ date: new Date(), status: this.status[0] });
+        });
     }
   }
 
@@ -76,7 +81,10 @@ export class TodoFormComponent implements OnInit {
       this.docRef
         .collection('todos')
         .doc(this.todoData.id)
-        .update(this.todo.value);
+        .update(this.todo.value)
+        .then(() => {
+          this.todo.reset({ date: new Date(), status: this.status[0] });
+        });
     }
   }
 }
