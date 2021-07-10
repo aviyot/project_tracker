@@ -1,5 +1,5 @@
 <mat-toolbar style="justify-content: space-between;">
-  <button mat-button (click)="sideNav.toggle()">
+  <button *ngIf="user" mat-button (click)="sideNav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{appName}}</span>
@@ -8,7 +8,7 @@
 <div class="main">
   <mat-sidenav-container hasBackdrop="false">
     <mat-sidenav autoFocus="true" mode="over" #sideNav>
-      <app-project-list (itemSelected) = "onItemSelected()"></app-project-list>
+      <app-project-list (itemSelected)="onItemSelected()"></app-project-list>
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet></router-outlet>
