@@ -30,7 +30,7 @@ export class ProjectListComponent implements OnInit {
         this.projects = this.firestore
           .collection('users')
           .doc(user.uid)
-          .collection('projects')
+          .collection('projects', (ref) => ref.orderBy('projectDesc.name'))
           .valueChanges({ idField: 'id' }) as Observable<Project[]>;
         /*   
         this.projects.subscribe((ps) => {
