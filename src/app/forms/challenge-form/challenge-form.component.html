@@ -1,0 +1,22 @@
+<form [formGroup]="challenge">
+    <mat-form-field appearance="outline">
+        <mat-label>כותרת</mat-label>
+        <input matInput type="text" formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>קושי</mat-label>
+        <textarea matInput formControlName="challenge"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>פתרון</mat-label>
+        <textarea matInput formControlName="solution"></textarea>
+    </mat-form-field>
+
+    <div>
+        <button *ngIf="!challengeData" mat-stroked-button color="primary" (click)="addChallenge()">הוסף
+        </button>
+        <button *ngIf="challengeData" mat-stroked-button color="warn" (click)="saveChallenge()">שמור
+        </button>
+    </div>
+
+</form>

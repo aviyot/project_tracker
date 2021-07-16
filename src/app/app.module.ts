@@ -30,6 +30,8 @@ import { FeaturesComponent } from './pages/features/features.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
 import { FormatPipe } from './pipes/format.pipe';
 import { DatePipe } from '@angular/common';
+import { ChallengeFormComponent } from './forms/challenge-form/challenge-form.component';
+import { ChallengesComponent } from './pages/challenges/challenges.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { DatePipe } from '@angular/common';
     FeaturesComponent,
     QuestionsComponent,
     FormatPipe,
+    ChallengeFormComponent,
+    ChallengesComponent,
   ],
   imports: [
     BrowserModule,

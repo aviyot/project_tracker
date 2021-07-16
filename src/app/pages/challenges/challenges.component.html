@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-title>
+        <span> קשיים </span>
+        <button mat-stroked-button color="primary" (click)="addChallenge()"> הוסף </button>
+    </mat-card-title>
+    <app-challenge-form *ngIf="challengeState.add" [docRef]="docRef">
+    </app-challenge-form>
+    <div *ngFor="let challenge of selectedProject.challenges ; let challengeIndex = index">
+        <div style="display: flex;flex-direction: column;margin-bottom: 10px;">
+            <p style="font-size: large"> {{challenge.title}}</p>
+            <mat-card-subtitle>
+
+            </mat-card-subtitle>
+            <mat-card-content>
+                <span>{{challenge.challenge}}</span>
+                <span>{{challenge.solution}}</span>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button mat-stroked-button color="accent" (click)="editChallenge(challengeIndex)">ערוך</button>
+                <button mat-stroked-button color="warn" (click)="deleteChallenge(challenge)">מחק</button>
+            </mat-card-actions>
+            <app-challenge-form *ngIf="challengeState.edit && (challengeIndex === challengeState.selectedIndex)"
+                [challenge]="challenge" [docRef]="docRef">
+            </app-challenge-form>
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+</mat-card>
