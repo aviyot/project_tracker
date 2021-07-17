@@ -1,18 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Todo } from 'src/models/todo.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { TODO_STATUS } from 'src/types/todo_status.type';
 import { IsTimestampService } from 'src/app/services/is-timestamp.service';
-import { Link } from 'src/models/link.model';
 
 @Component({
   selector: 'app-todo-form',
@@ -24,10 +17,6 @@ export class TodoFormComponent implements OnInit {
   @Input('docRef')
   docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
   todo: FormGroup;
-  linkForm: FormGroup;
-  linksArray: FormArray;
-  openLinkform = false;
-  todoLinks: Link[] = [];
   status: TODO_STATUS[] = [
     'PLANNED',
     'IN_PROGRESS',
