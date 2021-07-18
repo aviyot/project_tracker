@@ -18,7 +18,11 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>מצב הפרויקט</mat-label>
-        <input type="text" matInput formControlName="lifecycleStage" />
+        <mat-select formControlName="lifecycleStage">
+            <mat-option *ngFor="let status of projectStatuses" [value]="status">
+                {{status}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" style="display: block;">
         <mat-label>תיאור הפרויקט</mat-label>

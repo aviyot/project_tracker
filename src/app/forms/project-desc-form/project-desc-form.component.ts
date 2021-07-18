@@ -12,6 +12,7 @@ import { ProjectData } from 'src/models/project-data.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { IsTimestampService } from 'src/app/services/is-timestamp.service';
+import { LIFECYCLE_STAGE } from 'src/types/lifecycleStage.type';
 
 @Component({
   selector: 'app-project-desc-form',
@@ -25,6 +26,15 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
   docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
   @Input('added') added = false;
   @Output('newProject') newProject = new EventEmitter<ProjectData>();
+  projectStatuses: LIFECYCLE_STAGE[] = [
+    'planning',
+    'design',
+    'prototyping',
+    'development',
+    'testing',
+    'publishing',
+    'maintenance',
+  ];
 
   projectForm: FormGroup;
   constructor(
@@ -38,7 +48,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       desc: [''],
       startTime: [new Date()],
       endTime: [],
-      lifecycleStage: [''],
+      lifecycleStage: [this.projectStatuses[0]],
       gitHub: [''],
       site: [''],
       filePath: [''],
