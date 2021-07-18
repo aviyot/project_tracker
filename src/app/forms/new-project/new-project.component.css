@@ -1,8 +1,6 @@
 form {
-    position: relative;
+  position: relative;
 }
-.action-btn{
-    position: fixed;
-    left:20px;
-    bottom: 10px;
+.action-btn {
+  display: flex;
 }

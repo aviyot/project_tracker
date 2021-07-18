@@ -51,4 +51,8 @@ export class NewProjectComponent implements OnInit {
       console.log('invaild user data');
     }
   }
+
+  exitForm() {
+    this.router.navigate(['./', 'app-projects']);
+  }
 }
