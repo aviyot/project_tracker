@@ -1,5 +1,7 @@
 <button mt-button (click)="addNewProject()"> הוסף פרויקט חדש</button>
+
 <mat-list *ngIf="!detial">
+  <button mt-button (click)="goToProjectsList()"> רשימת הפרויקטים</button>
   <mat-list-item *ngFor="let project of projects | async" (click)="onSelectProject(project)">
     {{project.projectDesc.name}}
   </mat-list-item>

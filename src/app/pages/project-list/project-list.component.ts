@@ -59,4 +59,9 @@ export class ProjectListComponent implements OnInit {
     this.itemSelected.emit();
     this.router.navigate(['/', 'new-project']);
   }
+
+  goToProjectsList() {
+    this.itemSelected.emit();
+    this.router.navigate(['/', 'app-projects']);
+  }
 }
