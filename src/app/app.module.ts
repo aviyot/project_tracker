@@ -31,6 +31,7 @@ import { FormatPipe } from './pipes/format.pipe';
 import { DatePipe } from '@angular/common';
 import { ChallengeFormComponent } from './components/challenge/challenge-form/challenge-form.component';
 import { ChallengesComponent } from './components/challenge/challenges/challenges.component';
+import { SubPipe } from './pipes/sub.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ChallengesComponent } from './components/challenge/challenges/challenge
     FormatPipe,
     ChallengeFormComponent,
     ChallengesComponent,
+    SubPipe,
   ],
   imports: [
     BrowserModule,
