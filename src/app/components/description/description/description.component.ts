@@ -17,6 +17,7 @@ export class DescriptionComponent implements OnInit, OnChanges {
   @Input() selectedProject: Project;
   @Input() docRef;
   projectDescState: FormState;
+  showFullPath = false;
   constructor() {}
 
   ngOnInit(): void {
@@ -31,6 +32,9 @@ export class DescriptionComponent implements OnInit, OnChanges {
         this.projectDescState.edit = false;
       }
     }
+  }
+  onShowFullPath(full: boolean) {
+    this.showFullPath = full;
   }
 
   editProjectDesc() {

@@ -2,12 +2,15 @@
   <mat-card-header>
     <mat-card-title>
       {{selectedProject.projectDesc.name}}
+      <p>{{selectedProject.projectDesc.lifecycleStage}}</p>
     </mat-card-title>
     <mat-card-subtitle>
       <p>{{selectedProject.projectDesc.startTime | format }}</p>
       <p>{{selectedProject.projectDesc.endTime | format }}</p>
-      <p>{{selectedProject.projectDesc.lifecycleStage}}</p>
-      <p>{{selectedProject.projectDesc.filePath}}</p>
+      <p (click)="onShowFullPath(true)" *ngIf="!showFullPath">{{selectedProject.projectDesc.filePath | sub:'\\' }}
+      </p>
+      <p (click)="onShowFullPath(false)" *ngIf="showFullPath">{{selectedProject.projectDesc.filePath}}
+      </p>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
