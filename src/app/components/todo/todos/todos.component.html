@@ -22,14 +22,14 @@
       <p style="font-size: large"> {{todo.title}}</p>
       <mat-card-subtitle>
         <p *ngIf="selectedStatus ==='ALL'"> {{todo.status}} </p>
-        <span> זמן התחלה : {{todo.date | format }}</span>
-        <span> זמן סיום : {{todo.completeDate | format}}</span>
-        <p> <span>{{todo.gitCommit}}</span>
-        </p>
+        <p> זמן התחלה : {{todo.date | format }}</p>
+        <p> זמן סיום : {{todo.completeDate | format}}</p>
+        <p>{{todo.gitCommit | slice:0:8 }}</p>
       </mat-card-subtitle>
       <mat-card-content>
-        <span>{{todo.detail}}</span>
-        <span>{{todo.makingDesc}}</span>
+        <p>{{todo.detail}}
+        <p>
+        <p>{{todo.makingDesc}}</p>
       </mat-card-content>
 
       <mat-card-actions>
