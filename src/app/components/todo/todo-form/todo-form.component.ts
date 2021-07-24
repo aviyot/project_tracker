@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Todo } from 'src/models/todo.model';
 import firebase from 'firebase/app';
@@ -6,6 +6,7 @@ import 'firebase/firestore';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { TODO_STATUS } from 'src/types/todo_status.type';
 import { IsTimestampService } from 'src/app/services/is-timestamp.service';
+import { FormAction } from 'src/types/form-action.type';
 
 @Component({
   selector: 'app-todo-form',
@@ -16,6 +17,7 @@ export class TodoFormComponent implements OnInit {
   @Input('todo') todoData: Todo | null | any;
   @Input('docRef')
   docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
+  @Output() formAction: EventEmitter<FormAction> = new EventEmitter();
   todo: FormGroup;
   status: TODO_STATUS[] = [
     'PLANNED',
@@ -61,6 +63,7 @@ export class TodoFormComponent implements OnInit {
         .add(this.todo.value)
         .then(() => {
           this.todo.reset({ date: new Date(), status: this.status[0] });
+          this.formAction.emit('ADD');
         });
     }
   }
@@ -73,6 +76,7 @@ export class TodoFormComponent implements OnInit {
         .update(this.todo.value)
         .then(() => {
           this.todo.reset({ date: new Date(), status: this.status[0] });
+          this.formAction.emit('SAVE');
         });
     }
   }

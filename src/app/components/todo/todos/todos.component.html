@@ -14,7 +14,7 @@
       <mat-button-toggle value="COMPLETED">הושלם</mat-button-toggle>
     </mat-button-toggle-group>
   </mat-card-subtitle>
-  <app-todo-form *ngIf="todoState.add" [docRef]="docRef"></app-todo-form>
+  <app-todo-form *ngIf="todoState.add" [docRef]="docRef" (formAction)="onFormAction($event)"></app-todo-form>
   <mat-divider></mat-divider>
   <div *ngFor="let todo of todos | async; let todoIndex = index">
     <div *ngIf="selectedStatus === todo.status || selectedStatus ==='ALL'"
@@ -36,7 +36,8 @@
         <button mat-stroked-button color="accent" (click)="editTodo(todoIndex)">ערוך</button>
         <button mat-stroked-button color="warn" (click)="deleteTodo(todo.id)">מחק</button>
       </mat-card-actions>
-      <app-todo-form *ngIf="todoState.edit && (todoIndex === todoState.selectedIndex)" [todo]="todo" [docRef]="docRef">
+      <app-todo-form *ngIf="todoState.edit && (todoIndex === todoState.selectedIndex)" [todo]="todo" [docRef]="docRef"
+        (formAction)="onFormAction($event)">
       </app-todo-form>
     </div>
     <mat-divider></mat-divider>

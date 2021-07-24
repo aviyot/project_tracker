@@ -1,17 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { Timestamp } from '@firebase/firestore-types';
 import { Project } from 'src/models/project.model';
 import { FormState } from 'src/models/ui/form-state';
 import { TODO_STATUS } from 'src/types/todo_status.type';
 import { IsTimestampService } from 'src/app/services/is-timestamp.service';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/firestore';
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
+import { FormAction } from 'src/types/form-action.type';
 
 @Component({
   selector: 'app-todos',
@@ -27,11 +23,7 @@ export class TodosComponent implements OnInit {
   doneHided = true;
   selectedStatus: TODO_STATUS | 'ALL' = 'IN_PROGRESS';
 
-  constructor(
-    private timestampServ: IsTimestampService,
-    private firestore: AngularFirestore,
-    private authService: AuthService
-  ) {}
+  constructor(private timestampServ: IsTimestampService) {}
 
   ngOnInit(): void {
     this.todoState = { add: false, edit: false, selectedIndex: null };
@@ -56,16 +48,19 @@ export class TodosComponent implements OnInit {
   }
 
   deleteTodo(todoId) {
-    this.docRef
-      .collection('todos')
-      .doc(todoId)
-      .delete()
-      .then(() => {
-        console.log('data deleted');
-      });
+    this.docRef.collection('todos').doc(todoId).delete();
   }
 
   hideDone() {
     this.doneHided = !this.doneHided;
+  }
+
+  onFormAction(action: FormAction) {
+    if (action == 'ADD') {
+      this.todoState = { ...this.todoState, add: false };
+    }
+    if (action == 'SAVE') {
+      this.todoState = { ...this.todoState, edit: false };
+    }
   }
 }
