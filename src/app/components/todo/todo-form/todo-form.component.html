@@ -35,8 +35,8 @@
         <mat-label>גיט קומיט</mat-label>
         <textarea matInput placeholder="הכנס גיט קומיט" formControlName="gitCommit"></textarea>
     </mat-form-field>
-
-    <button *ngIf="!todoData" mat-stroked-button color="primary" (click)="addTodo()">Add Todo</button>
-    <button *ngIf="todoData" mat-stroked-button color="warn" (click)="saveTodo()">Save Todo</button>
-
+    <div>
+        <button *ngIf="!todoData" mat-stroked-button color="primary" (click)="addTodo()">הוסף משימה</button>
+        <button *ngIf="todoData" mat-stroked-button color="warn" (click)="saveTodo()">עדכן משימה</button>
+    </div>
 </form>
