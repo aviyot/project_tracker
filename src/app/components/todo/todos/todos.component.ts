@@ -36,7 +36,7 @@ export class TodosComponent implements OnInit {
   ngOnInit(): void {
     this.todoState = { add: false, edit: false, selectedIndex: null };
     this.todos = this.docRef
-      .collection('todos', (ref) => ref.orderBy('completeDate', 'desc'))
+      .collection('todos', (ref) => ref.orderBy('date', 'desc'))
       .valueChanges({ idField: 'id' }) as Observable<Project[]>;
     this.todos.subscribe((d) => {});
   }
