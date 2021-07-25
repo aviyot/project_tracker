@@ -9,5 +9,6 @@ export interface ProjectDesc {
   lifecycleStage: LIFECYCLE_STAGE;
   gitHub?: string;
   site: string;
+  sites: { url: string; main: boolean; udatedAutoGithub: boolean }[];
   filePath: string;
 }

@@ -36,6 +36,22 @@
         <mat-label>אתר</mat-label>
         <input type="text" matInput formControlName="site" />
     </mat-form-field>
+    <div formArrayName="sites">
+        <div *ngFor="let site of getSites().controls;let siteIndex = index ">
+            <div [formGroupName]="siteIndex">
+                <mat-form-field appearance="outline">
+                    <mat-label>אתר</mat-label>
+                    <input matInput type="text" formControlName="url">
+                </mat-form-field>
+                <mat-checkbox formControlName="main">
+                    ראשי
+                </mat-checkbox>
+                <mat-checkbox formControlName="udatedAutoGithub">מתעדכן אוטומטי </mat-checkbox>
+            </div>
+            <button mat-stroked-button (click)="removeSite(siteIndex)">הסר לינק</button>
+        </div>
+        <button mat-stroked-button (click)="addSite()">הוסף לינק</button>
+    </div>
     <mat-form-field appearance="outline">
         <mat-label>מיקום קובץ</mat-label>
         <input type="text" matInput formControlName="filePath" />

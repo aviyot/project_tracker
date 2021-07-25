@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectData } from 'src/models/project-data.model';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -37,6 +37,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
   ];
 
   projectForm: FormGroup;
+  sites: FormGroup;
   constructor(
     private fb: FormBuilder,
     private timestampServ: IsTimestampService
@@ -51,9 +52,15 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       lifecycleStage: [this.projectStatuses[0]],
       gitHub: [''],
       site: [''],
+      sites: this.fb.array([]),
       filePath: [''],
     });
 
+    this.sites = this.fb.group({
+      url: ['', Validators.required],
+      main: [false],
+      udatedAutoGithub: [false],
+    });
     if (this.projectData) {
       let startTime: any = this.projectData.projectDesc.startTime;
       let endTime: any = this.projectData.projectDesc.endTime;
@@ -70,15 +77,17 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       )
         endTime = this.projectData.projectDesc.endTime.toDate();
 
+      if (this.projectData.projectDesc.sites) {
+        this.projectData.projectDesc.sites.forEach((site) => {
+          this.sites.patchValue(site);
+          this.getSites().push(this.sites);
+        });
+      }
+
       this.projectDesc.patchValue({
-        name: this.projectData.projectDesc.name,
-        desc: this.projectData.projectDesc.desc,
+        ...this.projectData.projectDesc,
         startTime: startTime,
         endTime: endTime,
-        lifecycleStage: this.projectData.projectDesc.lifecycleStage,
-        gitHub: this.projectData.projectDesc.gitHub,
-        site: this.projectData.projectDesc.site,
-        filePath: this.projectData.projectDesc.filePath,
       });
     } else {
       this.createNewProject();
@@ -105,15 +114,60 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
     });
   }
   saveProjectDesc() {
-    this.docRef.update({
-      'projectDesc.name': this.projectDesc.value.name,
-      'projectDesc.desc': this.projectDesc.value.desc,
-      'projectDesc.startTime': this.projectDesc.value.startTime,
-      'projectDesc.endTime': this.projectDesc.value.endTime,
-      'projectDesc.lifecycleStage': this.projectDesc.value.lifecycleStage,
-      'projectDesc.gitHub': this.projectDesc.value.gitHub,
-      'projectDesc.site': this.projectDesc.value.site,
-      'projectDesc.filePath': this.projectDesc.value.filePath,
-    });
+    this.docRef
+      .update({
+        'projectDesc.name': this.projectDesc.value.name,
+        'projectDesc.desc': this.projectDesc.value.desc,
+        'projectDesc.startTime': this.projectDesc.value.startTime,
+        'projectDesc.endTime': this.projectDesc.value.endTime,
+        'projectDesc.lifecycleStage': this.projectDesc.value.lifecycleStage,
+        'projectDesc.gitHub': this.projectDesc.value.gitHub,
+        'projectDesc.site': this.projectDesc.value.site,
+        'projectDesc.filePath': this.projectDesc.value.filePath,
+      })
+      .then(() => {
+        if (this.projectData.projectDesc.sites.length) {
+          this.projectData.projectDesc.sites.forEach((site) => {
+            this.docRef
+              .update({
+                'projectDesc.sites':
+                  firebase.firestore.FieldValue.arrayRemove(site),
+              })
+              .then(() => {
+                this.projectDesc.value.sites.forEach((site) => {
+                  this.docRef.update({
+                    'projectDesc.sites':
+                      firebase.firestore.FieldValue.arrayUnion(site),
+                  });
+                });
+              });
+          });
+        } else {
+          this.projectDesc.value.sites.forEach((site) => {
+            this.docRef.update({
+              'projectDesc.sites':
+                firebase.firestore.FieldValue.arrayUnion(site),
+            });
+          });
+        }
+      });
+  }
+
+  getSites(): FormArray {
+    return this.projectDesc.get('sites') as FormArray;
+  }
+
+  addSite() {
+    this.getSites().push(
+      this.fb.group({
+        url: ['', Validators.required],
+        main: [false],
+        udatedAutoGithub: [false],
+      })
+    );
+  }
+
+  removeSite(siteIndex) {
+    this.getSites().removeAt(siteIndex);
   }
 }

@@ -20,8 +20,13 @@
     <mat-nav-list>
       <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item
         [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
-      <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item
-        [href]="selectedProject.projectDesc.site">אתר</a>
+      <!--    <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item
+        [href]="selectedProject.projectDesc.site">אתר</a> -->
+      <a *ngFor="let site of selectedProject.projectDesc.sites;let i = index" target="_blank" mat-list-item
+        [href]="site.url">
+        <span *ngIf="site.main">אתר ראשי</span>
+        <span *ngIf="!site.main">אתר נוסף</span>
+      </a>
     </mat-nav-list>
   </mat-card-content>
   <mat-card-actions>

@@ -38,16 +38,14 @@ export class QuestionAnswerFormComponent implements OnInit {
     });
     if (this.questionData) {
       this.questionData.answerLinks.forEach((element) => {
-        (this.question.get('answerLinks') as FormArray).push(
-          this.answerLink
-        );
+        (this.question.get('answerLinks') as FormArray).push(this.answerLink);
       });
       this.question.setValue(this.questionData);
     }
   }
 
   getAnswerLinks(): FormArray {
-    return (this.question.get('answerLinks') )as FormArray;
+    return this.question.get('answerLinks') as FormArray;
   }
 
   addAnswerLink(data?: any[]) {
@@ -73,19 +71,25 @@ export class QuestionAnswerFormComponent implements OnInit {
     }
   }
 
-  addQA(){
-    this.docRef.update({
-      questions:firebase.firestore.FieldValue.arrayUnion(this.question.value)
-    }).then(()=>{
-      this.question.reset();
-    })
+  addQA() {
+    this.docRef
+      .update({
+        questions: firebase.firestore.FieldValue.arrayUnion(
+          this.question.value
+        ),
+      })
+      .then(() => {
+        this.question.reset();
+      });
   }
 
-  saveQA(){
-    this.docRef.update({
-      questions:firebase.firestore.FieldValue.arrayRemove(this.questionData)
-    }).then(()=>{
-         this.addQA();
-    })
+  saveQA() {
+    this.docRef
+      .update({
+        questions: firebase.firestore.FieldValue.arrayRemove(this.questionData),
+      })
+      .then(() => {
+        this.addQA();
+      });
   }
 }
