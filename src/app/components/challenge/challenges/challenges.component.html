@@ -3,7 +3,7 @@
         <span> קשיים </span>
         <button mat-stroked-button color="primary" (click)="addChallenge()"> הוסף </button>
     </mat-card-title>
-    <app-challenge-form *ngIf="challengeState.add" [docRef]="docRef">
+    <app-challenge-form (formAction)="onFormAction($event)" *ngIf="challengeState.add" [docRef]="docRef">
     </app-challenge-form>
     <div *ngFor="let challenge of selectedProject.challenges ; let challengeIndex = index">
         <div style="display: flex;flex-direction: column;margin-bottom: 10px;">
@@ -21,7 +21,7 @@
                 <button mat-stroked-button color="warn" (click)="deleteChallenge(challenge)">מחק</button>
             </mat-card-actions>
             <app-challenge-form *ngIf="challengeState.edit && (challengeIndex === challengeState.selectedIndex)"
-                [challenge]="challenge" [docRef]="docRef">
+                [challenge]="challenge" [docRef]="docRef" (formAction)="onFormAction($event)">
             </app-challenge-form>
         </div>
         <mat-divider></mat-divider>

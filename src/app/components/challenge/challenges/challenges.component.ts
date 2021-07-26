@@ -4,6 +4,7 @@ import { Project } from 'src/models/project.model';
 import { FormState } from 'src/models/ui/form-state';
 import firebase from 'firebase/app';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FormAction } from 'src/types/form-action.type';
 
 @Component({
   selector: 'app-challenges',
@@ -20,6 +21,7 @@ export class ChallengesComponent implements OnInit {
   ngOnInit(): void {
     this.challengeState = { add: false, edit: false, selectedIndex: null };
   }
+
   addChallenge() {
     this.challengeState.add = !this.challengeState.add;
   }
@@ -34,5 +36,18 @@ export class ChallengesComponent implements OnInit {
     this.docRef.update({
       challenges: firebase.firestore.FieldValue.arrayRemove(challenge),
     });
+  }
+
+  onFormAction(formAction: FormAction) {
+    if (formAction == 'ADD') {
+      this.challengeState = { ...this.challengeState, add: false };
+    }
+
+    if (formAction == 'SAVE') {
+      this.challengeState = {
+        ...this.challengeState,
+        edit: false,
+      };
+    }
   }
 }
