@@ -69,6 +69,7 @@ export class TodoFormComponent implements OnInit {
   }
 
   saveTodo() {
+    this.formAction.emit('SAVE');
     if (this.todo.valid) {
       this.docRef
         .collection('todos')
@@ -76,7 +77,6 @@ export class TodoFormComponent implements OnInit {
         .update(this.todo.value)
         .then(() => {
           this.todo.reset({ date: new Date(), status: this.status[0] });
-          this.formAction.emit('SAVE');
         });
     }
   }
