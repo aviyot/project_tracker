@@ -1,13 +1,23 @@
-<button mt-button (click)="addNewProject()"> הוסף פרויקט חדש</button>
-
-<mat-list *ngIf="!detial">
-  <button mt-button (click)="goToProjectsList()"> רשימת הפרויקטים</button>
-  <mat-list-item *ngFor="let project of projects | async" (click)="onSelectProject(project)">
-    {{project.projectDesc.name}}
+<mat-nav-list>
+  <mat-list-item style="font-size: x-large;font-weight: bolder;font-style: italic;">
+    <a matLine [routerLink]="['/', 'new-project']"> הוסף פרויקט חדש</a>
   </mat-list-item>
-</mat-list>
+
+  <div *ngIf="!detial">
+    <mat-list-item style="font-size: x-large;font-weight: bolder;font-style: italic">
+      <a matLine [routerLink]="['/', 'app-projects']">רשימת הפרויקטים</a>
+    </mat-list-item>
+    <mat-list-item *ngFor="let project of projects | async">
+      <a matLine [routerLink]="['/', 'app-project', project.id]">{{project.projectDesc.name}}</a>
+    </mat-list-item>
+  </div>
+</mat-nav-list>
 <div class="project-list" *ngIf="detial">
   <app-description *ngFor="let project of projects | async" [selectedProject]="project">
-    <button mat-button (click)="onSelectProject(project)">פרטים</button>
+    <mat-nav-list>
+      <mat-list-item>
+        <a matLine [routerLink]="['/', 'app-project', project.id]">דף הפרויקט</a>
+      </mat-list-item>
+    </mat-nav-list>
   </app-description>
 </div>

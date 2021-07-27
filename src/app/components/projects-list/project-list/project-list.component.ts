@@ -20,7 +20,6 @@ export class ProjectListComponent implements OnInit {
   @Input() detial: boolean;
   constructor(
     private firestore: AngularFirestore,
-    private router: Router,
     private authService: AuthService
   ) {}
 
@@ -32,36 +31,7 @@ export class ProjectListComponent implements OnInit {
           .doc(user.uid)
           .collection('projects', (ref) => ref.orderBy('projectDesc.name'))
           .valueChanges({ idField: 'id' }) as Observable<Project[]>;
-        /*   
-        this.projects.subscribe((ps) => {
-          ps.forEach((p) => {
-            p.todos.forEach((todo) => {
-              this.firestore
-                .collection('users')
-                .doc(user.uid)
-                .collection('projects')
-                .doc(p.id)
-                .collection('todos')
-                .add(todo);
-            });
-          });
-        }); */
       }
     });
-  }
-
-  onSelectProject(selectedProject: Project) {
-    this.itemSelected.emit();
-    this.router.navigate(['/', 'app-project', selectedProject.id]);
-  }
-
-  addNewProject() {
-    this.itemSelected.emit();
-    this.router.navigate(['/', 'new-project']);
-  }
-
-  goToProjectsList() {
-    this.itemSelected.emit();
-    this.router.navigate(['/', 'app-projects']);
   }
 }
