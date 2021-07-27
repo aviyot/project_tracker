@@ -33,6 +33,9 @@
         <span *ngIf="site.main">אתר ראשי</span>
         <span *ngIf="!site.main">אתר נוסף</span>
       </a>
+      <mat-list-item>
+        <a matLine [routerLink]="['/', 'app-project', selectedProject.id]">דף הפרויקט</a>
+      </mat-list-item>
     </mat-nav-list>
     <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
     </app-project-desc-form>

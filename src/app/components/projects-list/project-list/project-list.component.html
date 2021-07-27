@@ -14,10 +14,5 @@
 </mat-nav-list>
 <div class="project-list" *ngIf="detial">
   <app-description *ngFor="let project of projects | async" [selectedProject]="project">
-    <mat-nav-list>
-      <mat-list-item>
-        <a (click)="closeMenu()" matLine [routerLink]="['/', 'app-project', project.id]">דף הפרויקט</a>
-      </mat-list-item>
-    </mat-nav-list>
   </app-description>
 </div>

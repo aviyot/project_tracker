@@ -1,40 +1,33 @@
-<mat-card>
-  <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
-  <mat-divider></mat-divider>
-  <span *ngFor="let tool of selectedProject.tools;let toolIndex = index">
-    <mat-card-subtitle (click)="toogleDetail(toolIndex)">
-      <span>{{tool.name}}</span>
-      <span>{{tool.ver}}</span>
-    </mat-card-subtitle>
-    <span *ngIf="showDetial && (toolIndex == selectedIndex)">
-
-      <mat-card-content>
-        <p>
-          <span> {{tool.type}}</span>
-          <span>{{tool.purpose}}</span>
-        </p>
-        <p>
-          {{tool.desc}}
-        </p>
-        <mat-nav-list>
-          <mat-list-item *ngIf="tool.githubLink">
-            <a matLine [href]="tool.githubLink" target="_blank">גיטהב</a>
-          </mat-list-item>
-          <mat-list-item *ngIf="tool.webSite">
-            <a matLine [href]="tool.webSite" target="_blank">אתר</a>
-          </mat-list-item>
-          <mat-list-item *ngIf="tool.npmLink">
-            <a matLine [href]="tool.npmLink" target="_blank">npm</a>
-          </mat-list-item>
-        </mat-nav-list>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-stroked-button color="accent" (click)="editTool(toolIndex)">ערוך</button>
-        <button mat-stroked-button color="warn" (click)="deleteTool(tool)">מחק</button>
-      </mat-card-actions>
-      <app-tool-form *ngIf="toolState.edit && (toolIndex === toolState.selectedIndex)" [tool]="tool" [docRef]="docRef">
-      </app-tool-form>
-    </span>
+<app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
+<span *ngFor="let tool of selectedProject.tools;let toolIndex = index">
+  <span (click)="toogleDetail(toolIndex)" style="margin: 0.2rem;">{{tool.name}}-{{tool.ver}}</span>
+  <span *ngIf="showDetial && (toolIndex == selectedIndex)">
+    <div>
+      <h2>{{tool.name}}-{{tool.ver}}</h2>
+      <h2> {{tool.type}}</h2>
+      <h3>{{tool.purpose}}</h3>
+      <h4>
+        {{tool.desc}}
+      </h4>
+    </div>
+    <mat-nav-list>
+      <mat-list-item *ngIf="tool.githubLink">
+        <a matLine [href]="tool.githubLink" target="_blank">גיטהב</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="tool.webSite">
+        <a matLine [href]="tool.webSite" target="_blank">אתר</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="tool.npmLink">
+        <a matLine [href]="tool.npmLink" target="_blank">npm</a>
+      </mat-list-item>
+    </mat-nav-list>
+    <div>
+      <button mat-stroked-button color="accent" (click)="editTool(toolIndex)">ערוך</button>
+      <button mat-stroked-button color="warn" (click)="deleteTool(tool)">מחק</button>
+    </div>
   </span>
-  <button mat-stroked-button color="primary" (click)="addTool()"> הוסף </button>
-</mat-card>
+
+  <app-tool-form *ngIf="toolState.edit && (toolIndex === toolState.selectedIndex)" [tool]="tool" [docRef]="docRef">
+  </app-tool-form>
+</span>
+<button mat-stroked-button color="primary" (click)="addTool()"> הוסף כלי</button>
