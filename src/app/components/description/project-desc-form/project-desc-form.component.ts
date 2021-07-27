@@ -52,7 +52,13 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       lifecycleStage: [this.projectStatuses[0]],
       gitHub: [''],
       site: [''],
+      sites: this.fb.array([
+        this.fb.group({
           url: ['', Validators.required],
+          main: [true],
+          udatedAutoGithub: [true],
+        }),
+      ]),
       filePath: [''],
     });
 
