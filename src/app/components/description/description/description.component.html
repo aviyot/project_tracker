@@ -17,21 +17,23 @@
     <p>
       {{selectedProject.projectDesc.desc}}
     </p>
+
+    <app-tools id="tools" [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="docRef" mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
+    <ng-content></ng-content>
     <mat-nav-list>
       <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item
         [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
       <!--    <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item
-        [href]="selectedProject.projectDesc.site">אתר</a> -->
+            [href]="selectedProject.projectDesc.site">אתר</a> -->
       <a *ngFor="let site of selectedProject.projectDesc.sites;let i = index" target="_blank" mat-list-item
         [href]="site.url">
         <span *ngIf="site.main">אתר ראשי</span>
         <span *ngIf="!site.main">אתר נוסף</span>
       </a>
     </mat-nav-list>
-  </mat-card-content>
-  <mat-card-actions>
-    <button *ngIf="docRef" mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
-    <ng-content></ng-content>
     <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
     </app-project-desc-form>
   </mat-card-actions>

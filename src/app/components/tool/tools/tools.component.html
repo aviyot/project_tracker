@@ -1,18 +1,12 @@
 <mat-card>
-  <mat-card-title>
-    <span> כלי פיתוח
-    </span>
-    <button mat-stroked-button color="primary" (click)="addTool()"> הוסף </button>
-  </mat-card-title>
   <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
   <mat-divider></mat-divider>
-  <div *ngFor="let tool of selectedProject.tools;let toolIndex = index">
-    <mat-card-subtitle>
+  <span *ngFor="let tool of selectedProject.tools;let toolIndex = index">
+    <mat-card-subtitle (click)="toogleDetail(toolIndex)">
       <span>{{tool.name}}</span>
       <span>{{tool.ver}}</span>
-      <button mat-stroked-button color="primary" (click)="toogleDetail(toolIndex)"> פרטים </button>
     </mat-card-subtitle>
-    <div *ngIf="showDetial && (toolIndex == selectedIndex)">
+    <span *ngIf="showDetial && (toolIndex == selectedIndex)">
 
       <mat-card-content>
         <p>
@@ -40,8 +34,7 @@
       </mat-card-actions>
       <app-tool-form *ngIf="toolState.edit && (toolIndex === toolState.selectedIndex)" [tool]="tool" [docRef]="docRef">
       </app-tool-form>
-    </div>
-    <mat-divider></mat-divider>
-
-  </div>
+    </span>
+  </span>
+  <button mat-stroked-button color="primary" (click)="addTool()"> הוסף </button>
 </mat-card>
