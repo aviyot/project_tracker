@@ -34,4 +34,8 @@ export class ProjectListComponent implements OnInit {
       }
     });
   }
+
+  closeMenu() {
+    this.itemSelected.emit();
+  }
 }

@@ -1,6 +1,6 @@
 <mat-nav-list>
   <mat-list-item style="font-size: x-large;font-weight: bolder;font-style: italic;">
-    <a matLine [routerLink]="['/', 'new-project']"> הוסף פרויקט חדש</a>
+    <a (click)="closeMenu()" matLine [routerLink]="['/', 'new-project']"> הוסף פרויקט חדש</a>
   </mat-list-item>
 
   <div *ngIf="!detial">
@@ -8,7 +8,7 @@
       <a matLine [routerLink]="['/', 'app-projects']">רשימת הפרויקטים</a>
     </mat-list-item>
     <mat-list-item *ngFor="let project of projects | async">
-      <a matLine [routerLink]="['/', 'app-project', project.id]">{{project.projectDesc.name}}</a>
+      <a (click)="closeMenu()" matLine [routerLink]="['/', 'app-project', project.id]">{{project.projectDesc.name}}</a>
     </mat-list-item>
   </div>
 </mat-nav-list>
@@ -16,7 +16,7 @@
   <app-description *ngFor="let project of projects | async" [selectedProject]="project">
     <mat-nav-list>
       <mat-list-item>
-        <a matLine [routerLink]="['/', 'app-project', project.id]">דף הפרויקט</a>
+        <a (click)="closeMenu()" matLine [routerLink]="['/', 'app-project', project.id]">דף הפרויקט</a>
       </mat-list-item>
     </mat-nav-list>
   </app-description>
