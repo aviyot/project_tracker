@@ -1,26 +1,26 @@
 <app-project-list *ngIf="!selectedProject" [detial]="true"></app-project-list>
 <div *ngIf="selectedProject">
-  <!--   <div class="anchors">
-    <a [routerLink]="['./']" fragment="desc">desc</a>
-    <a [routerLink]="['./']" fragment="tools">tools</a>
-    <a [routerLink]="['./']" fragment="todos">todos</a>
-    <a [routerLink]="['./']" fragment="worktimes" >worktimes</a>
-    <a [routerLink]="['./']" fragment="features">features</a>
-    <a [routerLink]="['./']" fragment="questions" >questions</a>
-  </div> -->
+
   <app-description id="desc" [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
   <mat-divider></mat-divider>
   <app-tools id="tools" [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
   <mat-divider></mat-divider>
-  <app-features id="features" [selectedProject]="selectedProject" [docRef]="docRef"></app-features>
-  <mat-divider></mat-divider>
-  <app-todos id="todos" [selectedProject]="selectedProject" [docRef]="docRef"></app-todos>
-  <mat-divider></mat-divider>
-  <app-challenges [selectedProject]="selectedProject" [docRef]="docRef"></app-challenges>
-  <mat-divider></mat-divider>
 
-  <app-work-times id="worktimes" [selectedProject]="selectedProject" [docRef]="docRef"></app-work-times>
-  <mat-divider></mat-divider>
+  <mat-tab-group>
+    <mat-tab label="פיצרים">
+      <app-features id="features" [selectedProject]="selectedProject" [docRef]="docRef"></app-features>
+    </mat-tab>
+    <mat-tab label="משימות">
+      <app-todos id="todos" [selectedProject]="selectedProject" [docRef]="docRef"></app-todos>
+    </mat-tab>
+    <mat-tab label="קשיים">
+      <app-challenges [selectedProject]="selectedProject" [docRef]="docRef"></app-challenges>
+    </mat-tab>
+    <mat-tab label="זמני עבודה">
+      <app-work-times id="worktimes" [selectedProject]="selectedProject" [docRef]="docRef"></app-work-times>
+    </mat-tab>
+  </mat-tab-group>
+
   <!-- 
   <app-questions id="questions" [selectedProject]="selectedProject" [docRef]="docRef"></app-questions>
   <mat-divider></mat-divider> 
