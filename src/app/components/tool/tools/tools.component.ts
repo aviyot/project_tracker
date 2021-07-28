@@ -14,6 +14,7 @@ import { Tool } from 'src/models/tool.model';
 export class ToolsComponent implements OnInit {
   @Input() selectedProject: Project;
   @Input() docRef;
+  @Input() editable = true;
   toolState: FormState;
   showDetial = false;
   selectedIndex = null;
