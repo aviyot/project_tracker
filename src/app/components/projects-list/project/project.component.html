@@ -1,12 +1,9 @@
 <app-project-list *ngIf="!selectedProject" [detial]="true"></app-project-list>
 <div *ngIf="selectedProject">
-
-  <app-description id="desc" [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
-  <mat-divider></mat-divider>
-
-  <mat-divider></mat-divider>
-
-  <mat-tab-group>
+  <mat-tab-group dynamicHeight animationDuration="0ms">
+    <mat-tab label="תיאור">
+      <app-description id="desc" [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
+    </mat-tab>
     <mat-tab label="פיצרים">
       <app-features id="features" [selectedProject]="selectedProject" [docRef]="docRef"></app-features>
     </mat-tab>
@@ -20,11 +17,6 @@
       <app-work-times id="worktimes" [selectedProject]="selectedProject" [docRef]="docRef"></app-work-times>
     </mat-tab>
   </mat-tab-group>
-
-  <!-- 
-  <app-questions id="questions" [selectedProject]="selectedProject" [docRef]="docRef"></app-questions>
-  <mat-divider></mat-divider> 
--->
   <mat-action-list>
     <button mat-stroked-button color="warn" (click)="deleteProject()">Delete Project</button>
     <button mat-stroked-button color="primary" (click)="editProject()">Edit Project</button>
