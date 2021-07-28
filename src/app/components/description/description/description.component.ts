@@ -16,6 +16,7 @@ import { FormState } from 'src/models/ui/form-state';
 export class DescriptionComponent implements OnInit, OnChanges {
   @Input() selectedProject: Project;
   @Input() docRef;
+  @Input() editable = true;
   projectDescState: FormState;
   showFullPath = false;
   constructor() {}

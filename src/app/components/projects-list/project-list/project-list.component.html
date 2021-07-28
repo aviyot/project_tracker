@@ -13,6 +13,5 @@
   </div>
 </mat-nav-list>
 <div class="project-list" *ngIf="detial">
-  <app-description *ngFor="let project of projects | async" [selectedProject]="project">
-  </app-description>
+  <app-project-summary *ngFor="let project of projects | async" [selectedProject]="project"></app-project-summary>
 </div>

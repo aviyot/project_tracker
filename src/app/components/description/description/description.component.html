@@ -18,11 +18,9 @@
       {{selectedProject.projectDesc.desc}}
     </p>
 
-    <app-tools id="tools" [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
+    <app-tools [editable]="editable" id="tools" [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
   </mat-card-content>
   <mat-card-actions>
-    <button *ngIf="docRef" mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
-    <ng-content></ng-content>
     <mat-nav-list>
       <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item
         [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
@@ -33,11 +31,12 @@
         <span *ngIf="site.main">אתר ראשי</span>
         <span *ngIf="!site.main">אתר נוסף</span>
       </a>
-      <mat-list-item>
+      <mat-list-item *ngIf="!editable">
         <a matLine [routerLink]="['/', 'app-project', selectedProject.id]">דף הפרויקט</a>
       </mat-list-item>
     </mat-nav-list>
     <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
     </app-project-desc-form>
+    <button *ngIf="docRef" mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
   </mat-card-actions>
 </mat-card>

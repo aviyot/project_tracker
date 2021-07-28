@@ -1,6 +1,7 @@
 <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
 <span *ngFor="let tool of selectedProject.tools;let toolIndex = index">
-  <span (click)="toogleDetail(toolIndex)" style="margin: 0.2rem;">{{tool.name}}-{{tool.ver}}</span>
+  <span *ngIf="!editable" style="margin: 0.2rem;">{{tool.name}}-{{tool.ver}}</span>
+  <span *ngIf="editable" (click)="toogleDetail(toolIndex)" style="margin: 0.2rem;">{{tool.name}}-{{tool.ver}}</span>
   <span *ngIf="showDetial && (toolIndex == selectedIndex)">
     <div>
       <h2>{{tool.name}}-{{tool.ver}}</h2>
@@ -21,7 +22,7 @@
         <a matLine [href]="tool.npmLink" target="_blank">npm</a>
       </mat-list-item>
     </mat-nav-list>
-    <div>
+    <div *ngIf="editable">
       <button mat-stroked-button color="accent" (click)="editTool(toolIndex)">ערוך</button>
       <button mat-stroked-button color="warn" (click)="deleteTool(tool)">מחק</button>
     </div>
@@ -30,4 +31,4 @@
   <app-tool-form *ngIf="toolState.edit && (toolIndex === toolState.selectedIndex)" [tool]="tool" [docRef]="docRef">
   </app-tool-form>
 </span>
-<button mat-stroked-button color="primary" (click)="addTool()"> הוסף כלי</button>
+<button *ngIf="editable" mat-stroked-button color="primary" (click)="addTool()"> הוסף כלי</button>
