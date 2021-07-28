@@ -1,10 +1,11 @@
 <app-tool-form *ngIf="toolState.add" [docRef]="docRef"></app-tool-form>
 <span *ngFor="let tool of selectedProject.tools;let toolIndex = index">
-  <span *ngIf="!editable" style="margin: 0.2rem;">
+  <span *ngIf="!editable" style="margin: 0.2rem;padding: 0.2rem; border:1px gray solid">
     <span>{{tool.name}}</span>
-    <span *ngIf="tool.ver">-{{tool.ver}}</span>
   </span>
-  <span *ngIf="editable" (click)="toogleDetail(toolIndex)" style="margin: 0.2rem;">{{tool.name}}-{{tool.ver}}</span>
+  <span *ngIf="editable" (click)="toogleDetail(toolIndex)" style="margin: 0.2rem;padding:0.2rem; border:1px gray solid">
+    {{tool.name}}-{{tool.ver}}
+  </span>
   <span *ngIf="showDetial && (toolIndex == selectedIndex)">
     <div>
       <h2>
