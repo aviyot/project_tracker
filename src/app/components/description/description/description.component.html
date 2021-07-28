@@ -18,7 +18,8 @@
       {{selectedProject.projectDesc.desc}}
     </p>
 
-    <app-tools [editable]="editable" id="tools" [selectedProject]="selectedProject" [docRef]="docRef"></app-tools>
+    <app-tools [editable]="projectDescState.edit" id="tools" [selectedProject]="selectedProject" [docRef]="docRef">
+    </app-tools>
   </mat-card-content>
   <mat-card-actions>
     <mat-nav-list>
