@@ -7,8 +7,9 @@
     <mat-card-subtitle>
       <p>{{selectedProject.projectDesc.startTime | format }}</p>
       <p>{{selectedProject.projectDesc.endTime | format }}</p>
-      <p (click)="onShowFullPath(true)" *ngIf="!showFullPath">{{selectedProject.projectDesc.filePath | sub:'\\' }}
-      </p>
+      <div *ngIf="editable">
+        <p (click)="onShowFullPath(true)" *ngIf="!showFullPath">{{selectedProject.projectDesc.filePath | sub:'\\' }}</p>
+      </div>
       <p (click)="onShowFullPath(false)" *ngIf="showFullPath">{{selectedProject.projectDesc.filePath}}
       </p>
     </mat-card-subtitle>
