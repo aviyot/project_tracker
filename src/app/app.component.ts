@@ -14,25 +14,23 @@ import { MatDrawer } from '@angular/material/sidenav';
 export class AppComponent implements OnInit {
   appName = 'מנהל הפרויקטים';
   isUserSignIn = false;
-  user:any="";
+  user: any = '';
   itemSelected = false;
   collectionName: string = 'projects';
   projects: Observable<Project[]> = new Observable<Project[]>();
-  selectedProject?:Project;
+  selectedProject?: Project;
   isSideOpen = false;
   isReg = false;
-  @ViewChild('sideNav') sideNav:MatDrawer;
+  @ViewChild('sideNav') sideNav: MatDrawer;
   constructor(
     private firestore: AngularFirestore,
     private auth: AngularFireAuth,
     private router: Router
-  ) {
-
-  }
+  ) {}
   ngOnInit() {
-    this.projects.subscribe((p)=>{
+    this.projects.subscribe((p) => {
       console.log(p);
-    })
+    });
     this.auth.user.subscribe((user) => {
       if (user) {
         this.router.navigate(['/']);
@@ -44,8 +42,7 @@ export class AppComponent implements OnInit {
       }
     });
   }
-  onItemSelected(){
+  onItemSelected() {
     this.sideNav.close();
-    }
- 
+  }
 }
