@@ -17,19 +17,19 @@ export class ChallengesService {
         title: {
           value: [],
           type: 'text',
-          label: 'כותרת',
+          label: 'שם קושי',
           order: 1,
         },
         challenge: {
           value: [],
           type: 'textarea',
-          label: 'קושי',
+          label: 'תיאור הקושי',
           order: 1,
         },
         solution: {
           value: [],
           type: 'textarea',
-          label: 'פתרון',
+          label: 'פתרונות',
           order: 1,
         },
       },

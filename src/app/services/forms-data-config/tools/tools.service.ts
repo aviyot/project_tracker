@@ -26,7 +26,7 @@ export class ToolsService {
         name: {
           value: [],
           type: 'text',
-          label: 'שם',
+          label: 'שם כלי',
           order: 1,
         },
         desc: {

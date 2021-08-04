@@ -17,7 +17,7 @@ export class TodoService {
         title: {
           value: [],
           type: 'text',
-          label: 'כותרת',
+          label: 'שם משימה',
           order: 1,
         },
         detail: {

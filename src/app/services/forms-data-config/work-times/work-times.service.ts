@@ -20,7 +20,7 @@ export class WorkTimesService {
         task: {
           value: [],
           type: 'textarea',
-          label: 'קושי',
+          label: 'משימה',
           order: 2,
         },
         startTime: {

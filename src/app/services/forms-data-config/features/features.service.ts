@@ -24,7 +24,7 @@ export class FeaturesService {
         name: {
           value: [],
           type: 'text',
-          label: 'כותרת',
+          label: 'שם פיצר',
           order: 1,
         },
         desc: {
