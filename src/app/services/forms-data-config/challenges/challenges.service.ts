@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Challenge } from 'src/models/challenge.model';
 import { FormConfig } from 'src/models/form-config.model';
 
 @Injectable({
@@ -6,6 +7,7 @@ import { FormConfig } from 'src/models/form-config.model';
 })
 export class ChallengesService {
   formConfig: FormConfig;
+
   constructor() {
     this.formConfig = {
       controlName: {
@@ -34,5 +36,13 @@ export class ChallengesService {
         },
       },
     };
+  }
+
+  formControlConfig() {
+    let controlFieldKeys = Object.keys(this.formConfig.controlFields);
+    let formDesc = {};
+    controlFieldKeys.forEach((key) => {
+      formDesc[key] = this.formConfig.controlFields[key].value;
+    });
   }
 }

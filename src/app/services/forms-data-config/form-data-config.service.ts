@@ -19,7 +19,7 @@ export class FormDataConfigService {
     private toolsService: ToolsService
   ) {}
 
-  getFormConfig(formName) {
+  getFormConfig(formName: string) {
     switch (formName) {
       case 'howTodos':
         return this.howTodoService.formConfig;
@@ -33,6 +33,26 @@ export class FormDataConfigService {
         return this.workTimesService.formConfig;
       case 'tools':
         return this.toolsService.formConfig;
+      default:
+        return null;
+    }
+  }
+
+  formControlConfig(formName) {
+    switch (formName) {
+      /*  case 'howTodos':
+        return this.howTodoService.formControlConfig();
+      case 'todos':
+        return this.todoService.formControlConfig();
+        */
+      case 'challenges':
+        return this.challengesService.formControlConfig();
+      /*   case 'features':
+        return this.featuresService.formControlConfig();
+      case 'workTimes':
+        return this.workTimesService.formControlConfig();
+      case 'tools':
+        return this.toolsService.formControlConfig(); */
       default:
         return null;
     }
