@@ -15,10 +15,15 @@ export class ShowDataComponent implements OnInit {
   @Input() fieldName: string;
   @Input() selectedProject;
   formState: FormState;
+  fieldSize: number;
 
   constructor(private formDataConfigService: FormDataConfigService) {}
 
   ngOnInit() {
+    if (this.selectedProject[this.fieldName])
+      this.fieldSize = this.selectedProject[this.fieldName].length;
+    else this.fieldSize = undefined;
+
     this.controlFields = this.formDataConfigService.getFormConfig(
       this.fieldName
     );
