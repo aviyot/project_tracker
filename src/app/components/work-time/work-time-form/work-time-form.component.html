@@ -1,4 +1,4 @@
-<form [formGroup]="workTime">
+<form [formGroup]="formGroup">
     <mat-form-field appearance="outline">
         <mat-label>זמן התחלה</mat-label>
         <input type="datetime-local" matInput formControlName="startTime">
@@ -11,7 +11,4 @@
         <mat-label>מה עשיתי</mat-label>
         <textarea matInput placeholder="" formControlName="task"></textarea>
     </mat-form-field>
-    <button *ngIf="!workTimeData" mat-stroked-button color="primary" (click)="addWorkTime()">הוסף</button>
-    <button  *ngIf="workTimeData" mat-stroked-button color="warn" (click)="saveWorkTime()">שמור</button>
-    
 </form>

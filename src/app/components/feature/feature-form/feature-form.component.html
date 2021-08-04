@@ -1,4 +1,4 @@
-<form [formGroup]="feature">
+<form [formGroup]="formGroup">
     <mat-form-field appearance="outline">
         <mat-label>שם</mat-label>
         <input matInput type="text" formControlName="name">
@@ -19,6 +19,4 @@
         <mat-label>התקדמות</mat-label>
         <input matInput type="text" formControlName="progress">
     </mat-form-field>
-    <button *ngIf="!featureData" mat-stroked-button color="primary" (click)="addFeature()">הוסף</button>
-    <button *ngIf="featureData" mat-stroked-button color="warn" (click)="saveFeature()">שמור</button>
 </form>

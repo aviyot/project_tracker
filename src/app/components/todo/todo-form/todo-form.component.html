@@ -1,4 +1,4 @@
-<form [formGroup]="todo">
+<form [formGroup]="formGroup">
     <mat-form-field appearance="outline" appearance="outline">
         <mat-label>כותרת</mat-label>
         <input type="text" matInput formControlName="title" />
@@ -9,24 +9,24 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>תאריך יצירה</mat-label>
-        <input matInput [matDatepicker]="datepickerCreate" formControlName="date">
+        <input matInput [matDatepicker]="datepickerCreate" formControlName="startTime">
         <mat-datepicker-toggle matSuffix [for]="datepickerCreate"></mat-datepicker-toggle>
         <mat-datepicker #datepickerCreate></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>תאריך השלמה</mat-label>
-        <input matInput [matDatepicker]="datepickerComplete" formControlName="completeDate">
+        <input matInput [matDatepicker]="datepickerComplete" formControlName="endTime">
         <mat-datepicker-toggle matSuffix [for]="datepickerComplete"></mat-datepicker-toggle>
         <mat-datepicker #datepickerComplete></mat-datepicker>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <!--   <mat-form-field appearance="outline">
         <mat-label>סטטוס</mat-label>
         <mat-select formControlName="status">
             <mat-option *ngFor="let selectedStatus  of status" [value]="selectedStatus">
                 {{selectedStatus}}
             </mat-option>
         </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field appearance="outline" appearance="outline">
         <mat-label>תיאור ביצוע</mat-label>
         <textarea matInput placeholder="" formControlName="makingDesc"></textarea>
@@ -35,8 +35,4 @@
         <mat-label>גיט קומיט</mat-label>
         <textarea matInput placeholder="הכנס גיט קומיט" formControlName="gitCommit"></textarea>
     </mat-form-field>
-    <div>
-        <button *ngIf="!todoData" mat-stroked-button color="primary" (click)="addTodo()">הוסף משימה</button>
-        <button *ngIf="todoData" mat-stroked-button color="warn" (click)="saveTodo()">עדכן משימה</button>
-    </div>
 </form>

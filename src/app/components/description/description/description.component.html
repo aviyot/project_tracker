@@ -19,7 +19,7 @@
       {{selectedProject.projectDesc.desc}}
     </p>
 
-    <app-tools [editable]="projectDescState.edit" id="tools" [selectedProject]="selectedProject" [docRef]="docRef">
+    <app-tools [editable]="projectDescState.edit" id="tools">
     </app-tools>
   </mat-card-content>
   <mat-card-actions>
@@ -37,8 +37,13 @@
         <a matLine [routerLink]="['/', 'app-project', selectedProject.id]">דף הפרויקט</a>
       </mat-list-item>
     </mat-nav-list>
-    <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
-    </app-project-desc-form>
-    <button *ngIf="docRef" mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
   </mat-card-actions>
+
+  <mat-action-list>
+    <button *ngIf="docRef" mat-stroked-button color="accent" (click)="editProjectDesc()">ערוך</button>
+    <button *ngIf="docRef" mat-stroked-button color="warn" (click)="deleteProject()">מחק פרויקט</button>
+  </mat-action-list>
+  <app-project-desc-form *ngIf="projectDescState.edit" [project]="selectedProject" [docRef]="docRef">
+  </app-project-desc-form>
+
 </mat-card>

@@ -67,6 +67,8 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       main: [false],
       udatedAutoGithub: [false],
     });
+
+    //update project description
     if (this.projectData) {
       let startTime: any = this.projectData.projectDesc.startTime;
       let endTime: any = this.projectData.projectDesc.endTime;

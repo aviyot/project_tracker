@@ -1,0 +1,28 @@
+<form [formGroup]="formGroup">
+  <span *ngFor="let key of controlFieldKeys;let keyIndex = index">
+    <mat-form-field *ngIf="controlFields.controlFields[key].type == 'text'" appearance="outline">
+      <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
+      <input matInput [formControlName]="key">
+    </mat-form-field>
+    <mat-form-field *ngIf="controlFields.controlFields[key].type == 'date'" appearance="outline">
+      <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
+      <input matInput [matDatepicker]="keyIndex" [formControlName]="key">
+      <mat-datepicker-toggle matSuffix [for]="keyIndex"></mat-datepicker-toggle>
+      <mat-datepicker #keyIndex></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="controlFields.controlFields[key].type == 'textarea'" appearance="outline">
+      <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
+      <textarea matInput [formControlName]="key"></textarea>
+    </mat-form-field>
+    <mat-form-field *ngIf="controlFields.controlFields[key].type == 'select'" appearance="outline">
+      <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
+      <mat-select [formControlName]="key">
+        <mat-option *ngFor="let option of controlFields.controlFields[key].option" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox *ngIf="controlFields.controlFields[key].type == 'checkbox'" [formControlName]="key">
+      {{controlFields.controlFields[key].label}}</mat-checkbox>
+  </span>
+</form>

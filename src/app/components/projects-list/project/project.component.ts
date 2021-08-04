@@ -81,23 +81,4 @@ export class ProjectComponent implements OnInit, AfterViewInit {
       //document.querySelector('#' + this.fragment).scrollIntoView();
     } catch (e) {}
   }
-
-  deleteProject() {
-    if (confirm('delete?')) {
-      this.docRef.delete().then(() => {
-        this.router.navigate(['/', 'app-projects']);
-      });
-    }
-  }
-
-  editProject() {
-    if (confirm(' EDIT ? ')) {
-      this.router.navigate([
-        '/',
-        'new-project',
-        'edit',
-        this.selectedProject.id,
-      ]);
-    }
-  }
 }

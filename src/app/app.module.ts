@@ -33,6 +33,10 @@ import { ChallengeFormComponent } from './components/challenge/challenge-form/ch
 import { ChallengesComponent } from './components/challenge/challenges/challenges.component';
 import { SubPipe } from './pipes/sub.pipe';
 import { ProjectSummaryComponent } from './components/project-summary/project-summary.component';
+import { FormDataComponent } from './components/common-components/form-data/form-data.component';
+import { ShowDataComponent } from './components/common-components/show-data/show-data.component';
+import { GeneralFormComponent } from './components/common-components/general-form/general-form.component';
+import { FormDataViewComponent } from './components/common-components/form-data-view/form-data-view.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import { ProjectSummaryComponent } from './components/project-summary/project-su
     ChallengesComponent,
     SubPipe,
     ProjectSummaryComponent,
+    FormDataComponent,
+    ShowDataComponent,
+    GeneralFormComponent,
+    FormDataViewComponent,
   ],
   imports: [
     BrowserModule,

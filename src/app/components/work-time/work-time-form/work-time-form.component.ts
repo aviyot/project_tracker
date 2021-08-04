@@ -1,50 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { WorkTime } from 'src/models/work-time.model';
-import firebase from "firebase/app";
-import "firebase/firestore";
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-work-time-form',
   templateUrl: './work-time-form.component.html',
-  styleUrls: ['./work-time-form.component.css']
+  styleUrls: ['./work-time-form.component.css'],
 })
 export class WorkTimeFormComponent implements OnInit {
-@Input('workTime') workTimeData :WorkTime | null;
-@Input('docRef') docRef:AngularFirestoreDocument<firebase.firestore.DocumentData>;
-
-workTime:FormGroup;
-  constructor( private fb:FormBuilder) {
-
-   }
-
+  @Input() dataIn: any;
+  formGroup: FormGroup;
+  @Input() formDesc: any;
+  @Output() dataOut = new EventEmitter();
+  constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
-    this.workTime = this.fb.group({
-      startTime:[''],
-      endTime:[''],
-      task:['',Validators.required]
-    })
+    this.formGroup = this.fb.group(this.formDesc);
+    this.formGroup.valueChanges.subscribe((value) => {
+      this.dataOut.emit(value);
+    });
 
-    if(this.workTimeData){
-      this.workTime.setValue(this.workTimeData);
+    if (this.dataIn) {
+      this.formGroup.patchValue(this.dataIn);
     }
   }
-
-  addWorkTime(){
-    this.docRef.update({
-      workTimes:firebase.firestore.FieldValue.arrayUnion(this.workTime.value)
-    })
-
-  }
-
-  saveWorkTime(){
-    this.docRef.update({
-      workTimes:firebase.firestore.FieldValue.arrayRemove(this.workTimeData)
-    }).then(()=>{
-         this.addWorkTime();
-    })
-
-  }
-
 }

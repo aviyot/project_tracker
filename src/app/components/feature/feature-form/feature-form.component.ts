@@ -1,53 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import { Feature } from 'src/models/feature.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-feature-form',
   templateUrl: './feature-form.component.html',
-  styleUrls: ['./feature-form.component.css']
+  styleUrls: ['./feature-form.component.css'],
 })
 export class FeatureFormComponent implements OnInit {
-
-  @Input('feature') featureData: Feature | null;
-  @Input('docRef')
-  docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
-  feature: FormGroup;
-
+  @Input() dataIn: any;
+  formGroup: FormGroup;
+  @Input() formDesc: any;
+  @Output() dataOut = new EventEmitter();
   constructor(private fb: FormBuilder) {}
-
   ngOnInit(): void {
-    this.feature = this.fb.group({
-      name: ['',Validators.required],
-      desc: [''],
-      startDate: [''],
-      endDate: [''],
-      progress: [''],
+    this.formGroup = this.fb.group(this.formDesc);
+    this.formGroup.valueChanges.subscribe((value) => {
+      this.dataOut.emit(value);
     });
-
-    if(this.featureData) {
-      this.feature.setValue(this.featureData);
+    if (this.dataIn) {
+      this.formGroup.patchValue(this.dataIn);
     }
-  }
-
-  addFeature(){
-    this.docRef.update({
-      features:firebase.firestore.FieldValue.arrayUnion(this.feature.value)
-    })
-
-  }
-
-  saveFeature(){
-
-    this.docRef.update({
-      features:firebase.firestore.FieldValue.arrayRemove(this.featureData)
-    }).then(()=>{
-         this.addFeature();
-    })
-
-
   }
 }

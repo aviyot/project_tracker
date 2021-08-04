@@ -5,6 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Project } from 'src/models/project.model';
 import { FormState } from 'src/models/ui/form-state';
 
@@ -19,7 +20,7 @@ export class DescriptionComponent implements OnInit, OnChanges {
   @Input() editable = true;
   projectDescState: FormState;
   showFullPath = false;
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.projectDescState = { add: false, edit: false, selectedIndex: null };
@@ -40,5 +41,13 @@ export class DescriptionComponent implements OnInit, OnChanges {
 
   editProjectDesc() {
     this.projectDescState.edit = !this.projectDescState.edit;
+  }
+
+  deleteProject() {
+    if (confirm('delete?')) {
+      this.docRef.delete().then(() => {
+        this.router.navigate(['/', 'app-projects']);
+      });
+    }
   }
 }

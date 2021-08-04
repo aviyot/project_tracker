@@ -1,26 +1,11 @@
 <mat-card>
-  <mat-card-title>
-    <h2 id="features">פיצרים <button mat-stroked-button color="primary" (click)="addFeature()"> הוסף</button></h2>
-  </mat-card-title>
-  <app-feature-form *ngIf="featureState.add" [docRef]="docRef"></app-feature-form>
-  <mat-divider></mat-divider>
-  <div *ngFor="let feature of selectedProject.features;let featureIndex = index">
-    <mat-card-subtitle>
-      <span>{{feature.name}}</span>
-      <span>{{feature.startDate}}</span>
-      <span>{{feature.endDate}}</span>
-      <span>{{feature.progress}}</span>
-    </mat-card-subtitle>
-    <mat-card-content>
-      <span>{{feature.desc}}</span>
-    </mat-card-content>
-    <app-feature-form *ngIf="featureState.edit && (featureIndex === featureState.selectedIndex)" [feature]="feature"
-      [docRef]="docRef"></app-feature-form>
-    <mat-card-actions>
-      <button mat-stroked-button color="accent" (click)="editFeature(featureIndex)">ערוך</button>
-      <button mat-stroked-button color="warn" (click)="deleteFeature(feature)">מחק</button>
-    </mat-card-actions>
-    <mat-divider></mat-divider>
-  </div>
-
+  <mat-card-subtitle>
+    <span>{{feature.name}}</span>
+    <span>{{feature.startDate}}</span>
+    <span>{{feature.endDate}}</span>
+    <span>{{feature.progress}}</span>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <span>{{feature.desc}}</span>
+  </mat-card-content>
 </mat-card>

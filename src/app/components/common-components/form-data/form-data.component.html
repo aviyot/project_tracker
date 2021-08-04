@@ -1,0 +1,20 @@
+<div [ngSwitch]="fieldName">
+  <!--   <app-todo-form *ngSwitchCase="'todos'" [formDesc]="formDesc" [dataIn]="inputFormData"
+    (dataOut)="formValueChange($event)">
+  </app-todo-form>
+  <app-tool-form *ngSwitchCase="'tools'" [formDesc]="formDesc" [dataIn]="inputFormData"
+    (dataOut)="formValueChange($event)">
+  </app-tool-form>
+  <app-challenge-form *ngSwitchCase="'challenges'" [formDesc]="formDesc" [dataIn]="inputFormData"
+    (dataOut)="formValueChange($event)">
+  </app-challenge-form>
+  <app-work-time-form *ngSwitchCase="'workTimes'" [formDesc]="formDesc" [dataIn]="inputFormData"
+    (dataOut)="formValueChange($event)"></app-work-time-form>
+  <app-feature-form *ngSwitchCase="'features'" [formDesc]="formDesc" [dataIn]="inputFormData"
+    (dataOut)="formValueChange($event)"></app-feature-form> -->
+  <app-general-form *ngSwitchDefault [formDesc]="formDesc" [dataIn]="inputFormData" [controlFields]="controlFields"
+    (dataOut)="formValueChange($event)"></app-general-form>
+</div>
+<button *ngIf="!inputFormData" mat-stroked-button color="primary" (click)="addData()">הוסף</button>
+<button *ngIf="inputFormData" mat-stroked-button color="warn" (click)="removeData()">מחק</button>
+<button *ngIf="inputFormData" mat-stroked-button color="warn" (click)="updateData()">שמור</button>

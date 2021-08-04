@@ -1,0 +1,8 @@
+<div *ngFor="let key of controlFieldKeys;let keyIndex = index">
+  <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
+    <div style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</div>
+    <div style="font-size: large;">
+      {{ fieldData[key] }}
+    </div>
+  </div>
+</div>

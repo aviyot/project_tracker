@@ -1,0 +1,37 @@
+<mat-card>
+  <mat-card-title>
+    <span>{{controlFields.controlName.title}}</span>
+    <button mat-stroked-button color="primary" (click)="addData()"> הוסף</button>
+  </mat-card-title>
+
+  <app-form-data *ngIf="formState.add" [controlFields]="controlFields" [docRef]="docRef"
+    (formAction)="onFormAction($event)"></app-form-data>
+  <div class="pages">
+    <mat-card *ngFor="let data of selectedProject[fieldName] ; let dataIndex = index">
+      <div [ngSwitch]="fieldName">
+        <!-- <app-work-times *ngSwitchCase="'workTimes'" [workTime]="data"></app-work-times>
+      <app-features *ngSwitchCase="'features'" [feature]="data"></app-features>
+      <app-todos *ngSwitchCase="'todos'" [todo]="data"></app-todos>
+      <app-tools *ngSwitchCase="'tools'" [tool]="data"></app-tools>
+      <app-challenges *ngSwitchCase="'challenges'" [challenge]="data"></app-challenges> -->
+        <app-form-data-view *ngSwitchDefault [fieldData]="data" [controlFields]="controlFields">
+        </app-form-data-view>
+      </div>
+
+      <mat-card-actions>
+        <button mat-stroked-button color="accent" (click)="editData(dataIndex)">ערוך</button>
+        <button mat-stroked-button color="warn" (click)="deleteData(data.id)">מחק</button>
+      </mat-card-actions>
+
+      <app-form-data *ngIf="formState.edit && (dataIndex === formState.selectedIndex)" [controlFields]="controlFields"
+        [docRef]="docRef" (formAction)="onFormAction($event)" [data]="data"></app-form-data>
+    </mat-card>
+
+  </div>
+
+  <mat-card-actions>
+    <button mat-stroked-button color="warn" (click)="deleteAllData(fieldName)">מחק הכל</button>
+  </mat-card-actions>
+
+
+</mat-card>

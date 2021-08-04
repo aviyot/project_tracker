@@ -1,24 +1,29 @@
 <app-project-list *ngIf="!selectedProject" [detial]="true"></app-project-list>
+
 <div *ngIf="selectedProject">
+  <h1 style=" margin: 2rem;">{{ selectedProject.projectDesc.name}}</h1>
   <mat-tab-group dynamicHeight animationDuration="0ms">
     <mat-tab label="תיאור">
-      <app-description id="desc" [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
+      <app-description [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
+    </mat-tab>
+    <mat-tab label="כלים">
+      <app-show-data [docRef]="docRef" [selectedProject]="selectedProject" fieldName="tools"></app-show-data>
     </mat-tab>
     <mat-tab label="פיצרים">
-      <app-features id="features" [selectedProject]="selectedProject" [docRef]="docRef"></app-features>
+      <app-show-data [docRef]="docRef" [selectedProject]="selectedProject" fieldName="features"></app-show-data>
     </mat-tab>
     <mat-tab label="משימות">
-      <app-todos id="todos" [selectedProject]="selectedProject" [docRef]="docRef"></app-todos>
+      <app-show-data [docRef]="docRef" [selectedProject]="selectedProject" fieldName="todos"></app-show-data>
     </mat-tab>
     <mat-tab label="קשיים">
-      <app-challenges [selectedProject]="selectedProject" [docRef]="docRef"></app-challenges>
+      <app-show-data [docRef]="docRef" [selectedProject]="selectedProject" fieldName="challenges"></app-show-data>
+    </mat-tab>
+    <mat-tab label="איך לעשות">
+      <app-show-data [docRef]="docRef" [selectedProject]="selectedProject" fieldName="howTodos"></app-show-data>
     </mat-tab>
     <mat-tab label="זמני עבודה">
-      <app-work-times id="worktimes" [selectedProject]="selectedProject" [docRef]="docRef"></app-work-times>
+      <app-show-data [docRef]="docRef" [selectedProject]="selectedProject" fieldName="workTimes"></app-show-data>
     </mat-tab>
   </mat-tab-group>
-  <mat-action-list>
-    <button mat-stroked-button color="warn" (click)="deleteProject()">Delete Project</button>
-    <button mat-stroked-button color="primary" (click)="editProject()">Edit Project</button>
-  </mat-action-list>
+
 </div>
