@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { NewProjectComponent } from './components/new-project/new-project/new-project.component';
-import { ProjectComponent } from './components/projects-list/project/project.component';
+import { NewProjectComponent } from './components/new-project/new-project.component';
+import { ProjectComponent } from './components/project/project.component';
 
 const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },

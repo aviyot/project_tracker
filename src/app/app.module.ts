@@ -10,10 +10,10 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
 
-import { NewProjectComponent } from './components/new-project/new-project/new-project.component';
+import { NewProjectComponent } from './components/new-project/new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProjectComponent } from './components/projects-list/project/project.component';
-import { ProjectListComponent } from './components/projects-list/project-list/project-list.component';
+import { ProjectComponent } from './components/project/project.component';
+import { ProjectListComponent } from './components/project-list/project-list.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { TodoFormComponent } from './components/todo/todo-form/todo-form.component';
 import { WorkTimeFormComponent } from './components/work-time/work-time-form/work-time-form.component';
