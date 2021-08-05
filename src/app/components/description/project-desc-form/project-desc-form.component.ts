@@ -52,13 +52,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       lifecycleStage: [this.projectStatuses[0]],
       gitHub: [''],
       site: [''],
-      sites: this.fb.array([
-        this.fb.group({
-          url: ['', Validators.required],
-          main: [true],
-          udatedAutoGithub: [true],
-        }),
-      ]),
+      sites: this.fb.array([]),
       filePath: [''],
     });
 
@@ -122,43 +116,47 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
     });
   }
   saveProjectDesc() {
-    this.docRef
-      .update({
-        'projectDesc.name': this.projectDesc.value.name,
-        'projectDesc.desc': this.projectDesc.value.desc,
-        'projectDesc.startTime': this.projectDesc.value.startTime,
-        'projectDesc.endTime': this.projectDesc.value.endTime,
-        'projectDesc.lifecycleStage': this.projectDesc.value.lifecycleStage,
-        'projectDesc.gitHub': this.projectDesc.value.gitHub,
-        'projectDesc.site': this.projectDesc.value.site,
-        'projectDesc.filePath': this.projectDesc.value.filePath,
-      })
-      .then(() => {
-        if (this.projectData.projectDesc.sites.length) {
-          this.projectData.projectDesc.sites.forEach((site) => {
-            this.docRef
-              .update({
-                'projectDesc.sites':
-                  firebase.firestore.FieldValue.arrayRemove(site),
-              })
-              .then(() => {
-                this.projectDesc.value.sites.forEach((site) => {
-                  this.docRef.update({
-                    'projectDesc.sites':
-                      firebase.firestore.FieldValue.arrayUnion(site),
+    if (this.projectDesc.valid) {
+      this.docRef
+        .update({
+          'projectDesc.name': this.projectDesc.value.name,
+          'projectDesc.desc': this.projectDesc.value.desc,
+          'projectDesc.startTime': this.projectDesc.value.startTime,
+          'projectDesc.endTime': this.projectDesc.value.endTime,
+          'projectDesc.lifecycleStage': this.projectDesc.value.lifecycleStage,
+          'projectDesc.gitHub': this.projectDesc.value.gitHub,
+          'projectDesc.site': this.projectDesc.value.site,
+          'projectDesc.filePath': this.projectDesc.value.filePath,
+        })
+        .then(() => {
+          if (this.projectData.projectDesc.sites.length) {
+            this.projectData.projectDesc.sites.forEach((site) => {
+              this.docRef
+                .update({
+                  'projectDesc.sites':
+                    firebase.firestore.FieldValue.arrayRemove(site),
+                })
+                .then(() => {
+                  this.projectDesc.value.sites.forEach((site) => {
+                    this.docRef.update({
+                      'projectDesc.sites':
+                        firebase.firestore.FieldValue.arrayUnion(site),
+                    });
                   });
                 });
-              });
-          });
-        } else {
-          this.projectDesc.value.sites.forEach((site) => {
-            this.docRef.update({
-              'projectDesc.sites':
-                firebase.firestore.FieldValue.arrayUnion(site),
             });
-          });
-        }
-      });
+          } else {
+            this.projectDesc.value.sites.forEach((site) => {
+              this.docRef.update({
+                'projectDesc.sites':
+                  firebase.firestore.FieldValue.arrayUnion(site),
+              });
+            });
+          }
+        });
+    } else {
+      alert('טופס לא תקין');
+    }
   }
 
   getSites(): FormArray {
@@ -166,10 +164,13 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
   }
 
   addSite() {
+    let mainSite: boolean;
+    if (this.getSites().length > 0) mainSite = false;
+    else mainSite = true;
     this.getSites().push(
       this.fb.group({
         url: ['', Validators.required],
-        main: [false],
+        main: [mainSite],
         udatedAutoGithub: [false],
       })
     );
