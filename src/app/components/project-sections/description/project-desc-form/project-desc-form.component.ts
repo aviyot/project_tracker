@@ -105,7 +105,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       this.projectDesc.reset();
     }
   }
-  createNewProject() {
+  /*   createNewProject() {
     this.projectForm = this.fb.group({
       projectDesc: this.projectDesc,
       tools: this.fb.array([]),
@@ -114,7 +114,7 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       questions: this.fb.array([]),
       workTimes: this.fb.array([]),
     });
-  }
+  } */
   saveProjectDesc() {
     if (this.projectDesc.valid) {
       this.docRef
