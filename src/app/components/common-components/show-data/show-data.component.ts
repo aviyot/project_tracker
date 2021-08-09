@@ -3,6 +3,7 @@ import { FormDataConfigService } from 'src/app/services/forms-data-config/form-d
 import { FormState } from 'src/models/ui/form-state';
 import firebase from 'firebase/app';
 import { FormAction } from 'src/types/form-action.type';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-data',
@@ -17,12 +18,19 @@ export class ShowDataComponent implements OnInit {
   formState: FormState;
   fieldSize: number;
 
-  constructor(private formDataConfigService: FormDataConfigService) {}
+  constructor(
+    private formDataConfigService: FormDataConfigService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    if (this.selectedProject[this.fieldName])
-      this.fieldSize = this.selectedProject[this.fieldName].length;
-    else this.fieldSize = undefined;
+    if (this.isArray(this.selectedProject[this.fieldName])) {
+      if (this.selectedProject[this.fieldName])
+        this.fieldSize = this.selectedProject[this.fieldName].length;
+      else this.fieldSize = undefined;
+    } else {
+      this.fieldSize = undefined;
+    }
 
     this.controlFields = this.formDataConfigService.getFormConfig(
       this.fieldName
@@ -30,19 +38,32 @@ export class ShowDataComponent implements OnInit {
     this.formState = { add: false, edit: false, selectedIndex: null };
   }
 
+  isArray(data: any): boolean {
+    return Array.isArray(data);
+  }
   addData() {
     this.formState.add = !this.formState.add;
   }
-  editData(index: number) {
-    if (this.formState.selectedIndex !== index) this.formState.edit = true;
-    else this.formState.edit = !this.formState.edit;
-    this.formState.selectedIndex = index;
+  editData(index?: number) {
+    if (index) {
+      if (this.formState.selectedIndex !== index) this.formState.edit = true;
+      else this.formState.edit = !this.formState.edit;
+      this.formState.selectedIndex = index;
+    } else {
+      this.formState.edit = !this.formState.edit;
+    }
   }
 
   deleteData(data) {
-    this.docRef.update({
-      features: firebase.firestore.FieldValue.arrayRemove(data),
-    });
+    this.docRef
+      .update({
+        [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(
+          data[this.fieldName]
+        ),
+      })
+      .then(() => {
+        this.router.navigate(['./', 'app-projects']);
+      });
   }
 
   onFormAction(action: FormAction) {
