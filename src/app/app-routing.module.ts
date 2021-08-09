@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
+import { ProjectSummaryComponent } from './components/project-summary/project-summary.component';
 import { ProjectComponent } from './components/project/project.component';
 
 const routes: Routes = [
@@ -10,9 +11,9 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'new-project/edit/:project_id', component: NewProjectComponent },
   { path: 'new-project', component: NewProjectComponent },
-  { path: 'app-projects', component: ProjectComponent },
+  { path: 'project-summary-lists', component: ProjectSummaryComponent },
   { path: 'app-project/:project_id', component: ProjectComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'app-projects' },
+  { path: '', pathMatch: 'full', redirectTo: 'project-summary-lists' },
 ];
 
 @NgModule({

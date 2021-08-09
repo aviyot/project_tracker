@@ -8,6 +8,7 @@ import 'firebase/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DataStructureService } from 'src/app/services/firebase/data-structure.service';
 import { Timestamp } from '@firebase/firestore-types';
+import { FormDataConfigService } from 'src/app/services/forms-data-config/form-data-config.service';
 
 @Component({
   selector: 'app-project',
@@ -32,14 +33,15 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     'howtodos',
   ];
   private fragment: string;
-
+  projectSections: string[] = [];
   constructor(
     private firestore: AngularFirestore,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private route: ActivatedRoute,
     private auth: AngularFireAuth,
-    private dataStructureService: DataStructureService
+    private dataStructureService: DataStructureService,
+    private formDataConfigService: FormDataConfigService
   ) {
     // console.log(this.router.getCurrentNavigation().extras.state);
   }
@@ -74,6 +76,8 @@ export class ProjectComponent implements OnInit, AfterViewInit {
       this.fragment = fragment;
       //this.router.navigate(['./','app-project',this.selectedProject.id],{fragment:this.fragment})
     });
+
+    this.projectSections = this.formDataConfigService.getFeildsNames();
   }
 
   ngAfterViewInit(): void {

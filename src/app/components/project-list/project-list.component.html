@@ -3,15 +3,12 @@
     <a (click)="closeMenu()" matLine [routerLink]="['/', 'new-project']"> הוסף פרויקט חדש</a>
   </mat-list-item>
 
-  <div *ngIf="!detial">
+  <div>
     <mat-list-item style="font-size: x-large;font-weight: bolder;font-style: italic">
-      <a matLine [routerLink]="['/', 'app-projects']">רשימת הפרויקטים</a>
+      <a matLine [routerLink]="['/', 'project-summary-lists']">רשימת הפרויקטים</a>
     </mat-list-item>
     <mat-list-item *ngFor="let project of projects | async">
       <a (click)="closeMenu()" matLine [routerLink]="['/', 'app-project', project.id]">{{project.projectDesc.name}}</a>
     </mat-list-item>
   </div>
 </mat-nav-list>
-<div class="project-list" *ngIf="detial">
-  <app-project-summary *ngFor="let project of projects | async" [selectedProject]="project"></app-project-summary>
-</div>

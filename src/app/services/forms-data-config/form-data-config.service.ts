@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormConfig } from 'src/models/form-config.model';
 import { ChallengesService } from './challenges/challenges.service';
 import { FeaturesService } from './features/features.service';
 import { HowTodoService } from './how-todo/how-todo.service';
@@ -131,8 +132,8 @@ export class FormDataConfigService {
     private projectSitesService: ProjectSitesService
   ) {}
 
-  getFormConfig(formName: string) {
-    switch (formName) {
+  getFormConfig(sectionName: string) {
+    switch (sectionName) {
       case 'howTodos':
         return this.howTodoService.formConfig;
       case 'todos':
@@ -154,6 +155,19 @@ export class FormDataConfigService {
     }
   }
 
+  getFeildsNames(): string[] {
+    const feildsNames: string[] = [
+      this.howTodoService.formConfig.controlName.dataFieldName,
+      this.todoService.formConfig.controlName.dataFieldName,
+      this.challengesService.formConfig.controlName.dataFieldName,
+      this.featuresService.formConfig.controlName.dataFieldName,
+      this.workTimesService.formConfig.controlName.dataFieldName,
+      this.toolsService.formConfig.controlName.dataFieldName,
+      this.projectDescService.formConfig.controlName.dataFieldName,
+    ];
+
+    return feildsNames;
+  }
   formControlConfig(formName) {
     switch (formName) {
       /*  case 'howTodos':

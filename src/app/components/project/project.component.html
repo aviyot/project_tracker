@@ -1,5 +1,3 @@
-<app-project-list *ngIf="!selectedProject" [detial]="true"></app-project-list>
-
 <div *ngIf="selectedProject">
   <div style="margin:1rem;margin-bottom: 0.5rem; font-size: x-large;">{{ selectedProject.projectDesc.name}}</div>
   <mat-tab-group dynamicHeight animationDuration="0ms">
