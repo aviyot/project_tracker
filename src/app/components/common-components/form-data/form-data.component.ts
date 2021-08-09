@@ -18,6 +18,7 @@ export class FormDataComponent implements OnInit {
   @Input('docRef')
   docRef: AngularFirestoreDocument<firebase.firestore.DocumentData>;
   @Input('controlFields') controlFields: FormConfig;
+  dataType: 'array' | 'map';
 
   //Output
   @Output() formAction: EventEmitter<FormAction> = new EventEmitter();
@@ -36,29 +37,48 @@ export class FormDataComponent implements OnInit {
     this.controlFieldKeys.forEach((key) => {
       this.formDesc[key] = this.controlFields.controlFields[key].value;
     });
+    this.dataType = this.controlFields.controlName.type;
   }
 
   formValueChange(value) {
     this.formValue = value;
   }
   addData() {
-    this.docRef
-      .update({
-        [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
-          this.formValue
-        ),
-      })
-      .then(() => {
-        this.formAction.emit('ADD');
-      });
+    if (this.dataType == 'array') {
+      this.docRef
+        .update({
+          [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
+            this.formValue
+          ),
+        })
+        .then(() => {
+          this.formAction.emit('ADD');
+        });
+    }
+    if (this.dataType == 'map' || this.fieldName == 'projectDesc') {
+      this.docRef
+        .update({
+          [this.fieldName]: this.formValue,
+        })
+        .then(() => {
+          this.formAction.emit('ADD');
+        });
+    }
   }
 
-  removeData() {
-    return this.docRef.update({
-      [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(
-        this.inputFormData
-      ),
-    });
+  removeData(): any {
+    if (this.dataType == 'array') {
+      return this.docRef.update({
+        [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(
+          this.inputFormData
+        ),
+      });
+    }
+    if (this.dataType == 'map' && this.fieldName !== 'projectDesc') {
+      return this.docRef.update({
+        [this.fieldName]: firebase.firestore.FieldValue.delete(),
+      });
+    }
   }
 
   updateData() {
