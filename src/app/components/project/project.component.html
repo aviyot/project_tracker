@@ -4,7 +4,10 @@
   <div style="margin:1rem;margin-bottom: 0.5rem; font-size: x-large;">{{ selectedProject.projectDesc.name}}</div>
   <mat-tab-group dynamicHeight animationDuration="0ms">
     <mat-tab label="תיאור">
-      <app-description [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
+      <!--       <app-description [selectedProject]="selectedProject" [docRef]="docRef"></app-description>
+ -->
+      <app-show-data [docRef]="docRef" [selectedProject]="selectedProject" fieldName="projectDesc"></app-show-data>
+
     </mat-tab>
     <mat-tab label="כלים">
       <app-show-data [docRef]="docRef" [selectedProject]="selectedProject" fieldName="tools"></app-show-data>
