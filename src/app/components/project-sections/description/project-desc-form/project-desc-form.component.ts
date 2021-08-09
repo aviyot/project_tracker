@@ -62,6 +62,10 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
       udatedAutoGithub: [false],
     });
 
+    this.projectDesc.valueChanges.subscribe((value) => {
+      this.projectForm.patchValue(value);
+      this.newProject.emit(this.projectForm.value);
+    });
     //update project description
     if (this.projectData) {
       let startTime: any = this.projectData.projectDesc.startTime;
@@ -90,12 +94,6 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
         ...this.projectData.projectDesc,
         startTime: startTime,
         endTime: endTime,
-      });
-    } else {
-      this.createNewProject();
-      this.projectDesc.valueChanges.subscribe((value) => {
-        this.projectForm.patchValue(value);
-        this.newProject.emit(this.projectForm.value);
       });
     }
   }
