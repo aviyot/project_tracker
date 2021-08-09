@@ -129,7 +129,10 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
           'projectDesc.filePath': this.projectDesc.value.filePath,
         })
         .then(() => {
-          if (this.projectData.projectDesc.sites.length) {
+          if (
+            this.projectData.projectDesc.sites &&
+            this.projectData.projectDesc.sites.length
+          ) {
             this.projectData.projectDesc.sites.forEach((site) => {
               this.docRef
                 .update({
