@@ -18,6 +18,7 @@ export class FormDataConfigService {
     private challengesService: ChallengesService,
     private featuresService: FeaturesService,
     private workTimesService: WorkTimesService,
+    private toolsService: ToolsService,
     private projectDescService: ProjectDescService,
     private projectSitesService: ProjectSitesService
   ) {}
