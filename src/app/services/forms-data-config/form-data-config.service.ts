@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ChallengesService } from './challenges/challenges.service';
 import { FeaturesService } from './features/features.service';
 import { HowTodoService } from './how-todo/how-todo.service';
+import { ProjectDescService } from './project-desc/project-desc.service';
+import { ProjectSitesService } from './project-sites/project-sites.service';
 import { TodoService } from './todo/todo.service';
 import { ToolsService } from './tools/tools.service';
 import { WorkTimesService } from './work-times/work-times.service';
