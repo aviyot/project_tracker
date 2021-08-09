@@ -37,6 +37,10 @@ export class FormDataConfigService {
         return this.workTimesService.formConfig;
       case 'tools':
         return this.toolsService.formConfig;
+      case 'projectDesc':
+        return this.projectDescService.formConfig;
+      case 'projectDesc.sites':
+        return this.projectSitesService.formConfig;
       default:
         return null;
     }
