@@ -72,13 +72,13 @@ export class ProjectDescFormComponent implements OnInit, OnChanges {
         this.timestampServ.isTimestamp(this.projectData.projectDesc.startTime)
       )
         startTime = this.projectData.projectDesc.startTime.toDate();
-
+      else startTime = null;
       if (
         this.projectData.projectDesc.endTime &&
         this.timestampServ.isTimestamp(this.projectData.projectDesc.endTime)
       )
         endTime = this.projectData.projectDesc.endTime.toDate();
-
+      else endTime = null;
       if (this.projectData.projectDesc.sites) {
         this.projectData.projectDesc.sites.forEach((site) => {
           this.sites.patchValue(site);
