@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProjectData } from 'src/models/project-data.model';
 
@@ -10,6 +11,7 @@ import { ProjectData } from 'src/models/project-data.model';
   styleUrls: ['./new-project.component.css'],
 })
 export class NewProjectComponent implements OnInit {
+  projectName: FormControl = new FormControl('', Validators.required);
   projects: ProjectData[] = [];
   currentProject: ProjectData;
   user: any;
@@ -35,20 +37,27 @@ export class NewProjectComponent implements OnInit {
   }
 
   saveFormData(exit?: boolean) {
-    if (this.user.uid) {
+    if (this.projectName.valid) {
       this.firestore
         .collection('users')
         .doc(this.user.uid)
         .collection('projects')
-        .add(this.currentProject)
+        .add({
+          projectDesc: {
+            name: this.projectName.value,
+          },
+        })
         .then((doc) => {
+          alert('data added');
+          this.projectName.reset();
+
           this.added = true;
           if (exit) {
             this.router.navigate(['./', 'app-project', doc.id]);
           }
         });
     } else {
-      console.log('invaild user data');
+      alert('data no valid');
     }
   }
 
