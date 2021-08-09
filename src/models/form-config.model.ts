@@ -7,7 +7,7 @@ export interface FormConfig {
   controlFields: {
     [key: string]: {
       value: any[];
-      type: 'text' | 'textarea' | 'date' | 'select' | 'checkbox';
+      type: 'text' | 'textarea' | 'date' | 'select' | 'checkbox' | 'href';
       label: string;
       order: number;
       option?: string[];
