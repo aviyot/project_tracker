@@ -1,26 +1,28 @@
-<div *ngFor="let key of controlFieldKeys;let keyIndex = index">
-  <div [ngSwitch]="controlFields.controlFields[key].type">
-    <div *ngSwitchCase="'select'">
-      <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
-        <span style="font-size: large;font-weight: bold; ">{{controlFields.controlFields[key].label}}</span>
-        <span style="font-size: large;margin: 1rem;">
-          {{ fieldData[key] }}
-        </span>
+<div *ngIf="fieldData">
+  <div *ngFor="let key of controlFieldKeys;let keyIndex = index">
+    <div [ngSwitch]="controlFields.controlFields[key].type">
+      <div *ngSwitchCase="'select'">
+        <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
+          <span style="font-size: large;font-weight: bold; ">{{controlFields.controlFields[key].label}}</span>
+          <span style="font-size: large;margin: 1rem;">
+            {{ fieldData[key] }}
+          </span>
+        </div>
       </div>
-    </div>
-    <div *ngSwitchCase="'checkbox'">
-      <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
-        <span style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</span>
-        <span style="font-size: large; margin: 1rem;">
-          {{ fieldData[key] }}
-        </span>
+      <div *ngSwitchCase="'checkbox'">
+        <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
+          <span style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</span>
+          <span style="font-size: large; margin: 1rem;">
+            {{ fieldData[key] }}
+          </span>
+        </div>
       </div>
-    </div>
-    <div *ngSwitchDefault>
-      <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
-        <div style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</div>
-        <div style="font-size: large;">
-          {{ fieldData[key] }}
+      <div *ngSwitchDefault>
+        <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
+          <div style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</div>
+          <div style="font-size: large;">
+            {{ fieldData[key] }}
+          </div>
         </div>
       </div>
     </div>
