@@ -12,7 +12,7 @@ export class WorkTimesService {
   constructor() {
     this.formConfig = {
       controlName: {
-        type: 'FormGroup',
+        type: 'array',
         dataFieldName: 'workTimes',
         title: 'זמני עבודה',
       },

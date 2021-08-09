@@ -18,7 +18,7 @@ export class ToolsService {
   constructor() {
     this.formConfig = {
       controlName: {
-        type: 'FormGroup',
+        type: 'array',
         dataFieldName: 'tools',
         title: 'כלים',
       },

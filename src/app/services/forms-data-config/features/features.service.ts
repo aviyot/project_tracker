@@ -16,7 +16,7 @@ export class FeaturesService {
   constructor() {
     this.formConfig = {
       controlName: {
-        type: 'FormGroup',
+        type: 'array',
         dataFieldName: 'features',
         title: 'פיצרים',
       },

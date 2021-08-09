@@ -9,7 +9,7 @@ export class HowTodoService {
   constructor() {
     this.formConfig = {
       controlName: {
-        type: 'FormGroup',
+        type: 'array',
         dataFieldName: 'howTodos',
         title: 'איך לעשות',
       },

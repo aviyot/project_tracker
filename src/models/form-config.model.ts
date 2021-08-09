@@ -1,6 +1,6 @@
 export interface FormConfig {
   controlName: {
-    type: 'FormGroup' | 'FormArray' | 'FormControl';
+    type: 'map' | 'array';
     dataFieldName: string;
     title: string;
   };

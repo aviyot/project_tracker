@@ -11,7 +11,7 @@ export class ChallengesService {
   constructor() {
     this.formConfig = {
       controlName: {
-        type: 'FormGroup',
+        type: 'array',
         dataFieldName: 'challenges',
         title: 'קשיים',
       },

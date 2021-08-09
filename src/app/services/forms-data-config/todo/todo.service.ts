@@ -9,7 +9,7 @@ export class TodoService {
   constructor() {
     this.formConfig = {
       controlName: {
-        type: 'FormGroup',
+        type: 'array',
         dataFieldName: 'todos',
         title: 'משימות',
       },
