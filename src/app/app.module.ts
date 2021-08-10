@@ -13,7 +13,7 @@ import { AuthModule } from './auth/auth.module';
 import { NewProjectComponent } from './components/new-project/new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectComponent } from './components/project/project.component';
-import { ProjectListComponent } from './components/project-list/project-list.component';
+import { ProjectsNameListComponent } from './components/projects-name-list/projects-name-list.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { TodoFormComponent } from './components/project-sections/todo/todo-form/todo-form.component';
 import { WorkTimeFormComponent } from './components/project-sections/work-time/work-time-form/work-time-form.component';
@@ -43,7 +43,7 @@ import { FormDataViewComponent } from './components/common-components/form-data-
     AppComponent,
     NewProjectComponent,
     ProjectComponent,
-    ProjectListComponent,
+    ProjectsNameListComponent,
     TodoFormComponent,
     WorkTimeFormComponent,
     ProjectDescFormComponent,

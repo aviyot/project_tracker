@@ -1,20 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Project } from 'src/models/project.model';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import { Todo } from 'src/models/todo.model';
-
 @Component({
-  selector: 'app-project-list',
-  templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.css'],
+  selector: 'app-projects-name-list',
+  templateUrl: './projects-name-list.component.html',
+  styleUrls: ['./projects-name-list.component.scss'],
 })
-export class ProjectListComponent implements OnInit {
+export class ProjectsNameListComponent implements OnInit {
   projects: Observable<Project[]> = new Observable<Project[]>();
   @Output() itemSelected = new EventEmitter();
   @Input() detial: boolean;
