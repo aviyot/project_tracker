@@ -5,7 +5,7 @@
 
   <div>
     <mat-list-item style="font-size: x-large;font-weight: bolder;font-style: italic">
-      <a matLine [routerLink]="['/', 'project-summary-lists']">רשימת הפרויקטים</a>
+      <a matLine [routerLink]="['/', 'projects-summary-lists']">רשימת הפרויקטים</a>
     </mat-list-item>
     <mat-list-item *ngFor="let project of projects | async">
       <a (click)="closeMenu()" matLine [routerLink]="['/', 'app-project', project.id]">{{project.projectDesc.name}}</a>

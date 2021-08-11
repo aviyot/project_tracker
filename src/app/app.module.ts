@@ -32,7 +32,7 @@ import { DatePipe } from '@angular/common';
 import { ChallengeFormComponent } from './components/project-sections/challenge/challenge-form/challenge-form.component';
 import { ChallengesComponent } from './components/project-sections/challenge/challenges/challenges.component';
 import { SubPipe } from './pipes/sub.pipe';
-import { ProjectSummaryComponent } from './components/project-summary/project-summary.component';
+import { ProjectsSummaryListComponent } from './components/projects-summary-list/projects-summary-list.component';
 import { FormDataComponent } from './components/common-components/form-data/form-data.component';
 import { ShowDataComponent } from './components/common-components/show-data/show-data.component';
 import { GeneralFormComponent } from './components/common-components/general-form/general-form.component';
@@ -60,7 +60,7 @@ import { FormDataViewComponent } from './components/common-components/form-data-
     ChallengeFormComponent,
     ChallengesComponent,
     SubPipe,
-    ProjectSummaryComponent,
+    ProjectsSummaryListComponent,
     FormDataComponent,
     ShowDataComponent,
     GeneralFormComponent,
