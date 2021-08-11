@@ -4,13 +4,12 @@ import { FormState } from 'src/models/ui/form-state';
 import firebase from 'firebase/app';
 import { FormAction } from 'src/types/form-action.type';
 import { Router } from '@angular/router';
-
 @Component({
-  selector: 'app-show-data',
-  templateUrl: './show-data.component.html',
-  styleUrls: ['./show-data.component.css'],
+  selector: 'app-project-section',
+  templateUrl: './project-section.component.html',
+  styleUrls: ['./project-section.component.css'],
 })
-export class ShowDataComponent implements OnInit {
+export class ProjectSectionComponent implements OnInit {
   @Input() docRef: any;
   controlFields: any;
   @Input() fieldName: string;
