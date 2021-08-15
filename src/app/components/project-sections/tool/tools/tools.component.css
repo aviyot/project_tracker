@@ -1,9 +1,0 @@
-mat-nav-list {
-  display: flex;
-  justify-content: flex-start;
-}
-
-mat-nav-list mat-list-item {
-  width: fit-content;
-  text-transform: capitalize;
-}

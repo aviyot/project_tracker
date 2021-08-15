@@ -1,0 +1,14 @@
+<mat-nav-list>
+  <mat-list-item style="font-size: x-large;font-weight: bolder;font-style: italic;">
+    <a (click)="addNewProject()" matLine> הוסף פרויקט חדש</a>
+  </mat-list-item>
+
+  <div>
+    <mat-list-item style="font-size: x-large;font-weight: bolder;font-style: italic">
+      <a matLine>רשימת הפרויקטים</a>
+    </mat-list-item>
+    <mat-list-item *ngFor="let project of projects ; let selectedIndex = index ">
+      <a (click)="closeMenu(selectedIndex)" matLine>{{project.projectDesc.name}}</a>
+    </mat-list-item>
+  </div>
+</mat-nav-list>

@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { Project } from 'src/models/project.model';
 import { MatDrawer } from '@angular/material/sidenav';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -14,35 +12,39 @@ import { MatDrawer } from '@angular/material/sidenav';
 export class AppComponent implements OnInit {
   appName = 'מנהל הפרויקטים';
   isUserSignIn = false;
-  user: any = '';
+  user: firebase.User = null;
+  userSignIn: 'LOAD' | 'SIGNIN' | 'INABLE_SIGNIN' | 'ERROR' = 'LOAD';
   itemSelected = false;
   collectionName: string = 'projects';
-  projects: Observable<Project[]> = new Observable<Project[]>();
   selectedProject?: Project;
   isSideOpen = false;
   isReg = false;
+  selectedProjectIndex = null;
   @ViewChild('sideNav') sideNav: MatDrawer;
-  constructor(
-    private firestore: AngularFirestore,
-    private auth: AngularFireAuth,
-    private router: Router
-  ) {}
+
+  addNewProject: boolean;
+
+  constructor(private auth: AngularFireAuth) {}
   ngOnInit() {
-    this.projects.subscribe((p) => {
-      console.log(p);
-    });
-    this.auth.user.subscribe((user) => {
-      if (user) {
-        this.router.navigate(['/']);
+    this.auth.user.subscribe(
+      (user) => {
         this.user = user;
-        this.isUserSignIn = true;
-      } else {
-        this.isUserSignIn = false;
-        this.router.navigate(['/', 'sign-in']);
+        if (user) {
+          this.userSignIn = 'SIGNIN';
+        } else {
+          this.userSignIn = 'INABLE_SIGNIN';
+        }
+      },
+      () => {
+        this.userSignIn = 'ERROR';
       }
-    });
+    );
   }
-  onItemSelected() {
+  onItemSelected(itemIndex) {
     this.sideNav.close();
+    if (itemIndex) this.selectedProjectIndex = itemIndex;
+    else {
+      this.addNewProject = true;
+    }
   }
 }

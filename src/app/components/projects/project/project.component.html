@@ -1,0 +1,32 @@
+<div style="margin:1rem;margin-bottom: 0.5rem; font-size: x-large;">{{ selectedProject.projectDesc.name}}</div>
+<mat-tab-group dynamicHeight animationDuration="0ms">
+  <mat-tab label="תיאור">
+    <app-project-section [docRef]="docRef" [selectedProject]="selectedProject" fieldName="projectDesc">
+    </app-project-section>
+
+  </mat-tab>
+  <mat-tab label="כלים">
+    <app-project-section [docRef]="docRef" [selectedProject]="selectedProject" fieldName="tools">
+    </app-project-section>
+  </mat-tab>
+  <mat-tab label="פיצרים">
+    <app-project-section [docRef]="docRef" [selectedProject]="selectedProject" fieldName="features">
+    </app-project-section>
+  </mat-tab>
+  <mat-tab label="משימות">
+    <app-project-section [docRef]="docRef" [selectedProject]="selectedProject" fieldName="todos">
+    </app-project-section>
+  </mat-tab>
+  <mat-tab label="קשיים">
+    <app-project-section [docRef]="docRef" [selectedProject]="selectedProject" fieldName="challenges">
+    </app-project-section>
+  </mat-tab>
+  <mat-tab label="איך לעשות">
+    <app-project-section [docRef]="docRef" [selectedProject]="selectedProject" fieldName="howTodos">
+    </app-project-section>
+  </mat-tab>
+  <mat-tab label="זמני עבודה">
+    <app-project-section [docRef]="docRef" [selectedProject]="selectedProject" fieldName="workTimes">
+    </app-project-section>
+  </mat-tab>
+</mat-tab-group>

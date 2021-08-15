@@ -1,5 +1,5 @@
 <mat-toolbar style="justify-content: space-between;">
-  <button *ngIf="user" mat-button (click)="sideNav.toggle()">
+  <button mat-button (click)="sideNav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{appName}}</span>
@@ -8,10 +8,15 @@
 <div class="main">
   <mat-sidenav-container hasBackdrop="false">
     <mat-sidenav autoFocus="true" mode="over" #sideNav>
-      <app-projects-name-list (itemSelected)="onItemSelected()"></app-projects-name-list>
+      <app-projects-name-list *ngIf="user" (itemSelected)="onItemSelected($event)"></app-projects-name-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+      <div style="text-align: center;font-size: x-large;margin-top: 2rem;" *ngIf="userSignIn === 'LOAD'">LOAD...</div>
+      <div *ngIf="userSignIn === 'ERROR'">ERROR SIGNIN</div>
+      <app-sign-in *ngIf="userSignIn === 'INABLE_SIGNIN'"></app-sign-in>
+      <app-new-project *ngIf="addNewProject"></app-new-project>
+      <app-projects *ngIf="userSignIn === 'SIGNIN'" [selectedProjectIndex]="selectedProjectIndex"></app-projects>
+      <!-- <router-outlet></router-outlet> -->
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

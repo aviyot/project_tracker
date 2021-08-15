@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-title>
+
+    <button *ngIf="controlFields.controlName.type =='array'" mat-stroked-button color="primary" (click)="addData()">
+      <span>{{'הוסף'+ " " + controlFields.controlName.title}}</span>
+    </button>
+  </mat-card-title>
+
+  <app-project-section-form *ngIf="formState.add" [controlFields]="controlFields" [docRef]="docRef"
+    (formAction)="onFormAction($event)" [projectId]="projectId"></app-project-section-form>
+  <div class="pages">
+
+    <div *ngIf="isArray(selectedProject[fieldName])">
+      <mat-card *ngFor="let fieldData of selectedProject[fieldName] ; let dataIndex = index">
+
+
+        <app-section-item [fieldData]="fieldData" [controlFields]="controlFields">
+        </app-section-item>
+
+        <mat-card-actions>
+          <button mat-stroked-button color="accent" (click)="editData(dataIndex)">ערוך</button>
+          <button mat-stroked-button color="warn" (click)="deleteData(fieldData.id)">מחק</button>
+        </mat-card-actions>
+
+        <app-project-section-form *ngIf="formState.edit && (dataIndex === formState.selectedIndex)"
+          [controlFields]="controlFields" [docRef]="docRef" (formAction)="onFormAction($event)" [inputData]="fieldData"
+          [projectId]="projectId">
+        </app-project-section-form>
+      </mat-card>
+    </div>
+    <div *ngIf="!isArray(selectedProject[fieldName])">
+      <mat-card>
+        <app-section-item [fieldData]="selectedProject[fieldName]" [controlFields]="controlFields">
+        </app-section-item>
+        <mat-card-actions>
+          <button mat-stroked-button color="accent" (click)="editData()">ערוך</button>
+          <button mat-stroked-button color="warn" (click)="deleteData(selectedProject)">מחק</button>
+        </mat-card-actions>
+
+        <app-project-section-form *ngIf="formState.edit" [controlFields]="controlFields" [docRef]="docRef"
+          (formAction)="onFormAction($event)" [inputData]="selectedProject[fieldName]" [projectId]="projectId">
+        </app-project-section-form>
+      </mat-card>
+    </div>
+  </div>
+  <mat-card-actions *ngIf="isArray(selectedProject[fieldName]) && fieldSize">
+    <button mat-stroked-button color="warn" (click)="deleteAllData(fieldName)">מחק הכל</button>
+  </mat-card-actions>
+
+
+</mat-card>

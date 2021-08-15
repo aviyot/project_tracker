@@ -10,61 +10,36 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
 
-import { NewProjectComponent } from './components/new-project/new-project.component';
+import { NewProjectComponent } from './components/projects/new-project/new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProjectComponent } from './components/project/project.component';
-import { ProjectsNameListComponent } from './components/projects-name-list/projects-name-list.component';
+import { ProjectComponent } from './components/projects/project/project.component';
+import { ProjectsNameListComponent } from './components/projects/projects-name-list/projects-name-list.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
-import { TodoFormComponent } from './components/project-sections/todo/todo-form/todo-form.component';
-import { WorkTimeFormComponent } from './components/project-sections/work-time/work-time-form/work-time-form.component';
-import { ProjectDescFormComponent } from './components/project-sections/description/project-desc-form/project-desc-form.component';
-import { ToolFormComponent } from './components/project-sections/tool/tool-form/tool-form.component';
-import { FeatureFormComponent } from './components/project-sections/feature/feature-form/feature-form.component';
-import { QuestionAnswerFormComponent } from './components/project-sections/question-answer/question-answer-form/question-answer-form.component';
-import { DescriptionComponent } from './components/project-sections/description/description/description.component';
-import { ToolsComponent } from './components/project-sections/tool/tools/tools.component';
-import { TodosComponent } from './components/project-sections/todo/todos/todos.component';
-import { WorkTimesComponent } from './components/project-sections/work-time/work-times/work-times.component';
-import { FeaturesComponent } from './components/project-sections/feature/features/features.component';
-import { QuestionsComponent } from './components/project-sections/question-answer/questions/questions.component';
 import { FormatPipe } from './pipes/format.pipe';
 import { DatePipe } from '@angular/common';
-import { ChallengeFormComponent } from './components/project-sections/challenge/challenge-form/challenge-form.component';
-import { ChallengesComponent } from './components/project-sections/challenge/challenges/challenges.component';
 import { SubPipe } from './pipes/sub.pipe';
-import { ProjectsSummaryListComponent } from './components/projects-summary-list/projects-summary-list.component';
-import { FormDataComponent } from './components/common-components/form-data/form-data.component';
-import { GeneralFormComponent } from './components/common-components/general-form/general-form.component';
-import { FormDataViewComponent } from './components/common-components/form-data-view/form-data-view.component';
-import { ProjectSectionComponent } from './components/project-section/project-section.component';
+import { ProjectsSummaryListComponent } from './components/projects/projects-summary-list/projects-summary-list.component';
+import { ProjectSectionComponent } from './components/projects/project/project-section/project-section.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { ProjectSummaryComponent } from './components/projects/projects-summary-list/project-summary/project-summary.component';
+import { ProjectSectionFormComponent } from './components/projects/project/project-section-form/project-section-form.component';
+import { SectionItemComponent } from './components/projects/project/project-section/section-item/section-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewProjectComponent,
-    ProjectComponent,
     ProjectsNameListComponent,
-    TodoFormComponent,
-    WorkTimeFormComponent,
-    ProjectDescFormComponent,
-    ToolFormComponent,
-    FeatureFormComponent,
-    QuestionAnswerFormComponent,
-    DescriptionComponent,
-    ToolsComponent,
-    TodosComponent,
-    WorkTimesComponent,
-    FeaturesComponent,
-    QuestionsComponent,
     FormatPipe,
-    ChallengeFormComponent,
-    ChallengesComponent,
     SubPipe,
     ProjectsSummaryListComponent,
-    FormDataComponent,
     ProjectSectionComponent,
-    GeneralFormComponent,
-    FormDataViewComponent,
+    ProjectsComponent,
+    ProjectSummaryComponent,
+    NewProjectComponent,
+    ProjectComponent,
+    ProjectSectionFormComponent,
+    SectionItemComponent,
   ],
   imports: [
     BrowserModule,

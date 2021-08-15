@@ -1,0 +1,5 @@
+<app-projects-summary-list *ngIf="!selectedProject" (itemSelected)="onItemSelected($event)" [projects]="projects">
+</app-projects-summary-list>
+<app-project *ngIf="selectedProject" [selectedProject]="selectedProject" [docRef]="docRef">
+</app-project>
+<app-new-project *ngIf="addNewProject"></app-new-project>
