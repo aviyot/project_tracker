@@ -1,35 +1,33 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      {{selectedProject.projectDesc.name}}
-      <p>{{selectedProject.projectDesc.lifecycleStage}}</p>
-    </mat-card-title>
-    <mat-card-subtitle>
-      <p>{{selectedProject.projectDesc.startTime | format }}</p>
-      <p>{{selectedProject.projectDesc.endTime | format }}</p>
-      <div>
-        <p>{{selectedProject.projectDesc.filePath |
-          sub:'\\' }}</p>
-      </div>
+<mat-card-header>
+  <mat-card-title>
+    {{selectedProject.projectDesc.name}}
+    <p>{{selectedProject.projectDesc.lifecycleStage}}</p>
+  </mat-card-title>
+  <mat-card-subtitle>
+    <p>{{selectedProject.projectDesc.startTime | format }}</p>
+    <p>{{selectedProject.projectDesc.endTime | format }}</p>
+    <div>
+      <p>{{selectedProject.projectDesc.filePath |
+        sub:'\\' }}</p>
+    </div>
 
-    </mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{selectedProject.projectDesc.desc}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <mat-nav-list>
-      <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item
-        [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
-      <!--    <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item
+  </mat-card-subtitle>
+</mat-card-header>
+<mat-card-content>
+  <p>
+    {{selectedProject.projectDesc.desc}}
+  </p>
+</mat-card-content>
+<mat-card-actions>
+  <mat-nav-list>
+    <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item
+      [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
+    <!--    <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item
             [href]="selectedProject.projectDesc.site">אתר</a> -->
-      <a *ngFor="let site of selectedProject.projectDesc.sites;let i = index" target="_blank" mat-list-item
-        [href]="site.url">
-        <span *ngIf="site.main">אתר ראשי</span>
-        <span *ngIf="!site.main">אתר </span>
-      </a>
-    </mat-nav-list>
-  </mat-card-actions>
-</mat-card>
+    <a *ngFor="let site of selectedProject.projectDesc.sites;let i = index" target="_blank" mat-list-item
+      [href]="site.url">
+      <span *ngIf="site.main">אתר ראשי</span>
+      <span *ngIf="!site.main">אתר </span>
+    </a>
+  </mat-nav-list>
+</mat-card-actions>

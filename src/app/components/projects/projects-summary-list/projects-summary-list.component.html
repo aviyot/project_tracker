@@ -1,6 +1,6 @@
 <div class="pages">
-  <div *ngFor="let selectedProject of projects;let projectIndex = index">
+  <mat-card *ngFor="let selectedProject of projects;let projectIndex = index">
     <app-project-summary [selectedProject]="selectedProject"></app-project-summary>
     <button mat-button (click)="selectProject(projectIndex)">דף הפרויקט</button>
-  </div>
+  </mat-card>
 </div>
