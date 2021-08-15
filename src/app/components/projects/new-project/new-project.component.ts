@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProjectData } from 'src/models/project-data.model';
+import { FormAction } from 'src/types/form-action.type';
 
 @Component({
   selector: 'app-new-project',
@@ -14,6 +15,7 @@ export class NewProjectComponent implements OnInit {
   projectName: FormControl = new FormControl('', Validators.required);
   projects: ProjectData[] = [];
   currentProject: ProjectData;
+  @Output() formAction = new EventEmitter<FormAction>();
   user: any;
   new: boolean = true;
   added = false;
@@ -47,10 +49,12 @@ export class NewProjectComponent implements OnInit {
           },
         })
         .then((doc) => {
+          this.formAction.emit('ADD');
           this.projectName.reset();
 
           this.added = true;
           if (exit) {
+            this.formAction.emit('ADD_EXIT');
             // this.router.navigate(['./', 'app-project', doc.id]);
           }
         });
@@ -60,6 +64,7 @@ export class NewProjectComponent implements OnInit {
   }
 
   exitForm() {
+    this.formAction.emit('EXIT');
     //this.router.navigate(['./', 'app-projects']);
   }
 }

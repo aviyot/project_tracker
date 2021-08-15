@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Project } from 'src/models/project.model';
 import { MatDrawer } from '@angular/material/sidenav';
 import firebase from 'firebase/app';
+import { FormAction } from 'src/types/form-action.type';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
   selectedProjectIndex = null;
   @ViewChild('sideNav') sideNav: MatDrawer;
 
-  addNewProject: boolean;
+  addNewProject = false;
 
   constructor(private auth: AngularFireAuth) {}
   ngOnInit() {
@@ -41,10 +42,28 @@ export class AppComponent implements OnInit {
     );
   }
   onItemSelected(itemIndex) {
-    this.sideNav.close();
     if (itemIndex) this.selectedProjectIndex = itemIndex;
     else {
       this.addNewProject = true;
+    }
+
+    this.sideNav.close();
+  }
+
+  onFormAction(event: FormAction) {
+    switch (event) {
+      case 'ADD':
+        this.addNewProject = true;
+        break;
+      case 'ADD_EXIT':
+        this.addNewProject = false;
+        break;
+      case 'EXIT':
+        this.addNewProject = false;
+        break;
+      default:
+        this.addNewProject = false;
+        break;
     }
   }
 }

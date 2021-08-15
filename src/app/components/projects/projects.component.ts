@@ -1,14 +1,17 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Project } from 'src/models/project.model';
+import { FormAction } from 'src/types/form-action.type';
 
 @Component({
   selector: 'app-projects',
@@ -21,9 +24,11 @@ export class ProjectsComponent implements OnInit, OnChanges {
   selectedProject: Project;
   @Input() detial: boolean;
   @Input() selectedProjectIndex: number;
-  @Input() addNewProject: boolean;
+  @Input() addNewProject;
   docRef;
   showFullPath = false;
+  @Output() formAction = new EventEmitter<FormAction>();
+
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService
@@ -46,22 +51,26 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
   ngOnInit() {}
   ngOnChanges(change: SimpleChanges) {
-    if (
-      change.selectedProjectIndex.previousValue !==
-        change.selectedProjectIndex.currentValue &&
-      change.selectedProjectIndex.previousValue
-    )
-      this.selectedProject = { ...this.projects[this.selectedProjectIndex] };
+    if (change.selectedProjectIndex) {
+      if (
+        change.selectedProjectIndex.previousValue !==
+          change.selectedProjectIndex.currentValue &&
+        change.selectedProjectIndex.previousValue
+      )
+        this.selectedProject = {
+          ...this.projects[this.selectedProjectIndex],
+        };
+    }
   }
   onItemSelected(selectedIndex) {
-    console.log(selectedIndex);
-
     if (selectedIndex !== null || selectedIndex !== undefined) {
       this.projects.forEach((project, i) => {
         if (selectedIndex === i) this.selectedProject = project;
       });
-    } else {
-      this.addNewProject = true;
     }
+  }
+
+  onFormAction(event: FormAction) {
+    this.formAction.emit(event);
   }
 }
