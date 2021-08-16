@@ -46,8 +46,7 @@ export class ProjectSectionComponent implements OnInit {
     this.formState.add = !this.formState.add;
   }
   editData(index?: number) {
-    console.log('edit');
-    if (index) {
+    if (index !== null || index !== undefined) {
       if (this.formState.selectedIndex !== index) this.formState.edit = true;
       else this.formState.edit = !this.formState.edit;
       this.formState.selectedIndex = index;
