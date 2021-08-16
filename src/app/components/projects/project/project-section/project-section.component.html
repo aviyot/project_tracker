@@ -12,20 +12,24 @@
 <div class="pages">
 
   <div *ngIf="isArray(selectedProject[fieldName]) && selectedProject[fieldName].length">
-    <mat-card *ngFor="let fieldData of selectedProject[fieldName] ; let dataIndex = index">
-      <app-section-item [fieldData]="fieldData" [controlFields]="controlFields">
-      </app-section-item>
+    <div *ngFor="let fieldData of selectedProject[fieldName] ; let dataIndex = index">
+      <mat-card>
+        <app-section-item [fieldData]="fieldData" [controlFields]="controlFields">
+        </app-section-item>
 
-      <mat-card-actions *ngIf="editMode">
-        <button mat-stroked-button color="accent" (click)="editData(dataIndex)">ערוך</button>
-        <!-- <button mat-stroked-button color="warn" (click)="deleteData(fieldData)">מחק </button> -->
-      </mat-card-actions>
+        <mat-card-actions *ngIf="editMode">
+          <button mat-stroked-button color="accent" (click)="editData(dataIndex)">ערוך</button>
+          <!-- <button mat-stroked-button color="warn" (click)="deleteData(fieldData)">מחק </button> -->
+        </mat-card-actions>
 
-      <app-project-section-form *ngIf="formState.edit && (dataIndex === formState.selectedIndex) && editMode"
-        [controlFields]="controlFields" [docRef]="docRef" (formAction)="onFormAction($event)" [inputData]="fieldData"
-        [projectId]="projectId">
-      </app-project-section-form>
-    </mat-card>
+        <app-project-section-form *ngIf="formState.edit && (dataIndex === formState.selectedIndex) && editMode"
+          [controlFields]="controlFields" [docRef]="docRef" (formAction)="onFormAction($event)" [inputData]="fieldData"
+          [projectId]="projectId">
+        </app-project-section-form>
+      </mat-card>
+      <mat-divider>
+      </mat-divider>
+    </div>
   </div>
   <div *ngIf="!isArray(selectedProject[fieldName])">
     <mat-card>
