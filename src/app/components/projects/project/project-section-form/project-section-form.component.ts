@@ -8,6 +8,7 @@ import { FormConfig } from 'src/models/form-config.model';
 import { FormAction } from 'src/types/form-action.type';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { ActionTypes } from 'src/models/action-types';
 
 @Component({
   selector: 'app-project-section-form',
@@ -28,6 +29,8 @@ export class ProjectSectionFormComponent implements OnInit {
 
   //Output
   @Output() formAction: EventEmitter<FormAction> = new EventEmitter();
+  formActionsNew: ActionTypes;
+  formActionsUpdate: ActionTypes;
 
   //Local
   fieldName: string;
@@ -38,6 +41,17 @@ export class ProjectSectionFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.formActionsNew = {
+      ADD: true,
+      ADD_EXIT: true,
+      EXIT: true,
+    };
+    this.formActionsUpdate = {
+      SAVE: true,
+      SAVE_EXIT: true,
+      DELETE: true,
+      EXIT: true,
+    };
     this.colRef = this.docRef;
     this.docRef = this.docRef.doc(this.projectId);
     this.fieldName = this.controlFields.controlName.dataFieldName;
@@ -52,7 +66,7 @@ export class ProjectSectionFormComponent implements OnInit {
     }
   }
 
-  addData() {
+  addData(formAction?: FormAction) {
     if (this.dataType == 'array') {
       this.docRef
         .update({
@@ -61,7 +75,7 @@ export class ProjectSectionFormComponent implements OnInit {
           ),
         })
         .then(() => {
-          this.formAction.emit('ADD');
+          this.formAction.emit(formAction);
         });
     }
     if (this.dataType == 'map' || this.fieldName == 'projectDesc') {
@@ -70,12 +84,12 @@ export class ProjectSectionFormComponent implements OnInit {
           [this.fieldName]: this.formGroup.value,
         })
         .then(() => {
-          this.formAction.emit('ADD');
+          this.formAction.emit(formAction);
         });
     }
   }
 
-  removeData(): any {
+  removeData(formAction?: FormAction): any {
     if (this.dataType == 'array') {
       return this.docRef.update({
         [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(
@@ -90,7 +104,7 @@ export class ProjectSectionFormComponent implements OnInit {
     }
   }
 
-  updateData() {
+  updateData(formAction?: FormAction) {
     if (this.dataType == 'array') {
       this.removeData().then(() => {
         this.addData();
@@ -103,8 +117,34 @@ export class ProjectSectionFormComponent implements OnInit {
           [this.fieldName]: this.formGroup.value,
         })
         .then(() => {
-          this.formAction.emit('SAVE');
+          this.formAction.emit(formAction);
         });
+    }
+  }
+
+  onFormAction(formAction: FormAction) {
+    switch (formAction) {
+      case 'ADD':
+        this.addData(formAction);
+        break;
+      case 'ADD_EXIT':
+        this.addData(formAction);
+        break;
+      case 'SAVE':
+        this.updateData(formAction);
+        break;
+      case 'SAVE_EXIT':
+        this.updateData(formAction);
+        break;
+      case 'EXIT':
+        this.formAction.emit(formAction);
+        break;
+      case 'DELETE':
+        this.removeData(formAction);
+        break;
+
+      default:
+        break;
     }
   }
 }

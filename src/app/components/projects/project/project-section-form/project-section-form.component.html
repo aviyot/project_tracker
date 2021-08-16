@@ -39,6 +39,13 @@
       {{controlFields.controlFields[key].label}}</mat-checkbox>
   </span>
 </form>
-<button *ngIf="!inputFormData" mat-stroked-button color="primary" (click)="addData()">הוסף</button>
+<!-- <button *ngIf="!inputFormData" mat-stroked-button color="primary" (click)="addData()">הוסף</button>
 <button *ngIf="inputFormData" mat-stroked-button color="warn" (click)="removeData()">מחק</button>
 <button *ngIf="inputFormData" mat-stroked-button color="warn" (click)="updateData()">שמור</button>
+ -->
+<div style="margin-bottom: 2rem;">
+  <app-form-action-toolbar *ngIf="!inputFormData" [formActions]="formActionsNew" (formAction)="onFormAction($event)">
+  </app-form-action-toolbar>
+  <app-form-action-toolbar *ngIf="inputFormData" [formActions]="formActionsUpdate" (formAction)="onFormAction($event)">
+  </app-form-action-toolbar>
+</div>

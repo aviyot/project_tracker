@@ -69,12 +69,8 @@ export class ProjectSectionComponent implements OnInit {
   }
  */
   onFormAction(action: FormAction) {
-    if (action == 'ADD') {
-      this.formState = { ...this.formState, add: false };
-    }
-    if (action == 'SAVE') {
+    if (action == 'EXIT' || action == 'ADD_EXIT' || action == 'SAVE_EXIT')
       this.formState = { ...this.formState, edit: false };
-    }
   }
   deleteAllData(fieldName) {
     if (confirm('Delte All Data')) {
