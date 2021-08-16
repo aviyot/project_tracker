@@ -18,6 +18,9 @@ export class ProjectSectionComponent implements OnInit {
   formState: FormState;
   fieldSize: number;
   projectId;
+  @Input() editMode = false;
+  fieldType;
+
   constructor(private formDataConfigService: FormDataConfigService) {}
 
   ngOnInit() {
@@ -33,14 +36,15 @@ export class ProjectSectionComponent implements OnInit {
     this.controlFields = this.formDataConfigService.getFormConfig(
       this.fieldName
     );
-
+    this.fieldType = this.controlFields.controlName.type;
     this.controlFieldKeys = Object.keys(this.controlFields.controlFields);
 
     this.formState = { add: false, edit: false, selectedIndex: null };
   }
 
   isArray(data: any): boolean {
-    return Array.isArray(data);
+    if (this.fieldType == 'array' && Array.isArray(data)) return true;
+    else return false;
   }
   addData() {
     this.formState.add = !this.formState.add;
@@ -55,7 +59,7 @@ export class ProjectSectionComponent implements OnInit {
     }
   }
 
-  deleteData(data) {
+  /*   deleteData(data) {
     this.docRef
       .doc(this.selectedProject.id)
       .update({
@@ -63,7 +67,7 @@ export class ProjectSectionComponent implements OnInit {
       })
       .then(() => {});
   }
-
+ */
   onFormAction(action: FormAction) {
     if (action == 'ADD') {
       this.formState = { ...this.formState, add: false };
@@ -78,5 +82,9 @@ export class ProjectSectionComponent implements OnInit {
         [fieldName]: firebase.firestore.FieldValue.delete(),
       });
     }
+  }
+
+  editFields() {
+    this.editMode = !this.editMode;
   }
 }
