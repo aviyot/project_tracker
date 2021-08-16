@@ -59,9 +59,7 @@ export class ProjectSectionComponent implements OnInit {
     this.docRef
       .doc(this.selectedProject.id)
       .update({
-        [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(
-          data[this.fieldName]
-        ),
+        [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(data),
       })
       .then(() => {});
   }

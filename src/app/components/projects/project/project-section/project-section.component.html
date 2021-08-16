@@ -12,14 +12,12 @@
 
     <div *ngIf="isArray(selectedProject[fieldName])">
       <mat-card *ngFor="let fieldData of selectedProject[fieldName] ; let dataIndex = index">
-
-
         <app-section-item [fieldData]="fieldData" [controlFields]="controlFields">
         </app-section-item>
 
         <mat-card-actions>
           <button mat-stroked-button color="accent" (click)="editData(dataIndex)">ערוך</button>
-          <button mat-stroked-button color="warn" (click)="deleteData(fieldData.id)">מחק</button>
+          <button mat-stroked-button color="warn" (click)="deleteData(fieldData)">מחק </button>
         </mat-card-actions>
 
         <app-project-section-form *ngIf="formState.edit && (dataIndex === formState.selectedIndex)"
