@@ -78,7 +78,7 @@ export class ProjectSectionFormComponent implements OnInit {
           this.formAction.emit(formAction);
         });
     }
-    if (this.dataType == 'map' || this.fieldName == 'projectDesc') {
+    if (this.dataType == 'map') {
       this.docRef
         .update({
           [this.fieldName]: this.formGroup.value,
@@ -111,7 +111,7 @@ export class ProjectSectionFormComponent implements OnInit {
       });
     }
 
-    if (this.dataType == 'map' || this.fieldName == 'projectDesc') {
+    if (this.dataType == 'map') {
       this.docRef
         .update({
           [this.fieldName]: this.formGroup.value,
