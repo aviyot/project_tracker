@@ -54,7 +54,9 @@ export class AppComponent implements OnInit {
     );
   }
   onItemSelected(itemIndex: number) {
-    this.selectedProject = { ...this.projects[itemIndex] };
+    if (itemIndex !== undefined)
+      this.selectedProject = { ...this.projects[itemIndex] };
+    else this.addNewProject = true;
     this.sideNav.close();
   }
 
