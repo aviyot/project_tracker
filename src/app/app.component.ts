@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Project } from 'src/models/project.model';
 import { MatDrawer } from '@angular/material/sidenav';
-import firebase from 'firebase/app';
 import { FormAction } from 'src/types/form-action.type';
+import { AuthService } from './auth/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,26 +13,37 @@ import { FormAction } from 'src/types/form-action.type';
 })
 export class AppComponent implements OnInit {
   appName = 'מנהל הפרויקטים';
+  selectedProject: Project;
+  projects: Project[];
+  docRef;
   isUserSignIn = false;
-  user: firebase.User = null;
   userSignIn: 'LOAD' | 'SIGNIN' | 'INABLE_SIGNIN' | 'ERROR' = 'LOAD';
   itemSelected = false;
-  collectionName: string = 'projects';
-  selectedProject?: Project;
-  isSideOpen = false;
-  isReg = false;
-  selectedProjectIndex = null;
-  @ViewChild('sideNav') sideNav: MatDrawer;
-
   addNewProject = false;
 
-  constructor(private auth: AngularFireAuth) {}
+  @ViewChild('sideNav') sideNav: MatDrawer;
+
+  constructor(
+    private firestore: AngularFirestore,
+    private authService: AuthService
+  ) {}
   ngOnInit() {
-    this.auth.user.subscribe(
+    this.authService.user.subscribe(
       (user) => {
-        this.user = user;
         if (user) {
           this.userSignIn = 'SIGNIN';
+          this.docRef = this.firestore
+            .collection('users')
+            .doc(user.uid)
+            .collection('projects', (ref) => ref.orderBy('projectDesc.name'));
+
+          (
+            this.docRef.valueChanges({
+              idField: 'id',
+            }) as Observable<Project[]>
+          ).subscribe((projects) => {
+            this.projects = projects;
+          });
         } else {
           this.userSignIn = 'INABLE_SIGNIN';
         }
@@ -41,12 +53,8 @@ export class AppComponent implements OnInit {
       }
     );
   }
-  onItemSelected(itemIndex) {
-    if (itemIndex) this.selectedProjectIndex = itemIndex;
-    else {
-      this.addNewProject = true;
-    }
-
+  onItemSelected(itemIndex: number) {
+    this.selectedProject = { ...this.projects[itemIndex] };
     this.sideNav.close();
   }
 

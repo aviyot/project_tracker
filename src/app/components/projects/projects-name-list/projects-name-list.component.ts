@@ -10,29 +10,11 @@ import { Project } from 'src/models/project.model';
   styleUrls: ['./projects-name-list.component.scss'],
 })
 export class ProjectsNameListComponent implements OnInit {
-  projects: Project[];
+  @Input() projects: Project[];
   @Output() itemSelected = new EventEmitter();
-  @Input() detial: boolean;
-  constructor(
-    private firestore: AngularFirestore,
-    private authService: AuthService
-  ) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.authService.user.subscribe((user) => {
-      if (user) {
-        (
-          this.firestore
-            .collection('users')
-            .doc(user.uid)
-            .collection('projects', (ref) => ref.orderBy('projectDesc.name'))
-            .valueChanges({ idField: 'id' }) as Observable<Project[]>
-        ).subscribe((projects) => {
-          this.projects = projects;
-        });
-      }
-    });
-  }
+  ngOnInit(): void {}
 
   addNewProject() {
     this.itemSelected.emit();

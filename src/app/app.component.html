@@ -8,7 +8,9 @@
 <div class="main">
   <mat-sidenav-container hasBackdrop="false">
     <mat-sidenav autoFocus="true" mode="over" #sideNav>
-      <app-projects-name-list *ngIf="user" (itemSelected)="onItemSelected($event)"></app-projects-name-list>
+      <app-projects-name-list [projects]="projects" *ngIf="userSignIn == 'SIGNIN'"
+        (itemSelected)="onItemSelected($event)">
+      </app-projects-name-list>
     </mat-sidenav>
     <mat-sidenav-content>
       <div style="text-align: center;font-size: x-large;margin-top: 2rem;" *ngIf="userSignIn === 'LOAD'">LOAD...</div>
@@ -16,8 +18,9 @@
       <app-sign-in *ngIf="userSignIn === 'INABLE_SIGNIN'"></app-sign-in>
       <!--       <app-new-project *ngIf="addNewProject"></app-new-project>
  -->
-      <app-projects *ngIf="userSignIn === 'SIGNIN'" [selectedProjectIndex]="selectedProjectIndex"
-        [addNewProject]="addNewProject" (formAction)="onFormAction($event)"></app-projects>
+      <app-projects [docRef]="docRef" [projects]="projects" *ngIf="userSignIn === 'SIGNIN'"
+        [selectedProject]="selectedProject" [addNewProject]="addNewProject" (formAction)="onFormAction($event)"
+        (itemSelected)="onItemSelected($event)"></app-projects>
       <!-- <router-outlet></router-outlet> -->
     </mat-sidenav-content>
   </mat-sidenav-container>

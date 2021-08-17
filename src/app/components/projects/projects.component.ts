@@ -7,9 +7,6 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
 import { Project } from 'src/models/project.model';
 import { FormAction } from 'src/types/form-action.type';
 
@@ -19,39 +16,18 @@ import { FormAction } from 'src/types/form-action.type';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit, OnChanges {
-  @Input() editable: boolean = false;
-  projects: Project[];
-  selectedProject: Project;
-  @Input() detial: boolean;
+  @Input() projects: Project[];
+  @Input() selectedProject: Project;
   @Input() selectedProjectIndex: number;
   @Input() addNewProject;
-  docRef;
-  showFullPath = false;
+  @Input() docRef;
   @Output() formAction = new EventEmitter<FormAction>();
+  @Output() itemSelected = new EventEmitter<number>();
 
-  constructor(
-    private firestore: AngularFirestore,
-    private authService: AuthService
-  ) {
-    this.authService.user.subscribe((user) => {
-      if (user) {
-        this.docRef = this.firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('projects', (ref) => ref.orderBy('projectDesc.name'));
-        (
-          this.docRef.valueChanges({
-            idField: 'id',
-          }) as Observable<Project[]>
-        ).subscribe((projects) => {
-          this.projects = projects;
-        });
-      }
-    });
-  }
+  constructor() {}
   ngOnInit() {}
   ngOnChanges(change: SimpleChanges) {
-    if (change.selectedProjectIndex) {
+    /*    if (change.selectedProjectIndex) {
       if (
         change.selectedProjectIndex.previousValue !==
           change.selectedProjectIndex.currentValue &&
@@ -60,14 +36,15 @@ export class ProjectsComponent implements OnInit, OnChanges {
         this.selectedProject = {
           ...this.projects[this.selectedProjectIndex],
         };
-    }
+    } */
   }
   onItemSelected(selectedIndex) {
-    if (selectedIndex !== null || selectedIndex !== undefined) {
+    this.itemSelected.emit(selectedIndex);
+    /*   if (selectedIndex !== null || selectedIndex !== undefined) {
       this.projects.forEach((project, i) => {
         if (selectedIndex === i) this.selectedProject = project;
       });
-    }
+    } */
   }
 
   onFormAction(event: FormAction) {
