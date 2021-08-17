@@ -102,6 +102,11 @@ export class ProjectSectionFormComponent implements OnInit {
         [this.fieldName]: firebase.firestore.FieldValue.delete(),
       });
     }
+    if (this.dataType == 'map' && this.fieldName == 'projectDesc') {
+      return this.docRef.delete().then(() => {
+        alert('project deleted');
+      });
+    }
   }
 
   updateData(formAction?: FormAction) {
