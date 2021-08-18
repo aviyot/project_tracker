@@ -5,6 +5,7 @@ import { FormAction } from 'src/types/form-action.type';
 import { AuthService } from './auth/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { ListAction } from 'src/models/list-action';
 
 @Component({
   selector: 'app-root',
@@ -61,13 +62,20 @@ export class AppComponent implements OnInit {
       }
     );
   }
-  onItemSelected(itemIndex: number) {
-    if (itemIndex !== undefined)
-      this.selectedProject = { ...this.projects[itemIndex] };
-    else this.addNewProject = true;
-    this.sideNav.close();
+  onItemSelected(listAction: ListAction) {
+    if (listAction.action == 'VIEW_ITEM') {
+      this.selectedProject = { ...this.projects[listAction.item] };
+      this.itemIndex = listAction.item;
+    }
 
-    this.itemIndex = itemIndex;
+    if (listAction.action == 'ADD_ITEM') this.addNewProject = true;
+
+    if (listAction.action == 'VIEW_ITEMS') {
+      this.selectedProject = null;
+      this.addNewProject = false;
+    }
+
+    this.sideNav.close();
   }
 
   onFormAction(event: FormAction) {

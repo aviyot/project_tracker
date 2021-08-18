@@ -7,6 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { ListAction } from 'src/models/list-action';
 import { Project } from 'src/models/project.model';
 import { FormAction } from 'src/types/form-action.type';
 
@@ -22,7 +23,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
   @Input() addNewProject;
   @Input() docRef;
   @Output() formAction = new EventEmitter<FormAction>();
-  @Output() itemSelected = new EventEmitter<number>();
+  @Output() itemSelected = new EventEmitter<ListAction>();
 
   constructor() {}
   ngOnInit() {}
@@ -38,8 +39,8 @@ export class ProjectsComponent implements OnInit, OnChanges {
         };
     } */
   }
-  onItemSelected(selectedIndex) {
-    this.itemSelected.emit(selectedIndex);
+  onItemSelected(listAction: ListAction) {
+    this.itemSelected.emit(listAction);
     /*   if (selectedIndex !== null || selectedIndex !== undefined) {
       this.projects.forEach((project, i) => {
         if (selectedIndex === i) this.selectedProject = project;

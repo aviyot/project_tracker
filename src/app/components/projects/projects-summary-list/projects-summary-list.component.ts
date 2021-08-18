@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ListAction } from 'src/models/list-action';
 import { Project } from 'src/models/project.model';
 
 @Component({
@@ -12,7 +13,7 @@ import { Project } from 'src/models/project.model';
 export class ProjectsSummaryListComponent implements OnInit {
   @Input() editable: boolean = false;
   @Input() projects: Project[];
-  @Output() itemSelected = new EventEmitter();
+  @Output() itemSelected = new EventEmitter<ListAction>();
   @Input() detial: boolean;
   showFullPath = false;
   constructor() {}
@@ -23,7 +24,7 @@ export class ProjectsSummaryListComponent implements OnInit {
     this.showFullPath = full;
   }
 
-  selectProject(projectIndex) {
-    this.itemSelected.emit(projectIndex);
+  selectProject(item: number) {
+    this.itemSelected.emit({ action: 'VIEW_ITEM', item: item });
   }
 }
