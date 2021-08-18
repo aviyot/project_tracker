@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   userSignIn: 'LOAD' | 'SIGNIN' | 'INABLE_SIGNIN' | 'ERROR' = 'LOAD';
   itemSelected = false;
   addNewProject = false;
+  itemIndex = 0;
 
   @ViewChild('sideNav') sideNav: MatDrawer;
 
@@ -42,7 +43,14 @@ export class AppComponent implements OnInit {
               idField: 'id',
             }) as Observable<Project[]>
           ).subscribe((projects) => {
-            this.projects = projects;
+            if (this.projects) {
+              if (projects.length == this.projects.length)
+                this.selectedProject = { ...projects[this.itemIndex] };
+              if (projects.length !== this.projects.length)
+                this.selectedProject = null;
+
+              this.projects = projects;
+            } else this.projects = projects;
           });
         } else {
           this.userSignIn = 'INABLE_SIGNIN';
@@ -58,6 +66,8 @@ export class AppComponent implements OnInit {
       this.selectedProject = { ...this.projects[itemIndex] };
     else this.addNewProject = true;
     this.sideNav.close();
+
+    this.itemIndex = itemIndex;
   }
 
   onFormAction(event: FormAction) {
