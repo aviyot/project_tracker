@@ -64,10 +64,10 @@ export class ProjectDescService {
           option: this.projectStatuses,
           order: 3,
         },
-        sites: {
-          value: [false],
-          type: 'checkbox',
-          label: '?יש אתר',
+        site: {
+          value: [''],
+          type: 'href',
+          label: 'אתר של הפרויקט',
           order: 4,
         },
       },
