@@ -25,6 +25,7 @@ import { ProjectSummaryComponent } from './components/projects/projects-summary-
 import { ProjectSectionFormComponent } from './components/projects/project/project-section-form/project-section-form.component';
 import { SectionItemComponent } from './components/projects/project/project-section/section-item/section-item.component';
 import { FormActionToolbarComponent } from './components/shared/form-action-toolbar/form-action-toolbar.component';
+import { ItemFieldComponent } from './components/projects/project/project-section/section-item/item-field/item-field.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { FormActionToolbarComponent } from './components/shared/form-action-tool
     ProjectSectionFormComponent,
     SectionItemComponent,
     FormActionToolbarComponent,
+    ItemFieldComponent,
   ],
   imports: [
     BrowserModule,
