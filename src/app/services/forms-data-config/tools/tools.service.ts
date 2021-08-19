@@ -49,13 +49,13 @@ export class ToolsService {
         },
         githubLink: {
           value: [],
-          type: 'text',
-          label: 'github',
+          type: 'href',
+          label: 'גיטהב',
           order: 5,
         },
         npmLink: {
           value: [],
-          type: 'text',
+          type: 'href',
           label: 'npm',
           order: 5,
         },
