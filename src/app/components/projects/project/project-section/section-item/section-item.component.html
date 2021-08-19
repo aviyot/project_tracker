@@ -2,6 +2,14 @@
   <div *ngFor="let key of controlFieldKeys;let keyIndex = index">
     <div *ngIf='controlFields.controlFields[key]'>
       <div [ngSwitch]="controlFields.controlFields[key].type">
+        <div *ngSwitchCase="'text'">
+          <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
+            <span style="font-size: large;font-weight: bold; ">{{controlFields.controlFields[key].label}}</span>
+            <span style="font-size: large;margin-inline-start: 0.5rem;">
+              {{ fieldData[key] }}
+            </span>
+          </div>
+        </div>
         <div *ngSwitchCase="'select'">
           <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
             <span style="font-size: large;font-weight: bold; ">{{controlFields.controlFields[key].label}}</span>
@@ -26,6 +34,12 @@
             </div>
           </div>
         </div>
+        <span *ngSwitchCase="'href'">
+          <span *ngIf="fieldData[key]" style="margin-top: 1rem;">
+            <a mat-stroked-button color="primary" [href]="fieldData[key]"
+              target="_blank">{{controlFields.controlFields[key].label}}</a>
+          </span>
+        </span>
       </div>
     </div>
   </div>
