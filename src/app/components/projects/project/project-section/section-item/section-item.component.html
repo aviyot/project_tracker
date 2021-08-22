@@ -27,11 +27,20 @@
           </div>
         </div>
 
+        <div *ngSwitchCase="'date'">
+
+          <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
+            <span style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</span>
+            <span style="font-size: large; margin-inline-start: 0.5rem;">
+              {{ fieldData[key] | format }}
+            </span>
+          </div>
+        </div>
         <div *ngSwitchDefault>
           <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
             <div style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</div>
             <div style="font-size: large;">
-              {{ fieldData[key] }}
+              {{ fieldData[key]}}
             </div>
           </div>
         </div>
