@@ -47,7 +47,7 @@ export class ProjectDescService {
         endDate: {
           value: [new Date()],
           type: 'date',
-          label: 'תאריך התחלה',
+          label: 'תאריך סיום',
           order: 3,
         },
         lifecycleStage: {
