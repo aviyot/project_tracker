@@ -112,7 +112,15 @@ export class ProjectSectionFormComponent implements OnInit {
   updateData(formAction?: FormAction) {
     if (this.dataType == 'array') {
       this.removeData().then(() => {
-        this.addData();
+        this.docRef
+          .update({
+            [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
+              this.formGroup.value
+            ),
+          })
+          .then(() => {
+            this.formAction.emit(formAction);
+          });
       });
     }
 
