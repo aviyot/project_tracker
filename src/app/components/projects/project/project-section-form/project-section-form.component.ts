@@ -44,13 +44,13 @@ export class ProjectSectionFormComponent implements OnInit {
     this.formActionsNew = {
       ADD: true,
       ADD_EXIT: true,
-      EXIT: true,
+      EXIT_ADD: true,
     };
     this.formActionsUpdate = {
       SAVE: true,
       SAVE_EXIT: true,
       DELETE: true,
-      EXIT: true,
+      EXIT_EDIT: true,
     };
     this.colRef = this.docRef;
     this.docRef = this.docRef.doc(this.projectId);
