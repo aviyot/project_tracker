@@ -4,6 +4,7 @@ import { FormState } from 'src/models/ui/form-state';
 import firebase from 'firebase/app';
 import { FormAction } from 'src/types/form-action.type';
 import { Router } from '@angular/router';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
 @Component({
   selector: 'app-project-section',
   templateUrl: './project-section.component.html',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ProjectSectionComponent implements OnInit {
   controlFieldKeys: string[];
-  @Input() docRef: any;
+  @Input() docRef: AngularFirestoreCollection;
   controlFields: any;
   @Input() fieldName: string;
   @Input() selectedProject;
@@ -69,8 +70,26 @@ export class ProjectSectionComponent implements OnInit {
   }
  */
   onFormAction(action: FormAction) {
-    if (action == 'EXIT' || action == 'ADD_EXIT' || action == 'SAVE_EXIT')
+    console.log(action);
+    if (action == 'EXIT_ADD' || action == 'ADD_EXIT')
+      this.formState = { ...this.formState, add: false };
+    if (action == 'EXIT_EDIT' || action == 'SAVE_EXIT')
       this.formState = { ...this.formState, edit: false };
+    console.log(this.formState);
+
+    /*     if (action == 'EXIT' || action == 'ADD_EXIT' || action == 'SAVE_EXIT' || action == "DELETE") {
+      
+    }
+      this.formState = { ...this.formState, add: false };
+        if (action == 'EXIT' || action == 'ADD_EXIT' || action == 'SAVE_EXIT' || action == "DELETE")
+          this.formState = { ...this.formState, add: false };
+          if (
+            action == 'EXIT' ||
+            action == 'ADD_EXIT' ||
+            action == 'SAVE_EXIT' ||
+            action == 'DELETE'
+          )
+            this.formState = { ...this.formState, add: false }; */
   }
   deleteAllData(fieldName) {
     if (confirm('Delte All Data')) {
