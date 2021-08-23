@@ -5,4 +5,6 @@ export type FormAction =
   | 'RESET'
   | 'ADD_EXIT'
   | 'SAVE_EXIT'
-  | 'EXIT';
+  | 'EXIT'
+  | 'EXIT_EDIT'
+  | 'EXIT_ADD';
