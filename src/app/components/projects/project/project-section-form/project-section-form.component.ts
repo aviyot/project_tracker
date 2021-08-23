@@ -143,11 +143,17 @@ export class ProjectSectionFormComponent implements OnInit {
       case 'ADD_EXIT':
         this.addData(formAction);
         break;
+      case 'EXIT_ADD':
+        this.formAction.emit(formAction);
+        break;
       case 'SAVE':
         this.updateData(formAction);
         break;
       case 'SAVE_EXIT':
         this.updateData(formAction);
+        break;
+      case 'EXIT_EDIT':
+        this.formAction.emit(formAction);
         break;
       case 'EXIT':
         this.formAction.emit(formAction);
