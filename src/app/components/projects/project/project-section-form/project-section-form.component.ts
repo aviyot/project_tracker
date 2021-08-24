@@ -97,9 +97,17 @@ export class ProjectSectionFormComponent implements OnInit {
         [this.fieldName]: firebase.firestore.FieldValue.delete(),
       });
     } else if (this.dataType == 'map' && this.fieldName == 'projectDesc') {
-      return this.docRef.delete().then(() => {
-        alert('project deleted');
-      });
+      if (
+        confirm(
+          `DANGER : delete ****** ${this.inputFormData.name} ****** project ?`
+        )
+      )
+        return this.docRef.delete().then(() => {});
+      else {
+        return new Promise((resolve, reject) => {
+          reject('delete canceled');
+        });
+      }
     } else {
       return new Promise((resolve, reject) => {
         reject('no find data type');
