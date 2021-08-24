@@ -23,6 +23,7 @@ export class ProjectSectionFormComponent implements OnInit {
   formGroup: FormGroup;
   @Input() projectId;
   colRef;
+  newData: boolean;
 
   //Output
   @Output() formAction: EventEmitter<FormAction> = new EventEmitter();
@@ -38,6 +39,9 @@ export class ProjectSectionFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    if (this.inputFormData === undefined) this.newData = true;
+    else this.newData = false;
+
     this.formActionsNew = {
       ADD: true,
       ADD_EXIT: true,
