@@ -27,6 +27,14 @@
           </div>
         </div>
 
+        <div *ngSwitchCase="'time'">
+          <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
+            <span style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</span>
+            <span style="font-size: large; margin-inline-start: 0.5rem;">
+              {{ fieldData[key] }}
+            </span>
+          </div>
+        </div>
 
         <div *ngSwitchCase="'datetime-local'">
           <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
@@ -36,8 +44,8 @@
             </span>
           </div>
         </div>
-        <div *ngSwitchCase="'date'">
 
+        <div *ngSwitchCase="'date'">
           <div *ngIf="fieldData[key]" style="margin-top: 1rem;">
             <span style="font-size: large;font-weight: bold;">{{controlFields.controlFields[key].label}}</span>
             <span style="font-size: large; margin-inline-start: 0.5rem;">
