@@ -63,91 +63,88 @@ export class ProjectSectionFormComponent implements OnInit {
     }
   }
 
-  addData(formAction?: FormAction) {
+  addData(): Promise<any> {
     if (this.dataType == 'array') {
-      this.docRef
-        .update({
-          [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
-            this.formGroup.value
-          ),
-        })
-        .then(() => {
-          this.formAction.emit(formAction);
-        });
-    }
-    if (this.dataType == 'map') {
-      this.docRef
-        .update({
-          [this.fieldName]: this.formGroup.value,
-        })
-        .then(() => {
-          this.formAction.emit(formAction);
-        });
+      return this.docRef.update({
+        [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
+          this.formGroup.value
+        ),
+      });
+    } else if (this.dataType == 'map') {
+      return this.docRef.update({
+        [this.fieldName]: this.formGroup.value,
+      });
+    } else {
+      return new Promise((resolve, reject) => {
+        reject('no find data type');
+      });
     }
   }
 
-  removeData(formAction?: FormAction): any {
+  removeData(): Promise<any> {
     if (this.dataType == 'array') {
       return this.docRef.update({
         [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(
           this.inputFormData
         ),
       });
-    }
-    if (this.dataType == 'map' && this.fieldName !== 'projectDesc') {
+    } else if (this.dataType == 'map' && this.fieldName !== 'projectDesc') {
       return this.docRef.update({
         [this.fieldName]: firebase.firestore.FieldValue.delete(),
       });
-    }
-    if (this.dataType == 'map' && this.fieldName == 'projectDesc') {
+    } else if (this.dataType == 'map' && this.fieldName == 'projectDesc') {
       return this.docRef.delete().then(() => {
         alert('project deleted');
+      });
+    } else {
+      return new Promise((resolve, reject) => {
+        reject('no find data type');
       });
     }
   }
 
-  updateData(formAction?: FormAction) {
+  updateData(): Promise<any> {
     if (this.dataType == 'array') {
-      this.removeData().then(() => {
-        this.docRef
-          .update({
-            [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
-              this.formGroup.value
-            ),
-          })
-          .then(() => {
-            this.formAction.emit(formAction);
-          });
-      });
-    }
-
-    if (this.dataType == 'map') {
-      this.docRef
-        .update({
-          [this.fieldName]: this.formGroup.value,
-        })
-        .then(() => {
-          this.formAction.emit(formAction);
+      return this.removeData().then(() => {
+        return this.docRef.update({
+          [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
+            this.formGroup.value
+          ),
         });
+      });
+    } else if (this.dataType == 'map') {
+      return this.docRef.update({
+        [this.fieldName]: this.formGroup.value,
+      });
+    } else {
+      return new Promise((resolve, reject) => {
+        reject('no find data type');
+      });
     }
   }
 
   onFormAction(formAction: FormAction) {
     switch (formAction) {
       case 'ADD':
-        this.addData(formAction);
+        this.addData().then(() => {
+          this.formAction.emit(formAction);
+        });
         break;
       case 'ADD_EXIT':
-        this.addData(formAction);
+        this.addData().then(() => {
+          this.formAction.emit(formAction);
+        });
         break;
       case 'EXIT_ADD':
         this.formAction.emit(formAction);
         break;
       case 'SAVE':
-        this.updateData(formAction);
+        this.formAction.emit(formAction);
+        this.updateData().then(() => {});
         break;
       case 'SAVE_EXIT':
-        this.updateData(formAction);
+        this.formAction.emit(formAction);
+        this.updateData().then(() => {});
         break;
       case 'EXIT_EDIT':
         this.formAction.emit(formAction);
@@ -156,7 +153,8 @@ export class ProjectSectionFormComponent implements OnInit {
         this.formAction.emit(formAction);
         break;
       case 'DELETE':
-        this.removeData(formAction);
+        this.formAction.emit(formAction);
+        this.removeData().then(() => {});
         break;
 
       default:
