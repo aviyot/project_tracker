@@ -23,6 +23,10 @@
       <mat-datepicker-toggle matSuffix [for]="keyIndex"></mat-datepicker-toggle>
       <mat-datepicker #keyIndex></mat-datepicker>
     </mat-form-field>
+    <mat-form-field *ngIf="controlFields.controlFields[key].type == 'datetime-local'" appearance="outline">
+      <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
+      <input type="datetime-local" matInput [formControlName]="key">
+    </mat-form-field>
     <mat-form-field *ngIf="controlFields.controlFields[key].type == 'textarea'" appearance="outline">
       <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
       <textarea matInput [formControlName]="key"></textarea>
