@@ -70,26 +70,26 @@ export class ProjectSectionComponent implements OnInit {
   }
  */
   onFormAction(action: FormAction) {
-    console.log(action);
-    if (action == 'EXIT_ADD' || action == 'ADD_EXIT')
-      this.formState = { ...this.formState, add: false };
-    if (action == 'EXIT_EDIT' || action == 'SAVE_EXIT')
-      this.formState = { ...this.formState, edit: false };
-    console.log(this.formState);
-
-    /*     if (action == 'EXIT' || action == 'ADD_EXIT' || action == 'SAVE_EXIT' || action == "DELETE") {
-      
+    switch (action) {
+      case 'EXIT_ADD':
+        this.formState = { ...this.formState, add: false };
+        break;
+      case 'ADD_EXIT':
+        this.formState = { ...this.formState, add: false };
+        break;
+      case 'EXIT_EDIT':
+        this.formState = { ...this.formState, edit: false };
+        break;
+      case 'SAVE_EXIT':
+        this.formState = { ...this.formState, edit: false };
+        break;
+      case 'DELETE':
+        this.formState = { ...this.formState, edit: false };
+        break;
+      default:
+        this.formState = { ...this.formState };
+        break;
     }
-      this.formState = { ...this.formState, add: false };
-        if (action == 'EXIT' || action == 'ADD_EXIT' || action == 'SAVE_EXIT' || action == "DELETE")
-          this.formState = { ...this.formState, add: false };
-          if (
-            action == 'EXIT' ||
-            action == 'ADD_EXIT' ||
-            action == 'SAVE_EXIT' ||
-            action == 'DELETE'
-          )
-            this.formState = { ...this.formState, add: false }; */
   }
   deleteAllData(fieldName) {
     if (confirm('Delte All Data')) {
