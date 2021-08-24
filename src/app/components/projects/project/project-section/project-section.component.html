@@ -6,7 +6,7 @@
     <span>{{'הוסף'+ " " + controlFields.controlName.title}}</span>
   </button>
 </div>
-
+<!-- form to add new project section,... -->
 <app-project-section-form *ngIf="formState.add && editMode" [controlFields]="controlFields" [docRef]="docRef"
   (formAction)="onFormAction($event)" [projectId]="projectId"></app-project-section-form>
 <div class="pages" *ngIf="isArray(selectedProject[fieldName]) && selectedProject[fieldName].length">
