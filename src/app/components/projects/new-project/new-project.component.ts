@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActionTypes } from 'src/models/action-types';
@@ -13,33 +16,26 @@ import { FormAction } from 'src/types/form-action.type';
   styleUrls: ['./new-project.component.css'],
 })
 export class NewProjectComponent implements OnInit {
+  @Input() projectsCollectionRef: AngularFirestoreCollection;
+  @Output() formAction = new EventEmitter<FormAction>();
+  formActions: ActionTypes; //app-form-action-toolbar;
+
   projectName: FormControl = new FormControl('', Validators.required);
   projects: ProjectData[] = [];
   currentProject: ProjectData;
-  @Output() formAction = new EventEmitter<FormAction>();
   user: any;
   new: boolean = true;
   added = false;
   exit = false;
-  formActions: ActionTypes;
 
-  constructor(
-    private firestore: AngularFirestore,
-    private auth: AngularFireAuth
-  ) {
+  constructor() {
     this.formActions = {
       ADD: true,
       ADD_EXIT: true,
       EXIT: true,
     };
   }
-  ngOnInit(): void {
-    this.auth.user.subscribe((user) => {
-      if (user) {
-        this.user = user;
-      }
-    });
-  }
+  ngOnInit(): void {}
 
   updateNewProject(newProject: ProjectData) {
     this.currentProject = newProject;
@@ -47,19 +43,15 @@ export class NewProjectComponent implements OnInit {
 
   saveFormData(exit?: boolean, formAction?: FormAction) {
     if (this.projectName.valid) {
-      this.firestore
-        .collection('users')
-        .doc(this.user.uid)
-        .collection('projects')
+      this.projectsCollectionRef
         .add({
           projectDesc: {
             name: this.projectName.value,
           },
         })
-        .then((doc) => {
+        .then(() => {
           this.formAction.emit(formAction);
           this.projectName.reset();
-
           this.added = true;
           if (exit) {
             this.formAction.emit(formAction);
