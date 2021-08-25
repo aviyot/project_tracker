@@ -121,16 +121,29 @@ let tool = new ProjectSection('array', 'tools', [
   providedIn: 'root',
 })
 export class FormDataConfigService {
+  private formDataConfigs: any[];
+
   constructor(
+    private featuresService: FeaturesService,
+    private toolsService: ToolsService,
     private howTodoService: HowTodoService,
     private todoService: TodoService,
     private challengesService: ChallengesService,
-    private featuresService: FeaturesService,
     private workTimesService: WorkTimesService,
-    private toolsService: ToolsService,
     private projectDescService: ProjectDescService,
     private projectSitesService: ProjectSitesService
-  ) {}
+  ) {
+    this.formDataConfigs = [
+      projectDescService,
+      toolsService,
+      featuresService,
+      todoService,
+      howTodoService,
+      challengesService,
+      workTimesService,
+      projectSitesService,
+    ];
+  }
 
   getFormConfig(sectionName: string) {
     switch (sectionName) {
@@ -155,18 +168,13 @@ export class FormDataConfigService {
     }
   }
 
-  getFeildsNames(): string[] {
-    const feildsNames: string[] = [
-      this.howTodoService.formConfig.controlName.dataFieldName,
-      this.todoService.formConfig.controlName.dataFieldName,
-      this.challengesService.formConfig.controlName.dataFieldName,
-      this.featuresService.formConfig.controlName.dataFieldName,
-      this.workTimesService.formConfig.controlName.dataFieldName,
-      this.toolsService.formConfig.controlName.dataFieldName,
-      this.projectDescService.formConfig.controlName.dataFieldName,
-    ];
+  getControls(): string[] {
+    let controls: any[] = [];
+    this.formDataConfigs.forEach((formDataConfig) => {
+      controls.push(formDataConfig.formConfig.controlName);
+    });
 
-    return feildsNames;
+    return [...controls];
   }
   formControlConfig(formName) {
     switch (formName) {

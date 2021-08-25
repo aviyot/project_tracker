@@ -19,11 +19,11 @@ export class ProjectComponent implements OnInit {
   projectDocRef: AngularFirestoreDocument;
   selectedIndex: number;
 
-  projectSections: string[] = [];
+  projectSections: any[] = [];
   constructor(private formDataConfigService: FormDataConfigService) {}
 
   ngOnInit(): void {
-    this.projectSections = this.formDataConfigService.getFeildsNames();
+    this.projectSections = this.formDataConfigService.getControls();
     this.projectDocRef = this.projectsCollectionRef.doc(
       this.selectedProject.id
     );
