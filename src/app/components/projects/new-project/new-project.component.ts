@@ -1,13 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ActionTypes } from 'src/models/action-types';
-import { ProjectData } from 'src/models/project-data.model';
 import { FormAction } from 'src/types/form-action.type';
 
 @Component({
@@ -19,14 +13,7 @@ export class NewProjectComponent implements OnInit {
   @Input() projectsCollectionRef: AngularFirestoreCollection;
   @Output() formAction = new EventEmitter<FormAction>();
   formActions: ActionTypes; //app-form-action-toolbar;
-
   projectName: FormControl = new FormControl('', Validators.required);
-  projects: ProjectData[] = [];
-  currentProject: ProjectData;
-  user: any;
-  new: boolean = true;
-  added = false;
-  exit = false;
 
   constructor() {
     this.formActions = {
@@ -37,44 +24,31 @@ export class NewProjectComponent implements OnInit {
   }
   ngOnInit(): void {}
 
-  updateNewProject(newProject: ProjectData) {
-    this.currentProject = newProject;
-  }
-
-  saveFormData(exit?: boolean, formAction?: FormAction) {
+  addNewProject(): Promise<any> {
     if (this.projectName.valid) {
-      this.projectsCollectionRef
-        .add({
-          projectDesc: {
-            name: this.projectName.value,
-          },
-        })
-        .then(() => {
-          this.formAction.emit(formAction);
-          this.projectName.reset();
-          this.added = true;
-          if (exit) {
-            this.formAction.emit(formAction);
-            // this.router.navigate(['./', 'app-project', doc.id]);
-          }
-        });
+      return this.projectsCollectionRef.add({
+        projectDesc: {
+          name: this.projectName.value,
+        },
+      });
     } else {
-      alert('data no valid');
+      return new Promise((res, rej) => {
+        rej('invalid data');
+      });
     }
-  }
-
-  exitForm() {
-    this.formAction.emit('EXIT');
-    //this.router.navigate(['./', 'app-projects']);
   }
 
   onFormAction(ev: FormAction) {
     switch (ev) {
       case 'ADD':
-        this.saveFormData(false, ev);
+        this.addNewProject().then(() => {
+          this.formAction.emit('ADD');
+        });
         break;
       case 'ADD_EXIT':
-        this.saveFormData(true, ev);
+        this.addNewProject().then(() => {
+          this.formAction.emit('ADD_EXIT');
+        });
         break;
       case 'EXIT':
         this.formAction.emit('EXIT');
