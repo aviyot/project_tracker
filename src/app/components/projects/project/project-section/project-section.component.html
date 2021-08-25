@@ -7,8 +7,9 @@
   </button>
 </div>
 <!-- form to add new project section,... -->
-<app-project-section-form *ngIf="formState.add && editMode" [controlFields]="controlFields" [docRef]="docRef"
-  (formAction)="onFormAction($event)" [projectId]="projectId"></app-project-section-form>
+<app-project-section-form *ngIf="formState.add && editMode" [controlFields]="controlFields"
+  [projectDocRef]="projectDocRef" (formAction)="onFormAction($event)">
+</app-project-section-form>
 <div class="pages" *ngIf="isArray(selectedProject[fieldName]) && selectedProject[fieldName].length">
   <mat-card *ngFor="let fieldData of selectedProject[fieldName] ; let dataIndex = index">
     <span style="font-size: large;">{{dataIndex + 1}}</span>
@@ -20,8 +21,8 @@
       <!-- <button mat-stroked-button color="warn" (click)="deleteData(fieldData)">מחק </button> -->
     </mat-card-actions>
     <app-project-section-form *ngIf="formState.edit && (dataIndex === formState.selectedIndex) && editMode"
-      [controlFields]="controlFields" [docRef]="docRef" (formAction)="onFormAction($event)" [inputData]="fieldData"
-      [projectId]="projectId">
+      [controlFields]="controlFields" [projectDocRef]="projectDocRef" (formAction)="onFormAction($event)"
+      [inputData]="fieldData">
     </app-project-section-form>
 
   </mat-card>
@@ -37,8 +38,8 @@
       <!-- <button mat-stroked-button color="warn" (click)="deleteData(selectedProject)">מחק</button> -->
     </mat-card-actions>
 
-    <app-project-section-form *ngIf="formState.edit && editMode" [controlFields]="controlFields" [docRef]="docRef"
-      (formAction)="onFormAction($event)" [inputData]="selectedProject[fieldName]" [projectId]="projectId">
+    <app-project-section-form *ngIf="formState.edit && editMode" [controlFields]="controlFields"
+      [projectDocRef]="projectDocRef" (formAction)="onFormAction($event)" [inputData]="selectedProject[fieldName]">
     </app-project-section-form>
   </mat-card>
 </div>

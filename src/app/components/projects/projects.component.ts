@@ -7,6 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { ListAction } from 'src/models/list-action';
 import { Project } from 'src/models/project.model';
 import { FormAction } from 'src/types/form-action.type';
@@ -21,7 +22,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
   @Input() selectedProject: Project;
   @Input() selectedProjectIndex: number;
   @Input() addNewProject;
-  @Input() docRef;
+  @Input() projectsCollectionRef: AngularFirestoreCollection;
   @Output() formAction = new EventEmitter<FormAction>();
   @Output() itemSelected = new EventEmitter<ListAction>();
 

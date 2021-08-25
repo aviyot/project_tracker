@@ -3,7 +3,11 @@ import { Project } from 'src/models/project.model';
 import { MatDrawer } from '@angular/material/sidenav';
 import { FormAction } from 'src/types/form-action.type';
 import { AuthService } from './auth/auth.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  CollectionReference,
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ListAction } from 'src/models/list-action';
 
@@ -16,7 +20,7 @@ export class AppComponent implements OnInit {
   appName = 'מנהל הפרויקטים';
   selectedProject: Project;
   projects: Project[];
-  docRef;
+  projectsCollectionRef: AngularFirestoreCollection;
   isUserSignIn = false;
   userSignIn: 'LOAD' | 'SIGNIN' | 'INABLE_SIGNIN' | 'ERROR' = 'LOAD';
   itemSelected = false;
@@ -34,13 +38,13 @@ export class AppComponent implements OnInit {
       (user) => {
         if (user) {
           this.userSignIn = 'SIGNIN';
-          this.docRef = this.firestore
+          this.projectsCollectionRef = this.firestore
             .collection('users')
             .doc(user.uid)
             .collection('projects', (ref) => ref.orderBy('projectDesc.name'));
 
           (
-            this.docRef.valueChanges({
+            this.projectsCollectionRef.valueChanges({
               idField: 'id',
             }) as Observable<Project[]>
           ).subscribe((projects) => {

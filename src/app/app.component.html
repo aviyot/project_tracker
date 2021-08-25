@@ -18,9 +18,9 @@
       <app-sign-in *ngIf="userSignIn === 'INABLE_SIGNIN'"></app-sign-in>
       <!--       <app-new-project *ngIf="addNewProject"></app-new-project>
  -->
-      <app-projects [docRef]="docRef" [projects]="projects" *ngIf="userSignIn === 'SIGNIN'"
-        [selectedProject]="selectedProject" [addNewProject]="addNewProject" (formAction)="onFormAction($event)"
-        (itemSelected)="onItemSelected($event)"></app-projects>
+      <app-projects [projectsCollectionRef]="projectsCollectionRef" [projects]="projects"
+        *ngIf="userSignIn === 'SIGNIN'" [selectedProject]="selectedProject" [addNewProject]="addNewProject"
+        (formAction)="onFormAction($event)" (itemSelected)="onItemSelected($event)"></app-projects>
       <!-- <router-outlet></router-outlet> -->
     </mat-sidenav-content>
   </mat-sidenav-container>

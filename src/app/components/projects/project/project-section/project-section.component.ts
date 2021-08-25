@@ -4,7 +4,10 @@ import { FormState } from 'src/models/ui/form-state';
 import firebase from 'firebase/app';
 import { FormAction } from 'src/types/form-action.type';
 import { Router } from '@angular/router';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import {
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
 import { Project } from 'src/models/project.model';
 @Component({
   selector: 'app-project-section',
@@ -13,7 +16,7 @@ import { Project } from 'src/models/project.model';
 })
 export class ProjectSectionComponent implements OnInit {
   //inputs
-  @Input() docRef: AngularFirestoreCollection;
+  @Input() projectDocRef: AngularFirestoreDocument;
   @Input() fieldName: string;
   @Input() selectedProject: Project;
   @Input() editMode = false;
@@ -96,7 +99,7 @@ export class ProjectSectionComponent implements OnInit {
   }
   deleteAllData(fieldName) {
     if (confirm('Delte All Data')) {
-      this.docRef.doc(this.selectedProject.id).update({
+      this.projectDocRef.update({
         [fieldName]: firebase.firestore.FieldValue.delete(),
       });
     }

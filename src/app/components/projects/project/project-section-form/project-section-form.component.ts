@@ -6,6 +6,7 @@ import { FormAction } from 'src/types/form-action.type';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { ActionTypes } from 'src/models/action-types';
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-project-section-form',
@@ -16,9 +17,8 @@ export class ProjectSectionFormComponent implements OnInit {
   //Input FROM
   @Input('inputData') inputFormData: any;
   @Input('firestoreField') firestoreField: string;
-  @Input('docRef') docRef;
+  @Input() projectDocRef: AngularFirestoreDocument;
   @Input('controlFields') controlFields: FormConfig;
-  @Input() projectId;
 
   dataType: 'array' | 'map';
   controlFieldKeys: string[];
@@ -53,8 +53,8 @@ export class ProjectSectionFormComponent implements OnInit {
       DELETE: true,
       EXIT_EDIT: true,
     };
-    this.colRef = this.docRef;
-    this.docRef = this.docRef.doc(this.projectId);
+    //this.docRef = this.docRef.doc(this.projectId);
+
     this.fieldName = this.controlFields.controlName.dataFieldName;
     this.controlFieldKeys = Object.keys(this.controlFields.controlFields);
     this.controlFieldKeys.forEach((key) => {
@@ -70,13 +70,13 @@ export class ProjectSectionFormComponent implements OnInit {
 
   addData(): Promise<any> {
     if (this.dataType == 'array') {
-      return this.docRef.update({
+      return this.projectDocRef.update({
         [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
           this.formGroup.value
         ),
       });
     } else if (this.dataType == 'map') {
-      return this.docRef.update({
+      return this.projectDocRef.update({
         [this.fieldName]: this.formGroup.value,
       });
     } else {
@@ -88,13 +88,13 @@ export class ProjectSectionFormComponent implements OnInit {
 
   removeData(): Promise<any> {
     if (this.dataType == 'array') {
-      return this.docRef.update({
+      return this.projectDocRef.update({
         [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(
           this.inputFormData
         ),
       });
     } else if (this.dataType == 'map' && this.fieldName !== 'projectDesc') {
-      return this.docRef.update({
+      return this.projectDocRef.update({
         [this.fieldName]: firebase.firestore.FieldValue.delete(),
       });
     } else if (this.dataType == 'map' && this.fieldName == 'projectDesc') {
@@ -103,7 +103,7 @@ export class ProjectSectionFormComponent implements OnInit {
           `DANGER : delete ****** ${this.inputFormData.name} ****** project ?`
         )
       )
-        return this.docRef.delete().then(() => {});
+        return this.projectDocRef.delete().then(() => {});
       else {
         return new Promise((resolve, reject) => {
           reject('delete canceled');
@@ -119,14 +119,14 @@ export class ProjectSectionFormComponent implements OnInit {
   updateData(): Promise<any> {
     if (this.dataType == 'array') {
       return this.removeData().then(() => {
-        return this.docRef.update({
+        return this.projectDocRef.update({
           [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
             this.formGroup.value
           ),
         });
       });
     } else if (this.dataType == 'map') {
-      return this.docRef.update({
+      return this.projectDocRef.update({
         [this.fieldName]: this.formGroup.value,
       });
     } else {
