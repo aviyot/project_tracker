@@ -18,17 +18,17 @@ export class ProjectSectionFormComponent implements OnInit {
   @Input('firestoreField') firestoreField: string;
   @Input('docRef') docRef;
   @Input('controlFields') controlFields: FormConfig;
+  @Input() projectId;
+
   dataType: 'array' | 'map';
   controlFieldKeys: string[];
   formGroup: FormGroup;
-  @Input() projectId;
   colRef;
   newData: boolean;
-
-  //Output
-  @Output() formAction: EventEmitter<FormAction> = new EventEmitter();
   formActionsNew: ActionTypes;
   formActionsUpdate: ActionTypes;
+  //Output
+  @Output() formAction: EventEmitter<FormAction> = new EventEmitter();
 
   //Local
   fieldName: string;
@@ -62,6 +62,7 @@ export class ProjectSectionFormComponent implements OnInit {
     });
     this.dataType = this.controlFields.controlName.type;
     this.formGroup = this.fb.group(this.formDesc);
+
     if (this.inputFormData) {
       this.formGroup.patchValue(this.inputFormData);
     }

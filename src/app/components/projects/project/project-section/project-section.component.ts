@@ -5,22 +5,25 @@ import firebase from 'firebase/app';
 import { FormAction } from 'src/types/form-action.type';
 import { Router } from '@angular/router';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Project } from 'src/models/project.model';
 @Component({
   selector: 'app-project-section',
   templateUrl: './project-section.component.html',
   styleUrls: ['./project-section.component.css'],
 })
 export class ProjectSectionComponent implements OnInit {
-  controlFieldKeys: string[];
+  //inputs
   @Input() docRef: AngularFirestoreCollection;
-  controlFields: any;
   @Input() fieldName: string;
-  @Input() selectedProject;
+  @Input() selectedProject: Project;
+  @Input() editMode = false;
+
+  controlFieldKeys: string[];
+  controlFields: any;
   formState: FormState;
   fieldSize: number;
-  projectId;
-  @Input() editMode = false;
-  fieldType;
+  projectId: string;
+  fieldType: string;
 
   constructor(private formDataConfigService: FormDataConfigService) {}
 
