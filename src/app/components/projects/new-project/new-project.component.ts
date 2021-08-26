@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { ActionTypes } from 'src/models/action-types';
+import { Project } from 'src/models/project.model';
 import { FormAction } from 'src/types/form-action.type';
 
 @Component({
@@ -11,6 +12,7 @@ import { FormAction } from 'src/types/form-action.type';
 })
 export class NewProjectComponent implements OnInit {
   @Input() projectsCollectionRef: AngularFirestoreCollection;
+  @Input() projects: Project[];
   @Output() formAction = new EventEmitter<FormAction>();
   formActions: ActionTypes; //app-form-action-toolbar;
   projectName: FormControl = new FormControl('', Validators.required);
@@ -26,6 +28,11 @@ export class NewProjectComponent implements OnInit {
 
   addNewProject(): Promise<any> {
     if (this.projectName.valid) {
+      if (this.isProjectNameExit(this.projects)) {
+        return new Promise((res, rej) => {
+          rej('PROJECT NAME EXIT');
+        });
+      }
       return this.projectsCollectionRef.add({
         projectDesc: {
           name: this.projectName.value,
@@ -41,25 +48,33 @@ export class NewProjectComponent implements OnInit {
   onFormAction(ev: FormAction) {
     switch (ev) {
       case 'ADD':
-        this.addNewProject().then(() => {
-          this.formActions = {
-            ...this.formActions,
-            ADD: false,
-            ADD_EXIT: false,
-          };
-          this.projectName.reset();
-          this.formAction.emit('ADD');
-        });
+        this.addNewProject()
+          .then(() => {
+            this.formActions = {
+              ...this.formActions,
+              ADD: false,
+              ADD_EXIT: false,
+            };
+            this.projectName.reset();
+            this.formAction.emit('ADD');
+          })
+          .catch((err) => {
+            alert(err);
+          });
         break;
       case 'ADD_EXIT':
-        this.addNewProject().then(() => {
-          this.formActions = {
-            ...this.formActions,
-            ADD: false,
-            ADD_EXIT: false,
-          };
-          this.formAction.emit('ADD_EXIT');
-        });
+        this.addNewProject()
+          .then(() => {
+            this.formActions = {
+              ...this.formActions,
+              ADD: false,
+              ADD_EXIT: false,
+            };
+            this.formAction.emit('ADD_EXIT');
+          })
+          .catch((err) => {
+            alert(err);
+          });
         break;
       case 'EXIT':
         this.formAction.emit('EXIT');
@@ -68,5 +83,31 @@ export class NewProjectComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  isProjectNameExit(projects: Project[]): boolean {
+    return projects.some((project) => {
+      // console.log(this.searchObj(project.projectDesc, this.projectName.value));
+      return project.projectDesc.name === this.projectName.value;
+    });
+  }
+
+  searchObj(obj, query): Boolean {
+    for (var key in obj) {
+      if (key === 'name') {
+        var value = obj[key];
+        console.table(key, value);
+        if (typeof value === 'object') {
+          //  console.log(value);
+          this.searchObj(value, query);
+        }
+      }
+
+      if (value === query) {
+        // console.log('property=' + key + ' value=' + value);
+        return true;
+      } else return false;
+    }
+    return false;
   }
 }
