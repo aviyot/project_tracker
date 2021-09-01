@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
 import { ListAction } from 'src/models/list-action';
 import { Project } from 'src/models/project.model';
+import { ProjectSection } from 'src/types/project-sections.type';
 
 @Component({
   selector: 'app-projects-summary-list',
@@ -24,7 +22,11 @@ export class ProjectsSummaryListComponent implements OnInit {
     this.showFullPath = full;
   }
 
-  selectProject(item: number) {
-    this.itemSelected.emit({ action: 'VIEW_ITEM', item: item });
+  selectProject(event: ProjectSection, projectIndex: number) {
+    this.itemSelected.emit({
+      action: 'VIEW_ITEM',
+      item: projectIndex,
+      section: event,
+    });
   }
 }

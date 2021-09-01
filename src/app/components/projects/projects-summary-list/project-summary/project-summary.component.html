@@ -4,13 +4,8 @@
     <p>{{selectedProject.projectDesc.lifecycleStage}}</p>
   </mat-card-title>
   <mat-card-subtitle>
-    <p>{{selectedProject.projectDesc.startTime | format }}</p>
-    <p>{{selectedProject.projectDesc.endTime | format }}</p>
-    <div>
-      <p>{{selectedProject.projectDesc.filePath |
-        sub:'\\' }}</p>
-    </div>
-
+    <span>{{selectedProject.projectDesc.startTime | format }}</span>
+    <span>{{selectedProject.projectDesc.endTime | format }}</span>
   </mat-card-subtitle>
 </mat-card-header>
 <mat-card-content>
@@ -19,15 +14,23 @@
   </p>
 </mat-card-content>
 <mat-card-actions>
-  <mat-nav-list>
-    <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-list-item
-      [href]="selectedProject.projectDesc.gitHub"> גיטהב</a>
-    <!--    <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-list-item
-            [href]="selectedProject.projectDesc.site">אתר</a> -->
-    <a *ngFor="let site of selectedProject.projectDesc.sites;let i = index" target="_blank" mat-list-item
+  <a *ngIf="selectedProject.projectDesc.gitHub" target="_blank" mat-button [href]="selectedProject.projectDesc.gitHub">
+    גיטהב</a>
+  <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-button
+    [href]="selectedProject.projectDesc.site">אתר</a>
+  <!--  <a *ngFor="let site of selectedProject.projectDesc.sites;let i = index" target="_blank" mat-list-item
       [href]="site.url">
       <span *ngIf="site.main">אתר ראשי</span>
       <span *ngIf="!site.main">אתר </span>
-    </a>
-  </mat-nav-list>
+    </a> -->
+</mat-card-actions>
+<mat-card-actions>
+  <button mat-button (click)="onSelectSection('projectDesc')">מאפיינים</button>
+  <button mat-button (click)="onSelectSection('tools')">כלים</button>
+  <button mat-button (click)="onSelectSection('features')">פיצרים</button>
+  <button mat-button (click)="onSelectSection('todos')">משימות</button>
+  <button mat-button (click)="onSelectSection('howTodos')">איך לעשות</button>
+  <button mat-button (click)="onSelectSection('challenges')">קשיים</button>
+  <button mat-button (click)="onSelectSection('workTimes')">זמני עבודה</button>
+
 </mat-card-actions>

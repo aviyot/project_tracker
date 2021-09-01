@@ -1,5 +1,19 @@
+<div style="display: flex;margin:12px;flex-wrap: wrap; justify-content: space-between;">
+    <div style="display: flex;flex-wrap: wrap;">
+        <button mat-flat-button [color]="itemIndex == i ? 'primary':''" *ngFor="let project of projects;let i = index"
+            (click)="selectProjectName({action:'VIEW_ITEM',item:i})">{{project.projectDesc.name}}</button>
+    </div>
+    <div>
+        <button (click)="selectProjectName({action:'ADD_ITEM'})" mat-stroked-button color="accent">הוסף + </button>
+    </div>
+</div>
+<app-new-project [projects]="projects" *ngIf="addNewProject" [projectsCollectionRef]="projectsCollectionRef"
+    (formAction)="onFormAction($event)"></app-new-project>
+
 <app-projects-summary-list *ngIf="!selectedProject" (itemSelected)="onItemSelected($event)" [projects]="projects">
 </app-projects-summary-list>
-<app-project *ngIf="selectedProject" [selectedProject]="selectedProject"
+
+
+<app-project [projectSection]="projectSection" *ngIf="selectedProject" [selectedProject]="selectedProject"
     [projectsCollectionRef]="projectsCollectionRef">
 </app-project>

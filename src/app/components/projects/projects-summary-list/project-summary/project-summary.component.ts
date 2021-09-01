@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProjectSection } from 'src/types/project-sections.type';
 
 @Component({
   selector: 'app-project-summary',
@@ -8,5 +9,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProjectSummaryComponent implements OnInit {
   constructor() {}
   @Input() selectedProject;
+  @Output() selectSection = new EventEmitter<ProjectSection>();
   ngOnInit() {}
+
+  onSelectSection(section: ProjectSection) {
+    this.selectSection.emit(section);
+  }
 }

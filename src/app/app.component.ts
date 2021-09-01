@@ -6,7 +6,6 @@ import { AuthService } from './auth/auth.service';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  CollectionReference,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ListAction } from 'src/models/list-action';
@@ -26,6 +25,7 @@ export class AppComponent implements OnInit {
   itemSelected = false;
   addNewProject = false;
   itemIndex = 0;
+  projectSection: number;
 
   @ViewChild('sideNav') sideNav: MatDrawer;
 
@@ -55,6 +55,9 @@ export class AppComponent implements OnInit {
                 this.selectedProject = null;
 
               this.projects = projects;
+              /* this.selectedProject = {
+                ...this.projects[this.itemIndex],
+              }; */
             } else this.projects = projects;
           });
         } else {
@@ -70,6 +73,32 @@ export class AppComponent implements OnInit {
     if (listAction.action == 'VIEW_ITEM') {
       this.selectedProject = { ...this.projects[listAction.item] };
       this.itemIndex = listAction.item;
+      switch (listAction.section) {
+        case 'projectDesc':
+          this.projectSection = 0;
+          break;
+        case 'tools':
+          this.projectSection = 1;
+          break;
+        case 'features':
+          this.projectSection = 2;
+          break;
+        case 'todos':
+          this.projectSection = 3;
+          break;
+        case 'howTodos':
+          this.projectSection = 4;
+          break;
+        case 'challenges':
+          this.projectSection = 5;
+          break;
+        case 'workTimes':
+          this.projectSection = 6;
+          break;
+
+        default:
+          break;
+      }
     }
 
     if (listAction.action == 'ADD_ITEM') this.addNewProject = true;
