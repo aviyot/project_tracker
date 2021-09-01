@@ -1,4 +1,4 @@
-<div style="display: flex;justify-content: space-between;margin:12px;">
+<div *ngIf="selectedProject" style="display: flex;justify-content: space-between;margin:12px;">
     <div style="font-size: x-large;"> {{selectedProject.projectDesc.name}}</div>
     <div>
         <button *ngIf="!isShowAllProjects" (click)="showAllProjects()" mat-stroked-button color="accent">הצג
