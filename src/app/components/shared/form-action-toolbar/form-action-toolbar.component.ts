@@ -10,11 +10,15 @@ import { FormAction } from 'src/types/form-action.type';
 export class FormActionToolbarComponent implements OnInit {
   @Output() formAction = new EventEmitter<FormAction>();
   @Input('formActions') actions: ActionTypes;
+  groupValue: FormAction;
   constructor() {}
 
   ngOnInit() {}
 
   onChange(ev: MatButtonToggleChange) {
-    this.formAction.emit(ev.value);
+    this.groupValue = ev.value;
+  }
+  onClick() {
+    this.formAction.emit(this.groupValue);
   }
 }

@@ -1,4 +1,4 @@
-<mat-button-toggle-group (change)="onChange($event)" name="formAction" aria-label="Form Action">
+<mat-button-toggle-group (change)="onChange($event)" (click)="onClick()" name="formAction" aria-label="Form Action">
   <mat-button-toggle *ngIf="actions.ADD" value="ADD">הוסף</mat-button-toggle>
   <mat-button-toggle *ngIf="actions.ADD_EXIT" value="ADD_EXIT">הוסף וצא</mat-button-toggle>
   <mat-button-toggle *ngIf="actions.SAVE" value="SAVE">שמור </mat-button-toggle>
