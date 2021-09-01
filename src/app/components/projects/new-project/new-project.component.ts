@@ -86,10 +86,13 @@ export class NewProjectComponent implements OnInit {
   }
 
   isProjectNameExit(projects: Project[]): boolean {
-    return projects.some((project) => {
-      // console.log(this.searchObj(project.projectDesc, this.projectName.value));
-      return project.projectDesc.name === this.projectName.value;
-    });
+    if (projects) {
+      return projects.some((project) => {
+        // console.log(this.searchObj(project.projectDesc, this.projectName.value));
+        return project.projectDesc.name === this.projectName.value;
+      });
+    }
+    return false;
   }
 
   searchObj(obj, query): Boolean {
