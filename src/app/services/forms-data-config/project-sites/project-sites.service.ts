@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { FormConfig } from 'src/models/form-config.model';
-
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectSitesService {
   formConfig: FormConfig;
-
   constructor() {
     this.formConfig = {
       controlName: {
-        title: 'אתרים',
-        dataFieldName: 'projectDesc.sites',
         type: 'array',
+        dataFieldName: 'sites',
+        title: 'אתרים',
       },
       controlFields: {
         url: {

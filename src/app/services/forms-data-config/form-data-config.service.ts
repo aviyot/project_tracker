@@ -161,7 +161,7 @@ export class FormDataConfigService {
         return this.toolsService.formConfig;
       case 'projectDesc':
         return this.projectDescService.formConfig;
-      case 'projectDesc.sites':
+      case 'sites':
         return this.projectSitesService.formConfig;
       default:
         return null;
