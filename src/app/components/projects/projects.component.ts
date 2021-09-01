@@ -28,6 +28,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
   @Input() itemIndex: number;
   @Output() formAction = new EventEmitter<FormAction>();
   @Output() itemSelected = new EventEmitter<ListAction>();
+  isShowAllProjects: boolean = false;
 
   constructor() {}
   ngOnInit() {}
@@ -57,8 +58,15 @@ export class ProjectsComponent implements OnInit, OnChanges {
     this.itemSelected.emit({ action: action.action, item: action.item });
     this.itemIndex = action.item;
     this.projectSection = 0;
+    if (action.action === 'CLOSE_ITEM') {
+      this.isShowAllProjects = false;
+    }
   }
   onFormAction(event: FormAction) {
     this.formAction.emit(event);
+  }
+
+  showAllProjects() {
+    this.isShowAllProjects = true;
   }
 }

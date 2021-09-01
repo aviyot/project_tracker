@@ -1,10 +1,22 @@
-<div style="display: flex;margin:12px;flex-wrap: wrap; justify-content: space-between;">
+<div style="display: flex;justify-content: space-between;margin:12px;">
+    <div style="font-size: x-large;"> {{selectedProject.projectDesc.name}}</div>
+    <div>
+        <button *ngIf="!isShowAllProjects" (click)="showAllProjects()" mat-stroked-button color="accent">הצג
+            הכל</button>
+    </div>
+
+</div>
+<div *ngIf="isShowAllProjects" style="display: flex;margin:12px;flex-wrap: wrap; justify-content: space-between;">
     <div style="display: flex;flex-wrap: wrap;">
         <button mat-flat-button [color]="itemIndex == i ? 'primary':''" *ngFor="let project of projects;let i = index"
             (click)="selectProjectName({action:'VIEW_ITEM',item:i})">{{project.projectDesc.name}}</button>
     </div>
     <div>
-        <button (click)="selectProjectName({action:'ADD_ITEM'})" mat-stroked-button color="accent">הוסף + </button>
+        <button (click)="selectProjectName({action:'ADD_ITEM',item:itemIndex})" mat-stroked-button color="accent">הוסף +
+        </button>
+        <button (click)="selectProjectName({action:'CLOSE_ITEM',item:itemIndex})" mat-stroked-button color="accent">
+            סגור</button>
+
     </div>
 </div>
 <app-new-project [projects]="projects" *ngIf="addNewProject" [projectsCollectionRef]="projectsCollectionRef"
