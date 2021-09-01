@@ -48,9 +48,12 @@ export class AppComponent implements OnInit {
               idField: 'id',
             }) as Observable<Project[]>
           ).subscribe((projects) => {
+            //check if added new projects
             if (this.projects) {
+              //item edited
               if (projects.length == this.projects.length)
                 this.selectedProject = { ...projects[this.itemIndex] };
+              //new iten addes
               if (projects.length !== this.projects.length)
                 this.selectedProject = null;
 
@@ -58,7 +61,14 @@ export class AppComponent implements OnInit {
               /* this.selectedProject = {
                 ...this.projects[this.itemIndex],
               }; */
-            } else this.projects = projects;
+            } else {
+              this.projects = projects;
+              this.itemIndex = 0;
+
+              this.selectedProject = {
+                ...projects[this.itemIndex],
+              };
+            }
           });
         } else {
           this.userSignIn = 'INABLE_SIGNIN';

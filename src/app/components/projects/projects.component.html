@@ -10,9 +10,9 @@
 <app-new-project [projects]="projects" *ngIf="addNewProject" [projectsCollectionRef]="projectsCollectionRef"
     (formAction)="onFormAction($event)"></app-new-project>
 
-<app-projects-summary-list *ngIf="!selectedProject" (itemSelected)="onItemSelected($event)" [projects]="projects">
+<!-- <app-projects-summary-list *ngIf="!selectedProject" (itemSelected)="onItemSelected($event)" [projects]="projects">
 </app-projects-summary-list>
-
+ -->
 
 <app-project [projectSection]="projectSection" *ngIf="selectedProject" [selectedProject]="selectedProject"
     [projectsCollectionRef]="projectsCollectionRef">
