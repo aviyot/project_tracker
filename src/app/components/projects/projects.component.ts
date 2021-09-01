@@ -31,7 +31,11 @@ export class ProjectsComponent implements OnInit, OnChanges {
   isShowAllProjects: boolean = false;
 
   constructor() {}
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.projects) {
+      this.addNewProject = true;
+    }
+  }
   ngOnChanges(change: SimpleChanges) {
     /*    if (change.selectedProjectIndex) {
       if (
