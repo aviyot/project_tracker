@@ -45,6 +45,10 @@
     </mat-form-field>
     <mat-checkbox *ngIf="controlFields.controlFields[key].type == 'checkbox'" [formControlName]="key">
       {{controlFields.controlFields[key].label}}</mat-checkbox>
+    <mat-form-field *ngIf="controlFields.controlFields[key].type == 'href'" appearance="outline">
+      <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
+      <input type="url" matInput [formControlName]="key">
+    </mat-form-field>
   </span>
 </form>
 <!-- <button *ngIf="!inputFormData" mat-stroked-button color="primary" (click)="addData()">הוסף</button>
