@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
             }) as Observable<Project[]>
           ).subscribe((projects) => {
             //check if added new projects
-            if (this.projects) {
+            if (this.projects && projects.length) {
               //item edited
               if (projects.length == this.projects.length)
                 this.selectedProject = { ...projects[this.itemIndex] };
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
               /* this.selectedProject = {
                 ...this.projects[this.itemIndex],
               }; */
-            } else {
+            } else if (projects.length) {
               this.projects = projects;
               this.itemIndex = 0;
 
