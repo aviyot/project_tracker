@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { ActionTypes } from 'src/models/action-types';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { IsTimestampService } from 'src/app/services/is-timestamp.service';
 
 @Component({
   selector: 'app-project-section-form',
@@ -36,7 +37,10 @@ export class ProjectSectionFormComponent implements OnInit {
   formValue: any;
   dataIn: any;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private isTimestampService: IsTimestampService
+  ) {}
 
   ngOnInit() {
     if (this.inputFormData === undefined) this.newData = true;
@@ -64,6 +68,14 @@ export class ProjectSectionFormComponent implements OnInit {
     this.formGroup = this.fb.group(this.formDesc);
 
     if (this.inputFormData) {
+      if (this.isTimestampService.isTimestamp(this.inputFormData.startDate)) {
+        this.inputFormData.startDate = this.inputFormData.startDate.toDate();
+      }
+
+      if (this.isTimestampService.isTimestamp(this.inputFormData.endDate)) {
+        this.inputFormData.endDate = this.inputFormData.endDate.toDate();
+      }
+
       this.formGroup.patchValue(this.inputFormData);
     }
   }
