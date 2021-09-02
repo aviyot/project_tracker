@@ -8,15 +8,7 @@ import { LIFECYCLE_STAGE } from 'src/types/lifecycleStage.type';
 export class ProjectDescService {
   formConfig: FormConfig;
 
-  projectStatuses: LIFECYCLE_STAGE[] = [
-    'planning',
-    'design',
-    'prototyping',
-    'development',
-    'testing',
-    'publishing',
-    'maintenance',
-  ];
+  projectStatuses = ['פיתוח', 'הסתיים', 'לא התחיל'];
 
   constructor() {
     this.formConfig = {
