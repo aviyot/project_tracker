@@ -50,11 +50,6 @@ export class NewProjectComponent implements OnInit {
       case 'ADD':
         this.addNewProject()
           .then(() => {
-            this.formActions = {
-              ...this.formActions,
-              ADD: false,
-              ADD_EXIT: false,
-            };
             this.projectName.reset();
             this.formAction.emit('ADD');
           })
