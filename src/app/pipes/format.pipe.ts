@@ -16,7 +16,7 @@ export class FormatPipe implements PipeTransform {
         return this.datePipe.transform(value.toDate(), 'yyyy-MM-dd');
       } else if (typeof value == 'string' && value.length) {
         return this.datePipe.transform(new Date(value as string), 'yyyy-MM-dd');
-      } else return null;
+      } else return this.datePipe.transform(value, 'yyyy-MM-dd');
     } else return null;
   }
 }
