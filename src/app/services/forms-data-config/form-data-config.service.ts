@@ -141,7 +141,6 @@ export class FormDataConfigService {
       howTodoService,
       challengesService,
       workTimesService,
-      projectSitesService,
     ];
   }
 
@@ -161,8 +160,6 @@ export class FormDataConfigService {
         return this.toolsService.formConfig;
       case 'projectDesc':
         return this.projectDescService.formConfig;
-      case 'sites':
-        return this.projectSitesService.formConfig;
       default:
         return null;
     }
