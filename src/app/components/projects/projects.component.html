@@ -11,7 +11,7 @@
         <button mat-flat-button [color]="itemIndex == i ? 'primary':''" *ngFor="let project of projects;let i = index"
             (click)="selectProjectName({action:'VIEW_ITEM',item:i})">{{project.projectDesc.name}}</button>
     </div>
-    <div>
+    <div style="margin: 4px;">
         <button (click)="selectProjectName({action:'ADD_ITEM',item:itemIndex})" mat-stroked-button color="accent"> הוסף
             פרויקט חדש+
         </button>
@@ -20,8 +20,8 @@
 
     </div>
 </div>
-<app-new-project [projects]="projects" *ngIf="addNewProject" [projectsCollectionRef]="projectsCollectionRef"
-    (formAction)="onFormAction($event)"></app-new-project>
+<app-new-project [projects]="projects" *ngIf="!projects || addNewProject"
+    [projectsCollectionRef]="projectsCollectionRef" (formAction)="onFormAction($event)"></app-new-project>
 
 <!-- <app-projects-summary-list *ngIf="!selectedProject" (itemSelected)="onItemSelected($event)" [projects]="projects">
 </app-projects-summary-list>
