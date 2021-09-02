@@ -12,7 +12,7 @@
   <app-feature-form *ngSwitchCase="'features'" [formDesc]="formDesc" [dataIn]="inputFormData"
     (dataOut)="formValueChange($event)"></app-feature-form> -->
 <form [formGroup]="formGroup">
-  <span *ngFor="let key of controlFieldKeys;let keyIndex = index">
+  <div *ngFor="let key of controlFieldKeys;let keyIndex = index">
     <mat-form-field *ngIf="controlFields.controlFields[key].type == 'text'" appearance="outline">
       <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
       <input matInput [formControlName]="key">
@@ -49,7 +49,7 @@
       <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
       <input type="url" matInput [formControlName]="key">
     </mat-form-field>
-  </span>
+  </div>
 </form>
 <!-- <button *ngIf="!inputFormData" mat-stroked-button color="primary" (click)="addData()">הוסף</button>
 <button *ngIf="inputFormData" mat-stroked-button color="warn" (click)="removeData()">מחק</button>
