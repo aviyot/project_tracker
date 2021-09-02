@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { FormConfig } from 'src/models/form-config.model';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class TodoService {
       },
       controlFields: {
         title: {
-          value: [],
+          value: ['', Validators.required],
           type: 'text',
           label: 'שם משימה',
           order: 1,

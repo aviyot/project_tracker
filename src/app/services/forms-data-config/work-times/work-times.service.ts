@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { FormConfig } from 'src/models/form-config.model';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class WorkTimesService {
       },
       controlFields: {
         task: {
-          value: [],
+          value: ['', Validators.required],
           type: 'textarea',
           label: 'משימה',
           order: 2,

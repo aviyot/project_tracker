@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { FormConfig } from 'src/models/form-config.model';
 import { LIFECYCLE_STAGE } from 'src/types/lifecycleStage.type';
 
@@ -19,7 +20,7 @@ export class ProjectDescService {
       },
       controlFields: {
         name: {
-          value: [],
+          value: ['', Validators.required],
           type: 'text',
           label: 'שם פרויקט',
           order: 1,

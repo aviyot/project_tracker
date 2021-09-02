@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { Challenge } from 'src/models/challenge.model';
 import { FormConfig } from 'src/models/form-config.model';
 
@@ -17,13 +18,13 @@ export class ChallengesService {
       },
       controlFields: {
         title: {
-          value: [],
+          value: ['', Validators.required],
           type: 'text',
           label: 'שם קושי',
           order: 1,
         },
         challenge: {
-          value: [],
+          value: [''],
           type: 'textarea',
           label: 'תיאור הקושי',
           order: 1,
