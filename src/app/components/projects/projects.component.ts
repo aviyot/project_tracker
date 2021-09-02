@@ -34,6 +34,8 @@ export class ProjectsComponent implements OnInit, OnChanges {
   ngOnInit() {
     if (!this.projects) {
       this.addNewProject = true;
+    } else {
+      this.addNewProject = false;
     }
   }
   ngOnChanges(change: SimpleChanges) {
@@ -50,6 +52,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
   onItemSelected(listAction: ListAction) {
     this.itemSelected.emit(listAction);
+
     // this.itemIndex = listAction.item;
 
     /*   if (selectedIndex !== null || selectedIndex !== undefined) {
@@ -68,6 +71,9 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
   onFormAction(event: FormAction) {
     this.formAction.emit(event);
+    if (event === 'EXIT') {
+      this.addNewProject = false;
+    }
   }
 
   showAllProjects() {
