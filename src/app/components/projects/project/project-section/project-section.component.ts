@@ -25,13 +25,11 @@ export class ProjectSectionComponent implements OnInit {
   controlFields: any;
   formState: FormState;
   fieldSize: number;
-  projectId: string;
   fieldType: string;
 
   constructor(private formDataConfigService: FormDataConfigService) {}
 
   ngOnInit() {
-    this.projectId = this.selectedProject.id;
     if (this.isArray(this.selectedProject[this.fieldName])) {
       if (this.selectedProject[this.fieldName])
         this.fieldSize = this.selectedProject[this.fieldName].length;
@@ -66,15 +64,6 @@ export class ProjectSectionComponent implements OnInit {
     }
   }
 
-  /*   deleteData(data) {
-    this.docRef
-      .doc(this.selectedProject.id)
-      .update({
-        [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(data),
-      })
-      .then(() => {});
-  }
- */
   onFormAction(action: FormAction) {
     switch (action) {
       case 'EXIT_ADD':

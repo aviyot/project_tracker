@@ -3,6 +3,7 @@ import {
   Component,
   Input,
   OnInit,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { Project } from 'src/models/project.model';
@@ -34,6 +35,9 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectSections = this.formDataConfigService.getControls();
+  }
+
+  ngOnChanges(): void {
     this.projectDocRef = this.projectsCollectionRef.doc(
       this.selectedProject.id
     );
