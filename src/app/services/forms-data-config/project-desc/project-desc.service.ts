@@ -37,7 +37,7 @@ export class ProjectDescService {
           order: 3,
         },
         endDate: {
-          value: [new Date()],
+          value: [],
           type: 'date',
           label: 'תאריך סיום',
           order: 3,
