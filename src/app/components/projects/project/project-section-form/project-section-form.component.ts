@@ -81,19 +81,25 @@ export class ProjectSectionFormComponent implements OnInit {
   }
 
   addData(): Promise<any> {
-    if (this.dataType == 'array') {
-      return this.projectDocRef.update({
-        [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
-          this.formGroup.value
-        ),
-      });
-    } else if (this.dataType == 'map') {
-      return this.projectDocRef.update({
-        [this.fieldName]: this.formGroup.value,
-      });
+    if (this.formGroup.valid) {
+      if (this.dataType == 'array') {
+        return this.projectDocRef.update({
+          [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
+            this.formGroup.value
+          ),
+        });
+      } else if (this.dataType == 'map') {
+        return this.projectDocRef.update({
+          [this.fieldName]: this.formGroup.value,
+        });
+      } else {
+        return new Promise((resolve, reject) => {
+          reject('no find data type');
+        });
+      }
     } else {
       return new Promise((resolve, reject) => {
-        reject('no find data type');
+        reject('Data no Valid');
       });
     }
   }
@@ -129,21 +135,27 @@ export class ProjectSectionFormComponent implements OnInit {
   }
 
   updateData(): Promise<any> {
-    if (this.dataType == 'array') {
-      return this.removeData().then(() => {
-        return this.projectDocRef.update({
-          [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
-            this.formGroup.value
-          ),
+    if (this.formGroup.valid) {
+      if (this.dataType == 'array') {
+        return this.removeData().then(() => {
+          return this.projectDocRef.update({
+            [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
+              this.formGroup.value
+            ),
+          });
         });
-      });
-    } else if (this.dataType == 'map') {
-      return this.projectDocRef.update({
-        [this.fieldName]: this.formGroup.value,
-      });
+      } else if (this.dataType == 'map') {
+        return this.projectDocRef.update({
+          [this.fieldName]: this.formGroup.value,
+        });
+      } else {
+        return new Promise((resolve, reject) => {
+          reject('no find data type');
+        });
+      }
     } else {
       return new Promise((resolve, reject) => {
-        reject('no find data type');
+        reject('Data no Valid');
       });
     }
   }
@@ -151,25 +163,41 @@ export class ProjectSectionFormComponent implements OnInit {
   onFormAction(formAction: FormAction) {
     switch (formAction) {
       case 'ADD':
-        this.addData().then(() => {
-          this.formAction.emit(formAction);
-        });
+        this.addData()
+          .then(() => {
+            this.formAction.emit(formAction);
+          })
+          .catch((reson) => {
+            alert(reson);
+          });
         break;
       case 'ADD_EXIT':
-        this.addData().then(() => {
-          this.formAction.emit(formAction);
-        });
+        this.addData()
+          .then(() => {
+            this.formAction.emit(formAction);
+          })
+          .catch((reson) => {
+            alert(reson);
+          });
         break;
       case 'EXIT_ADD':
         this.formAction.emit(formAction);
         break;
       case 'SAVE':
         this.formAction.emit(formAction);
-        this.updateData().then(() => {});
+        this.updateData()
+          .then(() => {})
+          .catch((reson) => {
+            alert(reson);
+          });
         break;
       case 'SAVE_EXIT':
         this.formAction.emit(formAction);
-        this.updateData().then(() => {});
+        this.updateData()
+          .then(() => {})
+          .catch((reson) => {
+            alert(reson);
+          });
         break;
       case 'EXIT_EDIT':
         this.formAction.emit(formAction);
