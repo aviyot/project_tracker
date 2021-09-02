@@ -19,7 +19,7 @@ export class ProjectSectionComponent implements OnInit {
   @Input() projectDocRef: AngularFirestoreDocument;
   @Input() fieldName: string;
   @Input() selectedProject: Project;
-  @Input() editMode = false;
+  @Input() editMode = true;
 
   controlFieldKeys: string[];
   controlFields: any;

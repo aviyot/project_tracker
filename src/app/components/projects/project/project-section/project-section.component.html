@@ -1,6 +1,6 @@
 <div>
-  <button *ngIf="!editMode" mat-stroked-button color="accent" (click)="editFields()">מצב עריכה</button>
-  <button *ngIf="editMode" mat-stroked-button color="accent" (click)="editFields()">בטל מצב עריכה</button>
+  <!-- <button *ngIf="!editMode" mat-stroked-button color="accent" (click)="editFields()">מצב עריכה</button>
+  <button *ngIf="editMode" mat-stroked-button color="accent" (click)="editFields()">בטל מצב עריכה</button> -->
   <button *ngIf="controlFields.controlName.type =='array' && editMode" mat-stroked-button color="primary"
     (click)="addData()">
     <span>{{'הוסף'+ " " + controlFields.controlName.title}}</span>
