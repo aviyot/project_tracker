@@ -50,6 +50,12 @@ export class ProjectDescService {
           option: this.projectStatuses,
           order: 3,
         },
+        localPath: {
+          value: [''],
+          type: 'text',
+          label: 'קובץ מקומי',
+          order: 5,
+        },
         gitHub: {
           value: [''],
           type: 'href',
