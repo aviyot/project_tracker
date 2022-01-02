@@ -33,7 +33,7 @@
     </mat-form-field>
     <mat-form-field *ngIf="controlFields.controlFields[key].type == 'textarea'" appearance="outline">
       <mat-label>{{controlFields.controlFields[key].label}}</mat-label>
-      <textarea matInput [formControlName]="key"></textarea>
+      <textarea autosize matInput [formControlName]="key"></textarea>
     </mat-form-field>
     <mat-form-field *ngIf="controlFields.controlFields[key].type == 'select'" appearance="outline">
       <mat-label>{{controlFields.controlFields[key].label}}</mat-label>

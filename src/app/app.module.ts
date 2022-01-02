@@ -26,6 +26,7 @@ import { ProjectSectionFormComponent } from './components/projects/project/proje
 import { SectionItemComponent } from './components/projects/project/project-section/section-item/section-item.component';
 import { FormActionToolbarComponent } from './components/shared/form-action-toolbar/form-action-toolbar.component';
 import { ItemFieldComponent } from './components/projects/project/project-section/section-item/item-field/item-field.component';
+import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ItemFieldComponent } from './components/projects/project/project-sectio
     AngularFireAuthModule,
     AuthModule,
     AngularMaterialModule,
+    TextareaAutosizeModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
