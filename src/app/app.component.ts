@@ -8,7 +8,9 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ListAction } from 'src/models/list-action';
+import { ProjectData } from 'src/models/project-data.model';
 
 @Component({
   selector: 'app-root',
@@ -17,15 +19,17 @@ import { ListAction } from 'src/models/list-action';
 })
 export class AppComponent implements OnInit {
   appName = 'מנהל הפרויקטים';
-  selectedProject: Project;
-  projects: Project[];
+  selectedProject: Project | null = null;
+  projects: Project[] = [];
+  projects$: Observable<Project[]>;
   projectsCollectionRef: AngularFirestoreCollection;
-  isUserSignIn = false;
-  userSignIn: 'LOAD' | 'SIGNIN' | 'INABLE_SIGNIN' | 'ERROR' = 'LOAD';
-  itemSelected = false;
+  isUserSignIn = false; //not used
+  userSignIn: 'LOAD' | 'SIGNIN' | 'INABLE_SIGNIN' | 'ERROR' = 'LOAD'; //user login status
+  itemSelected = false; //not used
   addNewProject = false;
   itemIndex = 0;
   projectSection: number;
+  isFristTimeProjectsFetch: boolean = true;
 
   @ViewChild('sideNav') sideNav: MatDrawer;
 
@@ -43,6 +47,57 @@ export class AppComponent implements OnInit {
             .doc(user.uid)
             .collection('projects', (ref) => ref.orderBy('projectDesc.name'));
 
+          this.projects$ = this.projectsCollectionRef.snapshotChanges().pipe(
+            map((actions) => {
+              return actions.map((a) => {
+                const data = a.payload.doc.data() as ProjectData;
+                const id = a.payload.doc.id;
+                return { id, ...data };
+              });
+            })
+          );
+          this.projects$.subscribe((data) => {
+            if (this.isFristTimeProjectsFetch) {
+              console.log('Frist Time');
+
+              this.isFristTimeProjectsFetch = false;
+
+              //frist time load
+              if (data.length) {
+                this.projects = [...data];
+                this.selectedProject = {
+                  ...this.projects[this.itemIndex],
+                };
+              } else {
+                this.projects = [];
+                this.selectedProject = null;
+              }
+            } else {
+              console.log('No Frist Time');
+              //not frist time load
+              if (data.length === this.projects.length) {
+                console.log('UPDATE');
+              }
+              if (data.length > this.projects.length) {
+                console.log('ADDED');
+
+                this.itemIndex = data.length - 1;
+              }
+              if (data.length < this.projects.length) {
+                console.log('DELETE');
+
+                this.itemIndex = 0;
+              }
+
+              console.log(this.projects.length);
+
+              this.projects = [...data];
+              this.selectedProject = {
+                ...this.projects[this.itemIndex],
+              };
+            }
+          });
+          /* 
           (
             this.projectsCollectionRef.valueChanges({
               idField: 'id',
@@ -58,9 +113,7 @@ export class AppComponent implements OnInit {
                 this.selectedProject = null;
 
               this.projects = projects;
-              /* this.selectedProject = {
-                ...this.projects[this.itemIndex],
-              }; */
+          
             } else if (projects.length) {
               this.projects = projects;
               this.itemIndex = 0;
@@ -70,6 +123,7 @@ export class AppComponent implements OnInit {
               };
             }
           });
+ */
         } else {
           this.userSignIn = 'INABLE_SIGNIN';
         }
