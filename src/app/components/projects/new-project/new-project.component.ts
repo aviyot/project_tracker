@@ -83,7 +83,6 @@ export class NewProjectComponent implements OnInit {
   isProjectNameExit(projects: Project[]): boolean {
     if (projects) {
       return projects.some((project) => {
-        // console.log(this.searchObj(project.projectDesc, this.projectName.value));
         return project.projectDesc.name === this.projectName.value;
       });
     }
@@ -96,13 +95,11 @@ export class NewProjectComponent implements OnInit {
         var value = obj[key];
         console.table(key, value);
         if (typeof value === 'object') {
-          //  console.log(value);
           this.searchObj(value, query);
         }
       }
 
       if (value === query) {
-        // console.log('property=' + key + ' value=' + value);
         return true;
       } else return false;
     }

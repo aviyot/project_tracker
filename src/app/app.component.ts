@@ -58,10 +58,7 @@ export class AppComponent implements OnInit {
           );
           this.projects$.subscribe((data) => {
             if (this.isFristTimeProjectsFetch) {
-              console.log('Frist Time');
-
               this.isFristTimeProjectsFetch = false;
-
               //frist time load
               if (data.length) {
                 this.projects = [...data];
@@ -73,57 +70,25 @@ export class AppComponent implements OnInit {
                 this.selectedProject = null;
               }
             } else {
-              console.log('No Frist Time');
               //not frist time load
+
               if (data.length === this.projects.length) {
-                console.log('UPDATE');
+                //Update
               }
               if (data.length > this.projects.length) {
-                console.log('ADDED');
-
+                // Add
                 this.itemIndex = data.length - 1;
               }
               if (data.length < this.projects.length) {
-                console.log('DELETE');
-
+                //delete
                 this.itemIndex = 0;
               }
-
-              console.log(this.projects.length);
-
               this.projects = [...data];
               this.selectedProject = {
                 ...this.projects[this.itemIndex],
               };
             }
           });
-          /* 
-          (
-            this.projectsCollectionRef.valueChanges({
-              idField: 'id',
-            }) as Observable<Project[]>
-          ).subscribe((projects) => {
-            //check if added new projects
-            if (this.projects && projects.length) {
-              //item edited
-              if (projects.length == this.projects.length)
-                this.selectedProject = { ...projects[this.itemIndex] };
-              //new iten addes
-              if (projects.length !== this.projects.length)
-                this.selectedProject = null;
-
-              this.projects = projects;
-          
-            } else if (projects.length) {
-              this.projects = projects;
-              this.itemIndex = 0;
-
-              this.selectedProject = {
-                ...projects[this.itemIndex],
-              };
-            }
-          });
- */
         } else {
           this.userSignIn = 'INABLE_SIGNIN';
         }

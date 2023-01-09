@@ -1,18 +1,10 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Project } from 'src/models/project.model';
 import { FormDataConfigService } from 'src/app/services/forms-data-config/form-data-config.service';
 import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
-import { ProjectSection } from 'src/types/project-sections.type';
 import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
@@ -23,12 +15,13 @@ import { MatTabGroup } from '@angular/material/tabs';
 export class ProjectComponent implements OnInit {
   @Input() selectedProject: Project;
   @Input() projectSection: number;
+  @Input() projectsCollectionRef: AngularFirestoreCollection;
+  @ViewChild('matGr') matGr: MatTabGroup;
+
   edit = false;
   add = false;
-  @Input() projectsCollectionRef: AngularFirestoreCollection;
   projectDocRef: AngularFirestoreDocument;
   selectedIndex: number;
-  @ViewChild('matGr') matGr: MatTabGroup;
 
   projectSections: any[] = [];
   constructor(private formDataConfigService: FormDataConfigService) {}

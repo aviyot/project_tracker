@@ -18,11 +18,6 @@
     גיטהב</a>
   <a *ngIf="selectedProject.projectDesc.site" target="_blank" mat-button
     [href]="selectedProject.projectDesc.site">אתר</a>
-  <!--  <a *ngFor="let site of selectedProject.projectDesc.sites;let i = index" target="_blank" mat-list-item
-      [href]="site.url">
-      <span *ngIf="site.main">אתר ראשי</span>
-      <span *ngIf="!site.main">אתר </span>
-    </a> -->
 </mat-card-actions>
 <mat-card-actions>
   <button mat-button (click)="onSelectSection('projectDesc')">מאפיינים</button>
@@ -32,5 +27,4 @@
   <button mat-button (click)="onSelectSection('howTodos')">איך לעשות</button>
   <button mat-button (click)="onSelectSection('challenges')">קשיים</button>
   <button mat-button (click)="onSelectSection('workTimes')">זמני עבודה</button>
-
 </mat-card-actions>

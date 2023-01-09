@@ -1,30 +1,21 @@
 <mat-toolbar style="justify-content: space-between;">
-  <!-- <button mat-button (click)="sideNav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button> -->
   <span>{{appName}}</span>
   <app-login></app-login>
 </mat-toolbar>
 <div class="main">
   <mat-sidenav-container hasBackdrop="false">
     <mat-sidenav autoFocus="true" mode="over" #sideNav>
-      <!--  <app-projects-name-list [projects]="projects" *ngIf="userSignIn == 'SIGNIN'"
-        (itemSelected)="onItemSelected($event)">
-      </app-projects-name-list> -->
     </mat-sidenav>
     <mat-sidenav-content>
-      <div style="text-align: center;font-size: x-large;margin-top: 2rem;" *ngIf="userSignIn === 'LOAD'">LOAD...</div>
+      <div style="text-align: center;
+           font-size: x-large;
+           margin-top: 2rem;" *ngIf="userSignIn === 'LOAD'">LOAD...</div>
       <div *ngIf="userSignIn === 'ERROR'">ERROR SIGNIN</div>
       <app-sign-in *ngIf="userSignIn === 'INABLE_SIGNIN'"></app-sign-in>
-      <!--       <app-new-project *ngIf="addNewProject"></app-new-project>
- -->
-
-
       <app-projects [itemIndex]="itemIndex" [projectsCollectionRef]="projectsCollectionRef" [projects]="projects"
         *ngIf="userSignIn === 'SIGNIN'" [selectedProject]="selectedProject" [addNewProject]="addNewProject"
         (formAction)="onFormAction($event)" (itemSelected)="onItemSelected($event)" [projectSection]="projectSection">
       </app-projects>
-      <!-- <router-outlet></router-outlet> -->
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

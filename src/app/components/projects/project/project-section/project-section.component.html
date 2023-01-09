@@ -1,6 +1,5 @@
 <div>
-  <!-- <button *ngIf="!editMode" mat-stroked-button color="accent" (click)="editFields()">מצב עריכה</button>
-  <button *ngIf="editMode" mat-stroked-button color="accent" (click)="editFields()">בטל מצב עריכה</button> -->
+
   <button *ngIf="controlFields.controlName.type =='array' && editMode" mat-stroked-button color="primary"
     (click)="addData()">
     <span>{{'הוסף'+ " " + controlFields.controlName.title}}</span>
@@ -18,7 +17,6 @@
 
     <mat-card-actions *ngIf="editMode">
       <button mat-stroked-button color="accent" (click)="editData(dataIndex)">ערוך</button>
-      <!-- <button mat-stroked-button color="warn" (click)="deleteData(fieldData)">מחק </button> -->
     </mat-card-actions>
     <app-project-section-form *ngIf="formState.edit && (dataIndex === formState.selectedIndex) && editMode"
       [controlFields]="controlFields" [projectDocRef]="projectDocRef" (formAction)="onFormAction($event)"
@@ -35,7 +33,6 @@
     </app-section-item>
     <mat-card-actions *ngIf="editMode">
       <button mat-stroked-button color="accent" (click)="editData()">ערוך</button>
-      <!-- <button mat-stroked-button color="warn" (click)="deleteData(selectedProject)">מחק</button> -->
     </mat-card-actions>
 
     <app-project-section-form *ngIf="formState.edit && editMode" [controlFields]="controlFields"

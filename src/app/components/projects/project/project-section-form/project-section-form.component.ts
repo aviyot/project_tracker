@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormConfig } from 'src/models/form-config.model';
-import { FormAction } from 'src/types/form-action.type';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { ActionTypes } from 'src/models/action-types';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+import { FormConfig } from 'src/models/form-config.model';
+import { FormAction } from 'src/types/form-action.type';
+import { ActionTypes } from 'src/models/action-types';
 import { IsTimestampService } from 'src/app/services/is-timestamp.service';
 
 @Component({

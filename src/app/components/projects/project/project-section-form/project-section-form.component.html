@@ -1,16 +1,3 @@
-<!--   <app-todo-form *ngSwitchCase="'todos'" [formDesc]="formDesc" [dataIn]="inputFormData"
-    (dataOut)="formValueChange($event)">
-  </app-todo-form>
-  <app-tool-form *ngSwitchCase="'tools'" [formDesc]="formDesc" [dataIn]="inputFormData"
-    (dataOut)="formValueChange($event)">
-  </app-tool-form>
-  <app-challenge-form *ngSwitchCase="'challenges'" [formDesc]="formDesc" [dataIn]="inputFormData"
-    (dataOut)="formValueChange($event)">
-  </app-challenge-form>
-  <app-work-time-form *ngSwitchCase="'workTimes'" [formDesc]="formDesc" [dataIn]="inputFormData"
-    (dataOut)="formValueChange($event)"></app-work-time-form>
-  <app-feature-form *ngSwitchCase="'features'" [formDesc]="formDesc" [dataIn]="inputFormData"
-    (dataOut)="formValueChange($event)"></app-feature-form> -->
 <form [formGroup]="formGroup">
   <div *ngFor="let key of controlFieldKeys;let keyIndex = index">
     <mat-form-field *ngIf="controlFields.controlFields[key].type == 'text'" appearance="outline">
@@ -51,10 +38,6 @@
     </mat-form-field>
   </div>
 </form>
-<!-- <button *ngIf="!inputFormData" mat-stroked-button color="primary" (click)="addData()">הוסף</button>
-<button *ngIf="inputFormData" mat-stroked-button color="warn" (click)="removeData()">מחק</button>
-<button *ngIf="inputFormData" mat-stroked-button color="warn" (click)="updateData()">שמור</button>
- -->
 <div style="margin-bottom: 2rem;">
   <app-form-action-toolbar *ngIf="newData" [formActions]="formActionsNew" (formAction)="onFormAction($event)">
   </app-form-action-toolbar>
