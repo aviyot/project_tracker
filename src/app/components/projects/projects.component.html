@@ -1,25 +1,22 @@
-<mat-accordion>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-description>
-                <div *ngIf="selectedProject">
-                    <div style="font-size: x-large;"> {{selectedProject.projectDesc.name}}</div>
-                </div>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div style="display: flex;flex-wrap: wrap;">
-            <button mat-button [color]="itemIndex == i ? 'primary':''" *ngFor="let project of projects;let i = index"
-                (click)="selectProjectName({action:'VIEW_ITEM',item:i})">{{project.projectDesc.name}}</button>
-        </div>
-        <div style="margin-top: 4px;">
-            <button (click)="selectProjectName({action:'ADD_ITEM',item:itemIndex})" mat-button color="accent">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{selectedProject.projectDesc.name}}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div style="display: flex;flex-wrap: wrap;">
+        <button mat-button [color]="itemIndex == i ? 'primary':''" *ngFor="let project of projects;let i = index"
+            (click)="selectProjectName({action:'VIEW_ITEM',item:i})">{{project.projectDesc.name}}</button>
+    </div>
+    <div style="margin-top: 4px;">
+        <button (click)="selectProjectName({action:'ADD_ITEM',item:itemIndex})" mat-button color="accent">
+            <mat-icon>add</mat-icon>
+        </button>
         <app-new-project [projects]="projects" *ngIf="!projects || addNewProject"
             [projectsCollectionRef]="projectsCollectionRef" (formAction)="onFormAction($event)"></app-new-project>
-    </mat-expansion-panel>
-</mat-accordion>
+    </div>
+
+</mat-expansion-panel>
 
 <app-project [projectSection]="projectSection" *ngIf="selectedProject" [selectedProject]="selectedProject"
     [projectsCollectionRef]="projectsCollectionRef">
