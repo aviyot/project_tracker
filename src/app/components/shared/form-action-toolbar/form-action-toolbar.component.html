@@ -1,11 +1,13 @@
-<mat-button-toggle-group (change)="onChange($event)" (click)="onClick()" name="formAction" aria-label="Form Action">
-  <mat-button-toggle *ngIf="actions.ADD" value="ADD">הוסף</mat-button-toggle>
-  <mat-button-toggle *ngIf="actions.ADD_EXIT" value="ADD_EXIT">הוסף וצא</mat-button-toggle>
-  <mat-button-toggle *ngIf="actions.SAVE" value="SAVE">שמור </mat-button-toggle>
-  <mat-button-toggle *ngIf="actions.SAVE_EXIT" value="SAVE_EXIT">שמור וצא</mat-button-toggle>
-  <mat-button-toggle *ngIf="actions.DELETE" value="DELETE">מחק</mat-button-toggle>
-  <mat-button-toggle *ngIf="actions.RESET" value="RESET">אפס</mat-button-toggle>
-  <mat-button-toggle *ngIf="actions.EXIT" value="EXIT">צא</mat-button-toggle>
-  <mat-button-toggle *ngIf="actions.EXIT_EDIT" value="EXIT_EDIT">צא מעריכה</mat-button-toggle>
-  <mat-button-toggle *ngIf="actions.EXIT_ADD" value="EXIT_ADD">צא מהוספה</mat-button-toggle>
+<mat-button-toggle-group (change)="onChange($event)" style="gap:1rem" (click)="onClick()" name="formAction"
+  aria-label="Form Action">
+  <mat-button-toggle *ngIf="actions.ADD" value="ADD"><mat-icon>done</mat-icon></mat-button-toggle>
+  <mat-button-toggle *ngIf="actions.ADD_EXIT" value="ADD_EXIT"><mat-icon>done_all</mat-icon></mat-button-toggle>
+  <mat-button-toggle *ngIf="actions.SAVE" value="SAVE"><mat-icon>save</mat-icon> </mat-button-toggle>
+  <mat-button-toggle *ngIf="actions.SAVE_EXIT"
+    value="SAVE_EXIT"><mat-icon>save</mat-icon><mat-icon>close</mat-icon></mat-button-toggle>
+  <mat-button-toggle *ngIf="actions.DELETE" value="DELETE"><mat-icon color="warn">delete</mat-icon></mat-button-toggle>
+  <mat-button-toggle *ngIf="actions.RESET" value="RESET"><mat-icon>restart_alt</mat-icon></mat-button-toggle>
+  <mat-button-toggle *ngIf="actions.EXIT" value="EXIT"><mat-icon>close</mat-icon></mat-button-toggle>
+  <mat-button-toggle *ngIf="actions.EXIT_EDIT" value="EXIT_EDIT"><mat-icon>close</mat-icon></mat-button-toggle>
+  <mat-button-toggle *ngIf="actions.EXIT_ADD" value="EXIT_ADD"><mat-icon>close</mat-icon></mat-button-toggle>
 </mat-button-toggle-group>
