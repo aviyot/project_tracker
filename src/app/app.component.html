@@ -3,19 +3,13 @@
   <app-login></app-login>
 </mat-toolbar>
 <div class="main">
-  <mat-sidenav-container hasBackdrop="false">
-    <mat-sidenav autoFocus="true" mode="over" #sideNav>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div style="text-align: center;
+  <div style="text-align: center;
            font-size: x-large;
            margin-top: 2rem;" *ngIf="userSignIn === 'LOAD'">LOAD...</div>
-      <div *ngIf="userSignIn === 'ERROR'">ERROR SIGNIN</div>
-      <app-sign-in *ngIf="userSignIn === 'INABLE_SIGNIN'"></app-sign-in>
-      <app-projects [itemIndex]="itemIndex" [projectsCollectionRef]="projectsCollectionRef" [projects]="projects"
-        *ngIf="userSignIn === 'SIGNIN'" [selectedProject]="selectedProject" [addNewProject]="addNewProject"
-        (formAction)="onFormAction($event)" (itemSelected)="onItemSelected($event)" [projectSection]="projectSection">
-      </app-projects>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  <div *ngIf="userSignIn === 'ERROR'">ERROR SIGNIN</div>
+  <app-sign-in *ngIf="userSignIn === 'INABLE_SIGNIN'"></app-sign-in>
+  <app-projects [itemIndex]="itemIndex" [projectsCollectionRef]="projectsCollectionRef" [projects]="projects"
+    *ngIf="userSignIn === 'SIGNIN'" [selectedProject]="selectedProject" [addNewProject]="addNewProject"
+    (formAction)="onFormAction($event)" (itemSelected)="onItemSelected($event)" [projectSection]="projectSection">
+  </app-projects>
 </div>
