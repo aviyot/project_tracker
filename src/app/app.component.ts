@@ -1,16 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Project } from 'src/models/project.model';
-import { MatDrawer } from '@angular/material/sidenav';
 import { FormAction } from 'src/types/form-action.type';
 import { AuthService } from './auth/auth.service';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ListAction } from 'src/models/list-action';
-import { ProjectData } from 'src/models/project-data.model';
+import { ProjectsDataService } from './services/projects/projects-data.service';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +15,6 @@ export class AppComponent implements OnInit {
   appName = 'מנהל הפרויקטים';
   selectedProject: Project | null = null;
   projects: Project[] = [];
-  projects$: Observable<Project[]>;
   projectsCollectionRef: AngularFirestoreCollection;
   isUserSignIn = false; //not used
   userSignIn: 'LOAD' | 'SIGNIN' | 'INABLE_SIGNIN' | 'ERROR' = 'LOAD'; //user login status
@@ -31,32 +24,18 @@ export class AppComponent implements OnInit {
   projectSection: number;
   isFristTimeProjectsFetch: boolean = true;
 
-  @ViewChild('sideNav') sideNav: MatDrawer;
-
   constructor(
-    private firestore: AngularFirestore,
-    private authService: AuthService
+    private authService: AuthService,
+    private projectsDataService: ProjectsDataService
   ) {}
   ngOnInit() {
     this.authService.user.subscribe(
       (user) => {
         if (user) {
           this.userSignIn = 'SIGNIN';
-          this.projectsCollectionRef = this.firestore
-            .collection('users')
-            .doc(user.uid)
-            .collection('projects', (ref) => ref.orderBy('projectDesc.name'));
-
-          this.projects$ = this.projectsCollectionRef.snapshotChanges().pipe(
-            map((actions) => {
-              return actions.map((a) => {
-                const data = a.payload.doc.data() as ProjectData;
-                const id = a.payload.doc.id;
-                return { id, ...data };
-              });
-            })
-          );
-          this.projects$.subscribe((data) => {
+          this.projectsCollectionRef =
+            this.projectsDataService.projectsCollectionRef;
+          this.projectsDataService.projects$.subscribe((data) => {
             if (this.isFristTimeProjectsFetch) {
               this.isFristTimeProjectsFetch = false;
               //frist time load
@@ -136,8 +115,6 @@ export class AppComponent implements OnInit {
       this.selectedProject = null;
       this.addNewProject = false;
     }
-
-    this.sideNav.close();
   }
 
   onFormAction(event: FormAction) {
