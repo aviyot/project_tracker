@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectsDataService } from 'src/app/services/projects/projects-data.service';

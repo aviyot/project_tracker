@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormDataConfigService } from 'src/app/services/forms-data-config/form-data-config.service';
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { Project } from 'src/models/project.model';
 import { ProjectsDataService } from 'src/app/services/projects/projects-data.service';
 import { ControlName } from 'src/models/form-config.model';

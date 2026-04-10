@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   CollectionReference,
-} from '@angular/fire/firestore';
+} from '@angular/fire/compat/firestore';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { ProjectData } from 'src/models/project-data.model';

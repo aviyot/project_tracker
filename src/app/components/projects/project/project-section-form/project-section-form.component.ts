@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import 'firebase/firestore';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormConfig } from 'src/models/form-config.model';
 import { FormAction } from 'src/types/form-action.type';
