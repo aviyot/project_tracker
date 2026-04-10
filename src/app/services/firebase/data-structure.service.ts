@@ -5,8 +5,7 @@ import {
   AngularFirestoreCollection,
   CollectionReference,
 } from '@angular/fire/compat/firestore';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firebase from 'firebase/compat/app';
 import { ProjectData } from 'src/models/project-data.model';
 
 @Injectable({
@@ -17,7 +16,7 @@ export class DataStructureService {
   newStructure: ProjectData;
   constructor(
     private firestore: AngularFirestore,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
   ) {}
 
   deleteFields() {

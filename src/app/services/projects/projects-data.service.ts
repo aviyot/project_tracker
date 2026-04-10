@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ProjectData } from 'src/models/project-data.model';
 import { Project } from 'src/models/project.model';
@@ -21,7 +21,7 @@ export class ProjectsDataService {
     private authService: AuthService,
     private firestore: AngularFirestore,
   ) {
-    this.authService.user.subscribe((user) => {
+    this.authService.user.pipe(filter((user) => !!user)).subscribe((user) => {
       this.projectsCollectionRef = this.firestore
         .collection('users')
         .doc(user.uid)

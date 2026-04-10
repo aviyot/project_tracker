@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +27,7 @@ import { ProjectSectionFormComponent } from './components/projects/project/proje
 import { SectionItemComponent } from './components/projects/project/project-section/section-item/section-item.component';
 import { FormActionToolbarComponent } from './components/shared/form-action-toolbar/form-action-toolbar.component';
 import { ItemFieldComponent } from './components/projects/project/project-section/section-item/item-field/item-field.component';
-import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { DialogContainerComponent } from './components/dialog-container/dialog-container.component';
 
 @NgModule({
@@ -50,6 +51,7 @@ import { DialogContainerComponent } from './components/dialog-container/dialog-c
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -58,7 +60,7 @@ import { DialogContainerComponent } from './components/dialog-container/dialog-c
     AngularFireAuthModule,
     AuthModule,
     AngularMaterialModule,
-    TextareaAutosizeModule,
+    TextFieldModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

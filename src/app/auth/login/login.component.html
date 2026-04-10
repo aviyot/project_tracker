@@ -1,1 +1,6 @@
-<ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
+<ng-container *ngIf="user">
+  <span style="margin-left: 8px; font-size: 14px;">{{ user.displayName || user.email }}</span>
+  <button mat-icon-button (click)="signOut()" title="יציאה">
+    <mat-icon>logout</mat-icon>
+  </button>
+</ng-container>

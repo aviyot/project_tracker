@@ -7,10 +7,25 @@ import firebase from 'firebase/compat/app';
   providedIn: 'root',
 })
 export class AuthService {
-  _user: Observable<any> = new Observable();
   constructor(private auth: AngularFireAuth) {}
 
-  get user(): Observable<firebase.User> {
-    return this.auth.user;
+  get user(): Observable<firebase.User | null> {
+    return this.auth.authState;
+  }
+
+  signInWithEmail(email: string, password: string) {
+    return this.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  signUpWithEmail(email: string, password: string) {
+    return this.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  signInWithGoogle() {
+    return this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  signOut() {
+    return this.auth.signOut();
   }
 }

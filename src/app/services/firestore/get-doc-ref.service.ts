@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class GetDocRefService {
   constructor(
     private firestore: AngularFirestore,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
   ) {}
   getDocRef(projectId: string) {
     this.auth.user.subscribe((user) => {

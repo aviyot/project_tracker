@@ -21,7 +21,7 @@ export class NewProjectComponent implements OnInit {
 
   constructor(
     private projectsDataService: ProjectsDataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {
     this.formActions = {
       ADD: true,

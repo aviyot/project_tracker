@@ -41,7 +41,7 @@ export class ProjectSectionFormComponent implements OnInit {
     private fb: FormBuilder,
     private isTimestampService: IsTimestampService,
     private formDataConfigService: FormDataConfigService,
-    private projectsDataService: ProjectsDataService
+    private projectsDataService: ProjectsDataService,
   ) {}
 
   ngOnInit() {
@@ -88,7 +88,7 @@ export class ProjectSectionFormComponent implements OnInit {
         this.projectDocRef,
         this.inputFormData,
         this.fieldName,
-        this.dataType
+        this.dataType,
       );
     } else {
       return new Promise((resolve, reject) => {
@@ -102,7 +102,7 @@ export class ProjectSectionFormComponent implements OnInit {
       this.projectDocRef,
       this.inputFormData,
       this.fieldName,
-      this.dataType
+      this.dataType,
     );
   }
 
@@ -112,7 +112,7 @@ export class ProjectSectionFormComponent implements OnInit {
         this.projectDocRef,
         this.inputFormData,
         this.fieldName,
-        this.dataType
+        this.dataType,
       );
     } else {
       return new Promise((resolve, reject) => {

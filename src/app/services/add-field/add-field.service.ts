@@ -13,7 +13,7 @@ import firebase from 'firebase/compat/app';
 export class AddFieldService {
   constructor(
     private firestore: AngularFirestore,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
   ) {}
 
   addFiled() {
