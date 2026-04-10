@@ -1,7 +1,6 @@
-<mat-tab-group dynamicHeight animationDuration="0ms" [selectedIndex]="projectSection">
+<mat-tab-group dynamicHeight animationDuration="0ms">
   <mat-tab *ngFor="let section of projectSections" [label]="section.title">
-    <app-project-section [projectDocRef]="projectDocRef" [selectedProject]="selectedProject"
-      [fieldName]="section.dataFieldName">
+    <app-project-section [section]="section" [selectedProject]="selectedProject">
     </app-project-section>
   </mat-tab>
 </mat-tab-group>
