@@ -1,45 +1,40 @@
 <div>
-
-  <button *ngIf="controlFields.controlName.type =='array' && editMode" mat-stroked-button color="primary"
-    (click)="addData()">
+  <button *ngIf="controlFields.controlName.type =='array'" mat-stroked-button color="primary" (click)="addData()">
     <span>{{'הוסף'+ " " + controlFields.controlName.title}}</span>
   </button>
 </div>
 <!-- form to add new project section,... -->
-<app-project-section-form *ngIf="formState.add && editMode" [controlFields]="controlFields"
-  [projectDocRef]="projectDocRef" (formAction)="onFormAction($event)">
-</app-project-section-form>
+<app-project-section-form [controlFields]="controlFields"></app-project-section-form>
+
+
 <div class="pages" *ngIf="isArray(selectedProject[fieldName]) && selectedProject[fieldName].length">
   <mat-card *ngFor="let fieldData of selectedProject[fieldName] ; let dataIndex = index">
     <span style="font-size: large;">{{dataIndex + 1}}</span>
     <app-section-item [fieldData]="fieldData" [controlFields]="controlFields">
     </app-section-item>
 
-    <mat-card-actions *ngIf="editMode">
+    <mat-card-actions>
       <button mat-stroked-button color="accent" (click)="editData(dataIndex)">ערוך</button>
     </mat-card-actions>
-    <app-project-section-form *ngIf="formState.edit && (dataIndex === formState.selectedIndex) && editMode"
-      [controlFields]="controlFields" [projectDocRef]="projectDocRef" (formAction)="onFormAction($event)"
-      [inputData]="fieldData">
+    <app-project-section-form [controlFields]="controlFields" [inputData]="fieldData">
     </app-project-section-form>
-
   </mat-card>
-  <mat-divider>
-  </mat-divider>
+  <mat-divider></mat-divider>
 </div>
+
+
 <div *ngIf="!isArray(selectedProject[fieldName])">
   <mat-card>
     <app-section-item [fieldData]="selectedProject[fieldName]" [controlFields]="controlFields">
     </app-section-item>
-    <mat-card-actions *ngIf="editMode">
+    <mat-card-actions>
       <button mat-stroked-button color="accent" (click)="editData()">ערוך</button>
     </mat-card-actions>
 
-    <app-project-section-form *ngIf="formState.edit && editMode" [controlFields]="controlFields"
-      [projectDocRef]="projectDocRef" (formAction)="onFormAction($event)" [inputData]="selectedProject[fieldName]">
+    <app-project-section-form [controlFields]="controlFields" [inputData]="selectedProject[fieldName]">
     </app-project-section-form>
   </mat-card>
 </div>
-<div *ngIf="isArray(selectedProject[fieldName]) && fieldSize && editMode">
-  <button mat-stroked-button color="warn" (click)="deleteAllData(fieldName)">מחק הכל</button>
+<div *ngIf="isArray(selectedProject[fieldName]) && fieldSize">
+  <button mat-stroked-button color="warn" (click)="deleteAllData()">מחק הכל</button>
 </div>

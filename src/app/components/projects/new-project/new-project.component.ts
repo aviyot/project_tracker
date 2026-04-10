@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectsDataService } from 'src/app/services/projects/projects-data.service';
 import { ActionTypes } from 'src/models/action-types';
 import { Project } from 'src/models/project.model';
 import { FormAction } from 'src/types/form-action.type';
@@ -17,7 +19,10 @@ export class NewProjectComponent implements OnInit {
   formActions: ActionTypes; //app-form-action-toolbar;
   projectName: FormControl = new FormControl('', Validators.required);
 
-  constructor() {
+  constructor(
+    private projectsDataService: ProjectsDataService,
+    public dialog: MatDialog
+  ) {
     this.formActions = {
       ADD: true,
       ADD_EXIT: true,
@@ -28,16 +33,7 @@ export class NewProjectComponent implements OnInit {
 
   addNewProject(): Promise<any> {
     if (this.projectName.valid) {
-      if (this.isProjectNameExit(this.projects)) {
-        return new Promise((res, rej) => {
-          rej('PROJECT NAME EXIT');
-        });
-      }
-      return this.projectsCollectionRef.add({
-        projectDesc: {
-          name: this.projectName.value,
-        },
-      });
+      return this.projectsDataService.addNewProject(this.projectName.value);
     } else {
       return new Promise((res, rej) => {
         rej('invalid data');
@@ -65,6 +61,7 @@ export class NewProjectComponent implements OnInit {
               ADD: false,
               ADD_EXIT: false,
             };
+            this.dialog.closeAll();
             this.formAction.emit('ADD_EXIT');
           })
           .catch((err) => {
@@ -72,21 +69,13 @@ export class NewProjectComponent implements OnInit {
           });
         break;
       case 'EXIT':
+        this.dialog.closeAll();
         this.formAction.emit('EXIT');
         break;
 
       default:
         break;
     }
-  }
-
-  isProjectNameExit(projects: Project[]): boolean {
-    if (projects) {
-      return projects.some((project) => {
-        return project.projectDesc.name === this.projectName.value;
-      });
-    }
-    return false;
   }
 
   searchObj(obj, query): Boolean {

@@ -1,5 +1,5 @@
 <mat-toolbar style="justify-content: space-between;">
-  <span>{{appName}}</span>
+  <span>מנהל הפרויקטים</span>
   <app-login></app-login>
 </mat-toolbar>
 <div class="main">
@@ -8,8 +8,6 @@
            margin-top: 2rem;" *ngIf="userSignIn === 'LOAD'">LOAD...</div>
   <div *ngIf="userSignIn === 'ERROR'">ERROR SIGNIN</div>
   <app-sign-in *ngIf="userSignIn === 'INABLE_SIGNIN'"></app-sign-in>
-  <app-projects [itemIndex]="itemIndex" [projectsCollectionRef]="projectsCollectionRef" [projects]="projects"
-    *ngIf="userSignIn === 'SIGNIN'" [selectedProject]="selectedProject" [addNewProject]="addNewProject"
-    (formAction)="onFormAction($event)" (itemSelected)="onItemSelected($event)" [projectSection]="projectSection">
+  <app-projects *ngIf="userSignIn === 'SIGNIN'" [projects]="projects">
   </app-projects>
 </div>

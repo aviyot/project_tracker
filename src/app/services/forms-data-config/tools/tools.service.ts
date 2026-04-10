@@ -6,15 +6,6 @@ import { FormConfig } from 'src/models/form-config.model';
   providedIn: 'root',
 })
 export class ToolsService {
-  /*   name: [''],
-      desc: [''],
-      purpose: [''],
-      ver: [''],
-      webSite: [''],
-      githubLink: [''],
-      npmLink: [''],
-      type:['']
-    }); */
   formConfig: FormConfig;
   constructor() {
     this.formConfig = {

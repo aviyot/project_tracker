@@ -27,6 +27,7 @@ import { SectionItemComponent } from './components/projects/project/project-sect
 import { FormActionToolbarComponent } from './components/shared/form-action-toolbar/form-action-toolbar.component';
 import { ItemFieldComponent } from './components/projects/project/project-section/section-item/item-field/item-field.component';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
+import { DialogContainerComponent } from './components/dialog-container/dialog-container.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
     SectionItemComponent,
     FormActionToolbarComponent,
     ItemFieldComponent,
+    DialogContainerComponent,
   ],
   imports: [
     BrowserModule,

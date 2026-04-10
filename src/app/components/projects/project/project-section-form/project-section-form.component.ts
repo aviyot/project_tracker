@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
 import { FormConfig } from 'src/models/form-config.model';
 import { FormAction } from 'src/types/form-action.type';
 import { ActionTypes } from 'src/models/action-types';
 import { IsTimestampService } from 'src/app/services/is-timestamp.service';
+import { FormDataConfigService } from 'src/app/services/forms-data-config/form-data-config.service';
+import { ProjectsDataService } from 'src/app/services/projects/projects-data.service';
 
 @Component({
   selector: 'app-project-section-form',
@@ -39,7 +39,9 @@ export class ProjectSectionFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private isTimestampService: IsTimestampService
+    private isTimestampService: IsTimestampService,
+    private formDataConfigService: FormDataConfigService,
+    private projectsDataService: ProjectsDataService
   ) {}
 
   ngOnInit() {
@@ -82,21 +84,12 @@ export class ProjectSectionFormComponent implements OnInit {
 
   addData(): Promise<any> {
     if (this.formGroup.valid) {
-      if (this.dataType == 'array') {
-        return this.projectDocRef.update({
-          [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
-            this.formGroup.value
-          ),
-        });
-      } else if (this.dataType == 'map') {
-        return this.projectDocRef.update({
-          [this.fieldName]: this.formGroup.value,
-        });
-      } else {
-        return new Promise((resolve, reject) => {
-          reject('no find data type');
-        });
-      }
+      return this.projectsDataService.addData(
+        this.projectDocRef,
+        this.inputFormData,
+        this.fieldName,
+        this.dataType
+      );
     } else {
       return new Promise((resolve, reject) => {
         reject('Data no Valid');
@@ -105,54 +98,22 @@ export class ProjectSectionFormComponent implements OnInit {
   }
 
   removeData(): Promise<any> {
-    if (this.dataType == 'array') {
-      return this.projectDocRef.update({
-        [this.fieldName]: firebase.firestore.FieldValue.arrayRemove(
-          this.inputFormData
-        ),
-      });
-    } else if (this.dataType == 'map' && this.fieldName !== 'projectDesc') {
-      return this.projectDocRef.update({
-        [this.fieldName]: firebase.firestore.FieldValue.delete(),
-      });
-    } else if (this.dataType == 'map' && this.fieldName == 'projectDesc') {
-      if (
-        confirm(
-          `DANGER : delete ****** ${this.inputFormData.name} ****** project ?`
-        )
-      )
-        return this.projectDocRef.delete().then(() => {});
-      else {
-        return new Promise((resolve, reject) => {
-          reject('delete canceled');
-        });
-      }
-    } else {
-      return new Promise((resolve, reject) => {
-        reject('no find data type');
-      });
-    }
+    return this.projectsDataService.removeData(
+      this.projectDocRef,
+      this.inputFormData,
+      this.fieldName,
+      this.dataType
+    );
   }
 
   updateData(): Promise<any> {
     if (this.formGroup.valid) {
-      if (this.dataType == 'array') {
-        return this.removeData().then(() => {
-          return this.projectDocRef.update({
-            [this.fieldName]: firebase.firestore.FieldValue.arrayUnion(
-              this.formGroup.value
-            ),
-          });
-        });
-      } else if (this.dataType == 'map') {
-        return this.projectDocRef.update({
-          [this.fieldName]: this.formGroup.value,
-        });
-      } else {
-        return new Promise((resolve, reject) => {
-          reject('no find data type');
-        });
-      }
+      return this.projectsDataService.updateData(
+        this.projectDocRef,
+        this.inputFormData,
+        this.fieldName,
+        this.dataType
+      );
     } else {
       return new Promise((resolve, reject) => {
         reject('Data no Valid');

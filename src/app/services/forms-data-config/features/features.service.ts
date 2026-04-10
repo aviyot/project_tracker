@@ -6,13 +6,6 @@ import { FormConfig } from 'src/models/form-config.model';
   providedIn: 'root',
 })
 export class FeaturesService {
-  /*    name: ['',Validators.required],
-      desc: [''],
-      startDate: [''],
-      endDate: [''],
-      progress: [''],
-  constructor() { }
-   */
   formConfig: FormConfig;
   constructor() {
     this.formConfig = {

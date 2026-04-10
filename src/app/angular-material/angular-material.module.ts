@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -38,6 +39,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatGridListModule,
     MatTabsModule,
     MatExpansionModule,
+    MatDialogModule,
   ],
   exports: [
     CommonModule,
@@ -57,6 +59,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatGridListModule,
     MatTabsModule,
     MatExpansionModule,
+    MatDialogModule,
   ],
 })
 export class AngularMaterialModule {}
